@@ -27,9 +27,7 @@
             </p>
           </div>
           <div class="header__item">
-            <p id="losses" class="filter__link filter__link--number">
-              Result
-            </p>
+            <p id="losses" class="filter__link filter__link--number">Result</p>
           </div>
         </div>
         <div class="table-content">
@@ -37,10 +35,12 @@
             <div class="table-data">{{ item.rollnbr }}</div>
             <div class="table-data">{{ item.s_name }}</div>
             <div class="table-data">{{ item.s_fname }}</div>
-            <div class="table-data"><router-link to="">Fees</router-link></div>
-            <div class="table-data"><router-link to="">Result</router-link></div>
-            
-            
+            <div class="table-data">
+              <router-link to="fees">Fees</router-link>
+            </div>
+            <div class="table-data">
+              <router-link to="">Result</router-link>
+            </div>
           </div>
         </div>
       </div>

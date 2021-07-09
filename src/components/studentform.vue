@@ -3,7 +3,7 @@
     <div class="container">
       <h2>Add a new Student</h2>
       <b-form @submit.prevent="submitData" method="POST" id="onlyform">
-        <div class="row">
+        <div class="row rowmargin">
           <div class="form-group col-md-6 row">
             <b-form-group
               id="sname"
@@ -43,7 +43,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row rowmargin">
           <div class="form-group col-md-6 row">
             <b-form-group
               id="sex"
@@ -77,7 +77,7 @@
           </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row rowmargin">
           <div class="fromgroup col-md-6 row">
             <b-form-group
               id="doj"
@@ -148,7 +148,7 @@
           </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row rowmargin">
           <div class="col-md-2">
             <b-form-group
               id="address"
@@ -246,7 +246,6 @@
                 
 
             </div>  -->
-      {{ posts }}
     </div>
   </div>
 </template>
@@ -346,4 +345,7 @@ export default {
 /* *{
     border: 1px solid;
 }    */
+.rowmargin {
+  margin: 37.8px 0px;
+}
 </style>

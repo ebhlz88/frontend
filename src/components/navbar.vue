@@ -38,10 +38,7 @@
                       aria-describedby="start-date"
                       placeholder="Search Here"
                     />
-                    <span
-                      v-on:click="clicked"
-                      class="input-group-addon"
-                      id="start-date"
+                    <span class="input-group-addon" id="start-date"
                       ><img src="../assets/searchicon.png" alt="serar"
                     /></span>
                   </div>
@@ -68,8 +65,9 @@ export default {
 <style>
 .navbar {
   display: flex;
-  background-color: #4e71ee;
-  background-color: rgb(83, 83, 158);
+  /* background-color: #4e71ee;
+  background-color: rgb(83, 83, 158); */
+  background-image: linear-gradient(to right, #3931af, #00c6ff);
   padding: 0px !important;
   width: 100%;
 }

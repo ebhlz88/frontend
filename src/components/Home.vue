@@ -1,8 +1,8 @@
 <template>
-  <div id="home">
+  <div id="homepage">
     <div>
       <div class="row">
-        <div class="col-md-6 margin">
+        <div class="col-md-4 margin">
           <div class="login">
             <h3 class="text-center">Login</h3>
             <form>
@@ -34,9 +34,9 @@
             </form>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
           <img
-            src="../assets/homeimage.png"
+            src="../assets/students.png"
             class="homeimage"
             alt="landing image"
           />
@@ -53,20 +53,23 @@ export default {};
 </script>
 
 <style>
-#home {
-  background-color: #4e71ee;
-  background-color: rgb(83, 83, 158);
+#homepage {
+  /* background-color: #4e71ee;
+  background-color: rgb(83, 83, 158); */
+  background-image: linear-gradient(to right, #3931af, #00c6ff);
+  margin: 0px;
 }
 .homeimage {
-  height: 400px;
+  height: 350px;
+  margin-top: 20px;
 }
 .login {
   height: auto;
   width: 400px;
-  padding: 40px;
+  padding: 60px;
+  margin: auto;
   background-image: url("../assets/loginback.png");
   border-radius: 10px;
-  margin-left: 150px;
 }
 .input-group-addon {
   background-color: white;
@@ -93,4 +96,7 @@ input:focus {
 .text-center {
   margin-bottom: 20px;
 }
+/* *{
+  border: 1px solid;
+} */
 </style>
