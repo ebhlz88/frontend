@@ -24,7 +24,7 @@
               >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/cardview"
+              <router-link class="nav-link" to="/sform"
                 ><b>Contact Us</b></router-link
               >
             </li>

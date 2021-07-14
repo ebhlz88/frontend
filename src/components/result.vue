@@ -1,5 +1,5 @@
 <template>
-  <div id="fees">
+  <div id="result">
     <div class="searchdiv m-4 row">
       <div class="input-group col-md-4">
         <input
@@ -21,17 +21,25 @@
             {{ items.standardname }}
           </option>
         </select>
+        <select class="form-control" v-model="updatesubject">
+          <option class="hidden" selected disabled>
+            Please select subject
+          </option>
+          <option v-for="items in subjects" :key="items.id">
+            {{ items.subjectname }}
+          </option>
+        </select>
         <input
           type="text"
           class="form-control"
-          v-model="amount.studentamount"
+          v-model="marks.subjectmarks"
           aria-describedby="start-date"
-          placeholder="Submit Amount Here"
+          placeholder="Subject Marks"
         />
         <input
           type="Submit"
           class="btn btn-primary"
-          v-on:click="updatefees"
+          v-on:click="updateresult"
           aria-describedby="start-date"
           value="Submit Fees"
         />
@@ -53,30 +61,29 @@
               </p>
             </div>
             <div class="header__item">
-              <p id="wins" class="filter__link filter__link--number">
-                Date Submitted
-              </p>
+              <p id="wins" class="filter__link filter__link--number">Subject</p>
             </div>
             <div class="header__item">
-              <p id="wins" class="filter__link filter__link--number">
-                Amount Submitted
-              </p>
+              <p id="wins" class="filter__link filter__link--number">Subject</p>
+            </div>
+            <div class="header__item">
+              <p id="wins" class="filter__link filter__link--number">Marks</p>
             </div>
           </div>
         </div>
         <div class="table-content">
-          <div v-for="fees in list" class="table-row" :key="fees.id">
+          <div v-for="result in list" class="table-row" :key="result.id">
             <div class="table-data">
-              {{ fees.enrollstudent.student.rollnbr }}
+              {{ result.enrollstudent.student.rollnbr }}
             </div>
             <div class="table-data">
-              {{ fees.enrollstudent.student.s_name }}
+              {{ result.enrollstudent.student.s_name }}
             </div>
             <div class="table-data">
-              {{ fees.enrollstudent.standard.standardname }}
+              {{ result.enrollstudent.standard.standardname }}
             </div>
-            <div class="table-data">{{ fees.date_enroll }}</div>
-            <div class="table-data">{{ fees.studentamount }}</div>
+            <div class="table-data">{{ result.subjectname.subjectname }}</div>
+            <div class="table-data">{{ result.subjectmarks }}</div>
           </div>
         </div>
       </div>
@@ -95,13 +102,14 @@ export default {
   data() {
     return {
       list: undefined,
-      selectedmonth: null,
-      amount: {
-        studentamount: null,
-      },
       updatestandard: null,
+      updatesubject: null,
       standards: null,
+      subjects: null,
       showtable: true,
+      marks: {
+        subjectmarks: null,
+      },
     };
   },
   props: {
@@ -111,36 +119,43 @@ export default {
     },
   },
   mounted() {
-    this.getfees();
+    this.getresults();
     Vue.axios.get("http://127.0.0.1:8000/standardlist").then((resp) => {
       this.standards = resp.data;
 
       console.log(resp.data);
     });
+    Vue.axios.get("http://127.0.0.1:8000/subjectlist").then((resp) => {
+      this.subjects = resp.data;
+
+      console.log(resp.data);
+    });
   },
   methods: {
-    getfees() {
+    getresults() {
       Vue.axios
-        .get("http://127.0.0.1:8000/feesByroll/" + this.roll)
+        .get("http://127.0.0.1:8000/result/" + this.roll)
         .then((resp) => {
           this.list = resp.data;
 
           console.log(resp.data);
         });
     },
-    updatefees() {
+    updateresult() {
       axios
         .post(
-          "http://127.0.0.1:8000/feespost/" +
+          "http://127.0.0.1:8000/resultpost/" +
             this.roll +
             "/" +
-            this.updatestandard,
-          this.amount
+            this.updatestandard +
+            "/" +
+            this.updatesubject,
+          this.marks
         )
         .then((response) => {
           console.warn(response);
           // this.smessage="Succesfully added"
-          this.getfees();
+          this.getresults();
           this.$bvToast.toast("Fees Submitted", {
             title: "Succesful",
             variant: "success",
@@ -178,11 +193,11 @@ export default {
   width: 150px;
   margin-left: 20%;
 }
-#fees .submitdiv .form-control {
-  width: 35%;
+#result .submitdiv .form-control {
+  width: 25%;
   margin: 0px 5px;
 }
-#fees .btn {
+#result .btn {
   margin: 0px;
   margin-left: 20px;
 }

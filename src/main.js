@@ -12,10 +12,14 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import home from "./components/Home.vue";
-import cardview from "./components/cardview.vue";
 import table from "./components/table.vue";
 import studentform from "./components/formstudent.vue";
 import fees from "./components/fees.vue";
+import result from "./components/result.vue";
+import teachertable from "./components/teachertable.vue";
+import payment from "./components/payment.vue";
+import sdetailtable from "./components/sdetailtable.vue";
+import tdetail from "./components/tdetail.vue";
 
 import VueComp from "@vue/composition-api";
 
@@ -41,11 +45,17 @@ Vue.config.productionTip = false;
 
 const routes = [
   { path: "/", component: home },
-  { path: "/cardview", component: cardview },
+  { path: "/sform", component: studentform },
   { path: "/list", component: table },
-  { path: "/sform", component: studentform },
-  { path: "/sform", component: studentform },
   { path: "/fees", component: fees },
+  { path: "/fees/:roll", component: fees, props: true },
+  { path: "/result", component: result },
+  { path: "/result/:roll", component: result, props: true },
+  { path: "/ttable", component: teachertable },
+  { path: "/payments", component: payment },
+  { path: "/payments/:roll", component: payment, props: true },
+  { path: "/sdetail/:roll", component: sdetailtable, props: true },
+  { path: "/tdetail/:roll", component: tdetail, props: true },
 ];
 
 const router = new VueRouter({

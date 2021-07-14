@@ -4,11 +4,11 @@
       <div class="formrow">
         <input
           type="text"
-          v-model="searchitem"
+          v-model="tsearchitem"
           class="form-control"
           placeholder="Search Here"
         />
-        <button v-on:click="searchstudent" class="btn btn-primary">
+        <button class="btn btn-primary" v-on:click="searchteacher">
           Search
         </button>
       </div>
@@ -25,7 +25,7 @@
           </div>
           <div class="header__item">
             <p id="draws" class="filter__link filter__link--number">
-              FATHER NAME
+              Mobile Number
             </p>
           </div>
           <div class="header__item">
@@ -34,21 +34,21 @@
             </p>
           </div>
           <div class="header__item">
-            <p id="losses" class="filter__link filter__link--number">Result</p>
+            <p id="losses" class="filter__link filter__link--number">
+              Speciality
+            </p>
           </div>
         </div>
         <div class="table-content">
           <div v-for="item in list" v-bind:key="item.id" class="table-row">
-            <div class="table-data">{{ item.rollnbr }}</div>
-            <a :href="hrefdetail + item.rollnbr" class="table-data">{{
-              item.s_name
+            <div class="table-data">{{ item.id }}</div>
+            <a :href="hrefdetail + item.id" class="table-data">{{
+              item.t_name
             }}</a>
-            <div class="table-data">{{ item.s_fname }}</div>
+            <div class="table-data">{{ item.m_number }}</div>
+            <div class="table-data">{{ item.speciality }}</div>
             <div class="table-data">
-              <a :href="hreffee + '' + item.rollnbr">Fees</a>
-            </div>
-            <div class="table-data">
-              <a :href="hrefresult + '' + item.rollnbr">Result</a>
+              <a :href="hrefpayment + item.id">Payment</a>
             </div>
           </div>
         </div>
@@ -68,16 +68,15 @@ export default {
   data() {
     return {
       list: undefined,
-      hreffee: "/#/fees/",
-      hrefresult: "/#/result/",
-      hrefdetail: "/#/sdetail/",
-      searchitem: null,
+      hrefpayment: "/#/payments/",
+      hrefdetail: "/#/tdetail/",
+      tsearchitem: null,
     };
   },
   methods: {
-    searchstudent() {
+    searchteacher() {
       Vue.axios
-        .get("http://127.0.0.1:8000/studentsearch/?search=" + this.searchitem)
+        .get("http://127.0.0.1:8000/teachersearch/?search=" + this.tsearchitem)
         .then((resp) => {
           this.list = resp.data;
 
@@ -86,7 +85,7 @@ export default {
     },
   },
   mounted() {
-    Vue.axios.get("http://127.0.0.1:8000/").then((resp) => {
+    Vue.axios.get("http://127.0.0.1:8000/allteachers").then((resp) => {
       this.list = resp.data;
 
       console.log(resp.data);

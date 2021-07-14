@@ -13,18 +13,10 @@
         /></span>
       </div>
       <div class="submitdiv col-md-8 row">
-        <select class="form-control" v-model="updatestandard">
-          <option class="hidden" selected disabled>
-            Please select Standard
-          </option>
-          <option v-for="items in standards" :key="items.id">
-            {{ items.standardname }}
-          </option>
-        </select>
         <input
           type="text"
           class="form-control"
-          v-model="amount.studentamount"
+          v-model="amount.teacheramount"
           aria-describedby="start-date"
           placeholder="Submit Amount Here"
         />
@@ -49,34 +41,28 @@
             </div>
             <div class="header__item">
               <p id="wins" class="filter__link filter__link--number">
-                Standard
+                Date Payed
               </p>
             </div>
             <div class="header__item">
               <p id="wins" class="filter__link filter__link--number">
-                Date Submitted
-              </p>
-            </div>
-            <div class="header__item">
-              <p id="wins" class="filter__link filter__link--number">
-                Amount Submitted
+                Amount Payed
               </p>
             </div>
           </div>
         </div>
         <div class="table-content">
-          <div v-for="fees in list" class="table-row" :key="fees.id">
+          <div v-for="payment in list" class="table-row" :key="payment.id">
             <div class="table-data">
-              {{ fees.enrollstudent.student.rollnbr }}
+              {{ payment.teacher.id }}
             </div>
             <div class="table-data">
-              {{ fees.enrollstudent.student.s_name }}
+              {{ payment.teacher.t_name }}
             </div>
             <div class="table-data">
-              {{ fees.enrollstudent.standard.standardname }}
+              {{ payment.date_payed }}
             </div>
-            <div class="table-data">{{ fees.date_enroll }}</div>
-            <div class="table-data">{{ fees.studentamount }}</div>
+            <div class="table-data">{{ payment.teacheramount }}</div>
           </div>
         </div>
       </div>
@@ -95,12 +81,9 @@ export default {
   data() {
     return {
       list: undefined,
-      selectedmonth: null,
       amount: {
-        studentamount: null,
+        teacheramount: null,
       },
-      updatestandard: null,
-      standards: null,
       showtable: true,
     };
   },
@@ -111,17 +94,12 @@ export default {
     },
   },
   mounted() {
-    this.getfees();
-    Vue.axios.get("http://127.0.0.1:8000/standardlist").then((resp) => {
-      this.standards = resp.data;
-
-      console.log(resp.data);
-    });
+    this.getpayments();
   },
   methods: {
-    getfees() {
+    getpayments() {
       Vue.axios
-        .get("http://127.0.0.1:8000/feesByroll/" + this.roll)
+        .get("http://127.0.0.1:8000/teacherpayment/" + this.roll)
         .then((resp) => {
           this.list = resp.data;
 
@@ -130,17 +108,11 @@ export default {
     },
     updatefees() {
       axios
-        .post(
-          "http://127.0.0.1:8000/feespost/" +
-            this.roll +
-            "/" +
-            this.updatestandard,
-          this.amount
-        )
+        .post("http://127.0.0.1:8000/tpaymentpost/" + this.roll, this.amount)
         .then((response) => {
           console.warn(response);
           // this.smessage="Succesfully added"
-          this.getfees();
+          this.getpayments();
           this.$bvToast.toast("Fees Submitted", {
             title: "Succesful",
             variant: "success",

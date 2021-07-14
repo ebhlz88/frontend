@@ -2,17 +2,19 @@
   <div class="register">
     <div class="row">
       <div class="col-md-3 register-left">
-        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-        <h3>Welcome</h3>
-        <p>You are 30 seconds away from earning your own money!</p>
-        <input type="submit" name="" value="Login" /><br />
+        <router-link type="submit" to="list" class="routerlink"
+          >Generate Student List</router-link
+        ><br />
+        <router-link type="submit" name="" to="ttable" class="routerlink"
+          >Generate Teacher List</router-link
+        ><br />
       </div>
       <div class="col-md-9 register-right">
         <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
           <li class="nav-item">
             <button
               class="nav-link"
-              :class="{active : studentshow}"
+              :class="{ active: studentshow }"
               id="home-tab"
               data-toggle="tab"
               v-on:click="
@@ -29,12 +31,11 @@
           <li class="nav-item">
             <button
               class="nav-link"
-            
               v-on:click="
                 studentshow = false;
                 teachershow = true;
               "
-              :class="{active : teachershow}"
+              :class="{ active: teachershow }"
               id="profile-tab"
               data-toggle="tab"
               role="tab"
@@ -62,7 +63,6 @@
                     type="text"
                     class="form-control"
                     placeholder="Full Name *"
-                    value=""
                   />
                 </div>
                 <div class="form-group">
@@ -71,7 +71,6 @@
                     type="text"
                     class="form-control"
                     placeholder="Father's Name *"
-                    value=""
                   />
                 </div>
                 <div class="form-group">
@@ -85,7 +84,7 @@
 
                 <div class="form-group">
                   <date-picker
-                    placeholder="Date of Birth"
+                    placeholder="Date of joining"
                     class="widthdp from-control"
                     v-model="posts.date_join"
                     valueType="format"
@@ -99,7 +98,6 @@
                     v-model="posts.address"
                     class="form-control"
                     placeholder="Address *"
-                    value=""
                   />
                 </div>
                 <div class="form-group">
@@ -111,7 +109,6 @@
                     name="txtEmpPhone"
                     class="form-control"
                     placeholder="Father's Phone *"
-                    value=""
                   />
                 </div>
                 <div class="form-group">
@@ -179,80 +176,148 @@
             role="tabpanel"
             aria-labelledby="profile-tab"
           >
-            <h3 class="register-heading">Apply as a Hirer</h3>
+            <h3 class="register-heading">Add Teacher</h3>
             <div class="row register-form">
               <div class="col-md-6">
                 <div class="form-group">
                   <input
+                    v-model="teacherposts.t_name"
                     type="text"
                     class="form-control"
-                    placeholder="First Name *"
-                    value=""
+                    placeholder="Full Name *"
                   />
                 </div>
                 <div class="form-group">
                   <input
+                    v-model="teacherposts.t_fname"
                     type="text"
                     class="form-control"
-                    placeholder="Last Name *"
-                    value=""
+                    placeholder="Father's Name *"
                   />
                 </div>
                 <div class="form-group">
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Email *"
-                    value=""
-                  />
+                  <date-picker
+                    placeholder="Date of Birth"
+                    class="widthdp from-control"
+                    v-model="teacherposts.dob"
+                    valueType="format"
+                  ></date-picker>
+                </div>
+
+                <div class="form-group">
+                  <date-picker
+                    placeholder="Date of Hiring"
+                    class="widthdp from-control"
+                    v-model="teacherposts.date_hiring"
+                    valueType="format"
+                  ></date-picker>
                 </div>
                 <div class="form-group">
                   <input
                     type="text"
-                    maxlength="10"
-                    minlength="10"
+                    v-model="teacherposts.speciality"
                     class="form-control"
-                    placeholder="Phone *"
-                    value=""
+                    placeholder="Speciality *"
                   />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <input
-                    type="password"
+                    type="text"
+                    v-model="teacherposts.address"
                     class="form-control"
-                    placeholder="Password *"
-                    value=""
+                    placeholder="Address *"
                   />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="password"
-                    class="form-control"
-                    placeholder="Confirm Password *"
-                    value=""
-                  />
-                </div>
-                <div class="form-group">
-                  <select class="form-control">
-                    <option class="hidden" selected disabled>
-                      Please select your Sequrity Question
-                    </option>
-                    <option>What is your Birthdate?</option>
-                    <option>What is Your old Phone Number</option>
-                    <option>What is your Pet Name?</option>
-                  </select>
                 </div>
                 <div class="form-group">
                   <input
                     type="text"
+                    v-model="teacherposts.m_number"
+                    minlength="10"
+                    maxlength="10"
+                    name="txtEmpPhone"
                     class="form-control"
-                    placeholder="`Answer *"
-                    value=""
+                    placeholder="Mobile *"
                   />
                 </div>
-                <input type="submit" class="btnRegister" value="Register" />
+                <div class="form-group">
+                  <input
+                    type="text"
+                    v-model="teacherposts.salary"
+                    minlength="10"
+                    maxlength="10"
+                    name="txtEmpPhone"
+                    class="form-control"
+                    placeholder="Salary *"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    v-model="teacherposts.t_email"
+                    minlength="10"
+                    maxlength="10"
+                    name="txtEmpPhone"
+                    class="form-control"
+                    placeholder="Email *"
+                  />
+                </div>
+                <div class="form-group">
+                  <div class="form-check current">
+                    <input
+                      class="form-check-input"
+                      v-model="teacherposts.sex"
+                      value="male"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault1"
+                    />
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Male
+                    </label>
+                  </div>
+                  <div class="form-check current">
+                    <input
+                      class="form-check-input"
+                      v-model="teacherposts.sex"
+                      value="female"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault2"
+                      checked
+                    />
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Female
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group form-check">
+                  <div class="current">
+                    <input
+                      type="checkbox"
+                      v-model="teacherposts.c_position"
+                      class="form-check-input"
+                      id="exampleCheck1"
+                    />
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Currently enrolled</label
+                    >
+                  </div>
+                </div>
+                <!-- <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Your Answer *"
+                    value=""
+                  /> -->
+
+                <input
+                  type="submit"
+                  v-on:click="submitteacherData"
+                  class="btnRegister"
+                  value="Register"
+                />
               </div>
             </div>
           </div>
@@ -295,6 +360,19 @@ export default {
         fm_number: null,
         sex: null,
       },
+      teacherposts: {
+        t_name: null,
+        t_fname: null,
+        m_number: null,
+        dob: null,
+        date_hiring: null,
+        t_email: null,
+        address: null,
+        salary: null,
+        sex: null,
+        speciality: null,
+        c_position: true,
+      },
       date: {
         value: new Date(),
         formattedValue: "",
@@ -305,6 +383,35 @@ export default {
     submitData() {
       axios
         .post("http://127.0.0.1:8000", this.posts)
+        .then((response) => {
+          console.log(response);
+
+          // this.smessage="Succesfully added"
+          this.$bvToast.toast("Succesfully added", {
+            title: "Succesful",
+            variant: "success",
+            solid: true,
+            toaster: "b-toaster-top-center",
+          });
+        })
+        .catch((error) =>
+          console.log(
+            error.response.request._response,
+            this.$bvToast.toast(
+              "Make sure all fields are filled or pass Null value",
+              {
+                title: " Failed to Add",
+                variant: "danger",
+                solid: true,
+                toaster: "b-toaster-top-center",
+              }
+            )
+          )
+        );
+    },
+    submitteacherData() {
+      axios
+        .post("http://127.0.0.1:8000/allteachers", this.teacherposts)
         .then((response) => {
           console.log(response);
 
@@ -345,29 +452,23 @@ export default {
   color: #fff;
   margin-top: 4%;
 }
-.register-left input {
+.register-left .routerlink {
   border: none;
   border-radius: 1.5rem;
-  padding: 2%;
-  width: 60%;
+  padding: 4% 8%;
+  width: auto;
   background: #f8f9fa;
+  text-decoration: none;
   font-weight: bold;
   color: #383d41;
-  margin-top: 30%;
-  margin-bottom: 3%;
+  margin-top: 0%;
+  margin-bottom: 15%;
   cursor: pointer;
 }
 .register-right {
   background: #f8f9fa;
   border-top-left-radius: 10% 50%;
   border-bottom-left-radius: 10% 50%;
-}
-.register-left img {
-  margin-top: 15%;
-  margin-bottom: 5%;
-  width: 25%;
-  -webkit-animation: mover 2s infinite alternate;
-  animation: mover 1s infinite alternate;
 }
 @-webkit-keyframes mover {
   0% {
