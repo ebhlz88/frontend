@@ -75,6 +75,8 @@ import Vue from "vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
 
+import { mapGetters } from "vuex";
+
 Vue.use(VueAxios, axios);
 export default {
   name: "fees",
@@ -86,6 +88,9 @@ export default {
       },
       showtable: true,
     };
+  },
+  computed: {
+    ...mapGetters(["token"]),
   },
   props: {
     roll: {
@@ -108,7 +113,11 @@ export default {
     },
     updatefees() {
       axios
-        .post("http://127.0.0.1:8000/tpaymentpost/" + this.roll, this.amount)
+        .post(
+          "http://127.0.0.1:8000/tpaymentpost/" + this.roll,
+          this.amount,
+          this.token
+        )
         .then((response) => {
           console.warn(response);
           // this.smessage="Succesfully added"

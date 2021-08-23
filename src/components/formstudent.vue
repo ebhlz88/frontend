@@ -1,5 +1,5 @@
 <template>
-  <div class="register">
+  <div class="register" v-if="isloggedin">
     <div class="row">
       <div class="col-md-3 register-left">
         <router-link type="submit" to="list" class="routerlink"
@@ -89,6 +89,9 @@
                     v-model="posts.date_join"
                     valueType="format"
                   ></date-picker>
+                </div>
+                <div class="form-group">
+                  <input type="file" @change="onFileChanged" />
                 </div>
               </div>
               <div class="col-md-6">
@@ -335,14 +338,21 @@ import axios from "axios";
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 
+import { mapGetters } from "vuex";
+
 Vue.use(VueAxios, axios);
 export default {
   name: "formstudent",
   components: {
     DatePicker,
   },
+  computed: {
+    ...mapGetters(["token"]),
+    ...mapGetters(["isloggedin"]),
+  },
   data() {
     return {
+      imagefile: null,
       studentshow: true,
       teachershow: false,
       cposition: null,
@@ -380,9 +390,29 @@ export default {
     };
   },
   methods: {
+    onFileChanged(e) {
+      let image = e.target.files[0];
+      this.imagefile = e.target.files[0];
+      let reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onload = (e) => {
+        this.posts.student_pic = e.target.result;
+        console.log(e);
+      };
+    },
     submitData() {
+      let data = new FormData();
+      data.append("s_name", this.posts.s_name);
+      data.append("s_fname", this.posts.s_fname);
+      data.append("dob", this.posts.dob);
+      data.append("date_join", this.posts.date_join);
+      data.append("sex", this.posts.sex);
+      data.append("fm_number", this.posts.fm_number);
+      data.append("c_position", this.posts.c_position);
+      data.append("address", this.posts.address);
+      data.append("student_pic", this.imagefile);
       axios
-        .post("http://127.0.0.1:8000", this.posts)
+        .post("http://127.0.0.1:8000", data, this.token)
         .then((response) => {
           console.log(response);
 
@@ -411,7 +441,11 @@ export default {
     },
     submitteacherData() {
       axios
-        .post("http://127.0.0.1:8000/allteachers", this.teacherposts)
+        .post(
+          "http://127.0.0.1:8000/allteachers",
+          this.teacherposts,
+          this.token
+        )
         .then((response) => {
           console.log(response);
 

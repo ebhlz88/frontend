@@ -19,14 +19,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mb-2 mb-lg-0 mlauto">
             <li class="nav-item">
-              <router-link class="nav-link active" to="/"
+              <router-link v-if="!isloggedin" class="nav-link active" to="/"
+                ><b>Home</b></router-link
+              >
+              <router-link v-if="isloggedin" class="nav-link active" to="/sform"
                 ><b>Home</b></router-link
               >
             </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/sform"
-                ><b>Contact Us</b></router-link
-              >
+            <li v-if="!isloggedin" class="nav-item">
+              <router-link class="nav-link" to="/"><b>Login</b></router-link>
+            </li>
+            <li v-if="isloggedin" class="nav-item">
+              <div class="nav-link logoutdiv" v-on:click="logout">
+                <b>Logout</b>
+              </div>
             </li>
             <li>
               <form class="d-flex">
@@ -52,12 +58,28 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+
+import { mapGetters } from "vuex";
 export default {
   name: "navbar",
   methods: {
     clicked() {
       console.log("clicked");
     },
+    logout() {
+      this.$store.dispatch("isloggedin", false);
+
+      axios.post("http://127.0.0.1:8000/logout", null, this.token).then(() => {
+        this.$store.dispatch("token", null);
+        this.$router.push("/");
+        // this.smessage="Succesfully added"
+      });
+    },
+  },
+  computed: {
+    ...mapGetters(["isloggedin"]),
+    ...mapGetters(["token"]),
   },
 };
 </script>
@@ -125,5 +147,8 @@ span:hover {
 }
 .searchdiv {
   margin: auto;
+}
+.logoutdiv:hover {
+  cursor: pointer;
 }
 </style>

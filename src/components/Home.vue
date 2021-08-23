@@ -1,55 +1,102 @@
 <template>
   <div id="homepage">
     <div>
-      <div class="row">
-        <div class="col-md-4 margin">
-          <div class="login">
-            <h3 class="text-center">Login</h3>
-            <form>
-              <div class="input-group">
-                <span class="input-group-addon"
-                  ><font-awesome-icon :icon="['fas', 'user']" id="basic-addon1"
-                /></span>
-                <input
-                  id="email"
-                  type="text"
-                  class="form-control"
-                  name="email"
-                  placeholder="Username"
-                />
-              </div>
-              <div class="input-group margin">
-                <span class="input-group-addon"
-                  ><font-awesome-icon :icon="['fas', 'lock']" id="basic-addon1"
-                /></span>
-                <input
-                  id="email"
-                  type="password"
-                  class="form-control"
-                  name="password"
-                  placeholder="Password"
-                />
-              </div>
-              <button class="btn btn-primary">Login</button>
-            </form>
+      <div>
+        <div class="row">
+          <div class="col-md-4 margin">
+            <div class="login">
+              <h3 class="text-center">Login</h3>
+              <form @submit.prevent="loginn">
+                <div class="input-group">
+                  <span class="input-group-addon"
+                    ><font-awesome-icon
+                      :icon="['fas', 'user']"
+                      id="basic-addon1"
+                  /></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="username"
+                    v-model="logindata.username"
+                    placeholder="Username"
+                  />
+                </div>
+                <div class="input-group margin">
+                  <span class="input-group-addon"
+                    ><font-awesome-icon
+                      :icon="['fas', 'lock']"
+                      id="basic-addon1"
+                  /></span>
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    v-model="logindata.password"
+                    placeholder="Password"
+                  />
+                </div>
+                <button class="btn btn-primary" type="submit">Login</button>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <img
+              src="../assets/students.png"
+              class="homeimage"
+              alt="landing image"
+            />
           </div>
         </div>
-        <div class="col-md-7">
-          <img
-            src="../assets/students.png"
-            class="homeimage"
-            alt="landing image"
-          />
-        </div>
       </div>
+
+      <img src="../assets/wave1.png" alt="wave" class="bottom-image" />
     </div>
-    <img src="../assets/wave1.png" alt="wave" class="bottom-image" />
   </div>
   <!-- <font-awesome-icon  :icon="['fas', 'user']" id="basic-addon1" /> -->
 </template>
 
 <script>
-export default {};
+import Vue from "vue";
+import VueAxios from "vue-axios";
+import axios from "axios";
+
+Vue.use(VueAxios, axios);
+export default {
+  components: {},
+  data() {
+    return {
+      isloggedin: false,
+      logindata: {
+        username: null,
+        password: null,
+      },
+    };
+  },
+  methods: {
+    loginn() {
+      axios
+        .post("http://127.0.0.1:8000/login", this.logindata)
+        .then((response) => {
+          console.log(response.data.token);
+          this.token = response.data.token;
+          var token = {
+            headers: {
+              Authorization: "Token " + response.data.token,
+            },
+          };
+          this.isloggedin = true;
+          this.$store.dispatch("token", token);
+          this.$store.dispatch("isloggedin", true);
+          this.$router.push("/sform");
+        })
+        .catch(
+          () => this.$store.dispatch("token", NaN),
+          (this.isloggedin = false),
+          this.$store.dispatch("isloggedin", this.isloggedin)
+        );
+    },
+  },
+};
 </script>
 
 <style>
@@ -60,7 +107,7 @@ export default {};
   margin: 0px;
 }
 .homeimage {
-  height: 350px;
+  height: 320px;
   margin-top: 20px;
 }
 .login {
@@ -68,6 +115,7 @@ export default {};
   width: 400px;
   padding: 60px;
   margin: auto;
+  margin-left: 90px;
   background-image: url("../assets/loginback.png");
   border-radius: 10px;
 }

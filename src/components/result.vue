@@ -96,6 +96,8 @@ import Vue from "vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
 
+import { mapGetters } from "vuex";
+
 Vue.use(VueAxios, axios);
 export default {
   name: "fees",
@@ -111,6 +113,9 @@ export default {
         subjectmarks: null,
       },
     };
+  },
+  computed: {
+    ...mapGetters(["token"]),
   },
   props: {
     roll: {
@@ -150,7 +155,8 @@ export default {
             this.updatestandard +
             "/" +
             this.updatesubject,
-          this.marks
+          this.marks,
+          this.token
         )
         .then((response) => {
           console.warn(response);

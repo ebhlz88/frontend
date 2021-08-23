@@ -30,12 +30,12 @@
           </div>
           <div class="header__item">
             <p id="losses" class="filter__link filter__link--number">
-              Fee Detail
+              Speciality
             </p>
           </div>
           <div class="header__item">
             <p id="losses" class="filter__link filter__link--number">
-              Speciality
+              Fee Detail
             </p>
           </div>
         </div>
