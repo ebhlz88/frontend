@@ -87,7 +87,7 @@ export default {
           this.isloggedin = true;
           this.$store.dispatch("token", token);
           this.$store.dispatch("isloggedin", true);
-          this.$router.push("/sform");
+          this.$router.push("/main");
         })
         .catch(
           () => this.$store.dispatch("token", NaN),

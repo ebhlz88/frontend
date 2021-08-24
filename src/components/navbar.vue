@@ -22,7 +22,7 @@
               <router-link v-if="!isloggedin" class="nav-link active" to="/"
                 ><b>Home</b></router-link
               >
-              <router-link v-if="isloggedin" class="nav-link active" to="/sform"
+              <router-link v-if="isloggedin" class="nav-link active" to="/main"
                 ><b>Home</b></router-link
               >
             </li>

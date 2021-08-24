@@ -1,67 +1,70 @@
 <template>
   <div id="cardview">
-    <h1>this is cardview</h1>
     <div class="row">
-      <div class="cardd animate" style="width: 22rem">
+      <div class="cardd animate" style="width: 14rem" v-on:click="schoolinfo">
         <img
           class="card-img-top"
-          src="../assets/cardimage1.jpg"
+          src="../assets/SchoolInfo.png"
           alt="Card image cap"
         />
-        <div class="card-body">
-          <div class="diplay">
-            <router-link class="btn btn-primary" to="/list">View</router-link>
-            <router-link class="btn btn-primary" to="/sform"
-              >Add Student</router-link
-            >
-          </div>
-          <button class="btn btn-primary">Fees Detail</button>
-          <button class="btn btn-primary">Result</button>
-        </div>
+        <div class="card-body">School Information</div>
       </div>
-
-      <div class="cardd animate" style="width: 22rem">
+      <div class="cardd animate" style="width: 14rem" v-on:click="register">
         <img
           class="card-img-top"
-          src="../assets/cardimage1.jpg"
+          src="../assets/RegStudent.png"
           alt="Card image cap"
         />
-        <div class="card-body">
-          <div class="diplay">
-            <button class="btn btn-primary">List</button>
-            <button class="btn btn-primary">Add Teacher</button>
-          </div>
-          <button class="btn btn-primary">Payment</button>
-        </div>
+        <div class="card-body">Registration</div>
       </div>
-
-      <div class="cardd animate" style="width: 22rem">
+      <div class="cardd animate" style="width: 14rem" v-on:click="stdtmngmt">
         <img
           class="card-img-top"
-          src="../assets/cardimage1.jpg"
+          src="../assets/StudentMgmt.png"
           alt="Card image cap"
         />
-        <div class="card-body">
-          <div class="diplay">
-            <button class="btn btn-primary">List</button>
-            <button class="btn btn-primary">Add Student</button>
-          </div>
-          <button class="btn btn-primary">Fees Detail</button>
-          <button class="btn btn-primary">Result</button>
-        </div>
+        <div class="card-body">Student Management</div>
+      </div>
+      <div class="cardd animate" style="width: 14rem" v-on:click="staffmgmt">
+        <img
+          class="card-img-top"
+          src="../assets/StaffMgmt.png"
+          alt="Card image cap"
+        />
+        <div class="card-body">Staff Management</div>
+      </div>
+      <div class="cardd animate" style="width: 14rem">
+        <img
+          class="card-img-top"
+          src="../assets/reports.png"
+          alt="Card image cap"
+        />
+        <div class="card-body">Financial Report</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    stdtmngmt() {
+      this.$router.push("/list");
+    },
+    staffmgmt() {
+      this.$router.push("/ttable");
+    },
+    register() {
+      this.$router.push("/sform");
+    },
+    schoolinfo() {},
+  },
+};
 </script>
 
 <style>
 .card-img-top {
-  height: 250px;
-  width: 100%;
+  height: 60%;
   display: inline;
 }
 .cardd:hover {
@@ -76,6 +79,11 @@ export default {};
   margin: 0px 25px;
   margin-bottom: 15px;
 }
+.card-body {
+  background-color: rgb(49, 127, 222);
+  color: white;
+  border-radius: 0.7rem;
+}
 .row {
   display: flex;
   justify-content: center;
@@ -83,9 +91,6 @@ export default {};
 .footer {
   background-color: yellow;
   height: 20px;
-}
-.card-body {
-  background-color: rgb(5, 90, 168);
 }
 .animate {
   -webkit-animation: animatezoom 0.6s;
@@ -120,4 +125,22 @@ export default {};
     width: 100%;
   }
 }
+#cardview {
+  margin-top: 1px;
+}
+.cardd {
+  height: 54vh;
+  background-color: transparent;
+  margin: 8vh;
+  margin-bottom: 0px;
+  padding: 0px 0px;
+}
+.cardd:hover {
+  cursor: pointer;
+  background-color: #fff;
+  box-shadow: none;
+}
+/* *{
+  border: 1px solid;
+} */
 </style>

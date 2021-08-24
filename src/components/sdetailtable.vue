@@ -6,11 +6,7 @@
           <div class="col-lg-4">
             <div class="card shadow-sm">
               <div class="card-header bg-transparent text-center">
-                <img
-                  class="profile_img"
-                  :src="photo"
-                  alt="student dp"
-                />
+                <img class="profile_img" :src="photo" alt="student dp" />
                 <h3>{{ list.s_name }}</h3>
                 S/O
                 <h3>{{ list.s_fname }}</h3>
@@ -29,7 +25,10 @@
             <div class="card shadow-sm">
               <div class="card-header bg-transparent border-0">
                 <h3 class="mb-0">
-                  <i class="far fa-clone pr-1"></i>General Information
+                  <font-awesome-icon
+                    :icon="['fas', 'info-circle']"
+                    id="basic-addon1"
+                  />General Information
                 </h3>
               </div>
               <div class="card-body pt-0">
@@ -85,9 +84,7 @@
                 </h3>
               </div>
               <div class="card-body pt-0">
-                <p>
-                 sfsdfsd
-                </p>
+                <p>sfsdfsd</p>
               </div>
             </div>
           </div>
@@ -112,7 +109,7 @@ export default {
       hrefresult: "/#/result/",
       hrefdetail: "/#/sdetail/",
       searchitem: null,
-      photo:null,
+      photo: null,
     };
   },
   props: {

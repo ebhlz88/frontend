@@ -2,12 +2,24 @@
   <div class="register" v-if="isloggedin">
     <div class="row">
       <div class="col-md-3 register-left">
-        <router-link type="submit" to="list" class="routerlink"
-          >Generate Student List</router-link
-        ><br />
-        <router-link type="submit" name="" to="ttable" class="routerlink"
-          >Generate Teacher List</router-link
-        ><br />
+        <div class="card-container">
+          <div class="card">
+            <div class="front">
+              Number of Students
+            </div>
+            <div class="back">User</div>
+          </div>
+        </div>
+        <br />
+        <div class="card-container">
+          <div class="card">
+            <div class="front">
+              Number of Teachers
+            </div>
+            <div class="back">User</div>
+          </div>
+        </div>
+        <br />
       </div>
       <div class="col-md-9 register-right">
         <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
@@ -587,4 +599,55 @@ export default {
 }
 
 //*{border: 1px solid;}
+.card-container {
+  display: inline-block;
+  margin: 0 auto;
+  padding: 0 12px;
+  perspective: 900px;
+  text-align: center;
+}
+.card {
+  position: relative;
+  width: 250px;
+  height: 150px;
+  transition: all 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.front,
+.back {
+  position: absolute;
+  background: #021e42;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 150px;
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3),
+    0 17px 17px 0 rgba(0, 0, 0, 0.15);
+  backface-visibility: hidden;
+}
+
+.front {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.card-container:hover .card {
+  transform: rotateY(180deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
 </style>
