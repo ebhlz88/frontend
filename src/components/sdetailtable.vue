@@ -77,7 +77,7 @@
               </div>
             </div>
             <div style="height: 26px"></div>
-            <div class="card shadow-sm">
+            <!-- <div class="card shadow-sm">
               <div class="card-header bg-transparent border-0">
                 <h3 class="mb-0">
                   <i class="far fa-clone pr-1"></i>Other Information
@@ -86,7 +86,7 @@
               <div class="card-body pt-0">
                 <p>sfsdfsd</p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

@@ -79,7 +79,7 @@ export default {
   margin: 0px 25px;
   margin-bottom: 15px;
 }
-.card-body {
+#cardview .card-body {
   background-color: rgb(49, 127, 222);
   color: white;
   border-radius: 0.7rem;

@@ -1,21 +1,17 @@
 <template>
-  <div class="register" v-if="isloggedin">
+  <div id="regist" class="register" v-if="isloggedin">
     <div class="row">
       <div class="col-md-3 register-left">
         <div class="card-container">
           <div class="card">
-            <div class="front">
-              Number of Students
-            </div>
+            <div class="front">Number of Students</div>
             <div class="back">User</div>
           </div>
         </div>
         <br />
         <div class="card-container">
           <div class="card">
-            <div class="front">
-              Number of Teachers
-            </div>
+            <div class="front">Number of Teachers</div>
             <div class="back">User</div>
           </div>
         </div>
@@ -606,7 +602,7 @@ export default {
   perspective: 900px;
   text-align: center;
 }
-.card {
+#regist .card {
   position: relative;
   width: 250px;
   height: 150px;

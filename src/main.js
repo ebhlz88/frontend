@@ -21,6 +21,7 @@ import payment from "./components/payment.vue";
 import sdetailtable from "./components/sdetailtable.vue";
 import tdetail from "./components/tdetail.vue";
 import cardview from "./components/cardview.vue";
+import graph from "./components/financialgraph.vue";
 
 import VueComp from "@vue/composition-api";
 
@@ -55,6 +56,7 @@ const routes = [
   { path: "/ttable", component: teachertable },
   { path: "/payments", component: payment },
   { path: "/main", component: cardview },
+  { path: "/graph", component: graph },
   { path: "/payments/:roll", component: payment, props: true },
   { path: "/sdetail/:roll", component: sdetailtable, props: true },
   { path: "/tdetail/:roll", component: tdetail, props: true },
