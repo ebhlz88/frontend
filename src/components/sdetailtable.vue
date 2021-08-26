@@ -64,9 +64,9 @@
                     <td>{{ list.date_join }}</td>
                   </tr>
                   <tr>
-                    <th width="30%">blood</th>
+                    <th width="30%">blood Group</th>
                     <td width="2%">:</td>
-                    <td>B+</td>
+                    <td>{{ list.bloodgroup }}</td>
                   </tr>
                   <tr>
                     <th width="30%">Currently enrolled</th>
@@ -104,7 +104,7 @@ export default {
   name: "sdtailtable",
   data() {
     return {
-      list: null,
+      list: undefined,
       hreffee: "/#/fees/",
       hrefresult: "/#/result/",
       hrefdetail: "/#/sdetail/",
@@ -124,18 +124,14 @@ export default {
         .get("http://127.0.0.1:8000/studentsearch/?search=" + this.searchitem)
         .then((resp) => {
           this.list = resp.data;
-
-          console.log(resp.data);
+          this.photo = resp.data.student_pic;
         });
     },
   },
   mounted() {
     Vue.axios.get("http://127.0.0.1:8000/student/" + this.roll).then((resp) => {
       this.list = resp.data;
-
-      this.photo = resp.data.student_pic;
-
-      console.log(resp.data);
+      this.photo = "http://127.0.0.1:8000" + resp.data.student_pic;
     });
   },
 };

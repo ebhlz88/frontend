@@ -123,6 +123,17 @@
                   />
                 </div>
                 <div class="form-group">
+                  <input
+                    type="text"
+                    v-model="posts.bloodgroup"
+                    minlength="10"
+                    maxlength="10"
+                    name="blood"
+                    class="form-control"
+                    placeholder="Blood Group *"
+                  />
+                </div>
+                <div class="form-group">
                   <div class="form-check current">
                     <input
                       class="form-check-input"
@@ -377,6 +388,7 @@ export default {
         address: null,
         fm_number: null,
         sex: null,
+        bloodgroup: null,
       },
       teacherposts: {
         t_name: null,
@@ -419,6 +431,7 @@ export default {
       data.append("c_position", this.posts.c_position);
       data.append("address", this.posts.address);
       data.append("student_pic", this.imagefile);
+      data.append("bloodgroup", this.posts.bloodgroup);
       axios
         .post("http://127.0.0.1:8000", data, this.token)
         .then((response) => {
