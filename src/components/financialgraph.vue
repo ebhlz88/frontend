@@ -1,27 +1,20 @@
 <template>
   <div id="graph">
-    <div>
-      <b-form @submit.prevent="search" class="form-inline">
-        <b-form-select
-          split
-          split-variant="outline-primary"
-          variant="primary"
-          text="Select the year"
-          class="m-2"
-          v-model="selectedyear"
-        >
-          <b-form-select-option disabled
-            >Please select an Year</b-form-select-option
-          >
-          <b-form-select-option
-            v-for="items in year"
-            :key="items.year"
-            :value="items.year"
-            >{{ items.year }}</b-form-select-option
-          >
-        </b-form-select>
-        <b-button variant="primary" type="submit">search</b-button>
-      </b-form>
+    <div class="input-group col-md-6 width m-3">
+      <h5 class="p-3"><b>Select a year</b></h5>
+      <select
+        split-variant="outline-primary"
+        variant="primary"
+        text="Select the year"
+        class="width m-2 form-control"
+        v-model="selectedyear"
+      >
+        <option disabled>Please select an Year</option>
+        <option v-for="items in year" :key="items.year" :value="items.year">
+          {{ items.year }}
+        </option>
+      </select>
+      <button class="btn btn-primary" v-on:click="search">search</button>
     </div>
     <div id="chart" class="chartdiv">
       <apexchart
@@ -147,21 +140,17 @@ export default {
 
   methods: {
     search() {
-      Vue.axios
-        .get("http://127.0.0.1:8000/calc/" + this.selectedyear)
-        .then((resp) => {
-          this.monthssum = resp.data;
+      Vue.axios.get("http://127.0.0.1:8000/calc/2021").then((resp) => {
+        this.monthssum = resp.data;
 
-          console.log(resp.data);
-        });
-      Vue.axios
-        .get("http://127.0.0.1:8000/calcteacher/" + this.selectedyear)
-        .then((resp) => {
-          console.log(resp.data);
-          this.teacherpayment = resp.data;
-          //this.maxvalueee = ((Math.max(this.jansum,this.monthssum.febsum,this.monthssum.marsum,this.monthssum.aprsum,this.monthssum.maysum,this.monthssum.junsum,this.monthssum.julsum,this.monthssum.sepsum,this.monthssum.octsum,this.monthssum.novsum,this.monthssum.decsum,this.monthssum.augsum)) * 1.5  )
-          this.updatechart();
-        });
+        console.log(resp.data);
+      });
+      Vue.axios.get("http://127.0.0.1:8000/tcalc/2021").then((resp) => {
+        console.log(resp.data);
+        this.teacherpayment = resp.data;
+        //this.maxvalueee = ((Math.max(this.jansum,this.monthssum.febsum,this.monthssum.marsum,this.monthssum.aprsum,this.monthssum.maysum,this.monthssum.junsum,this.monthssum.julsum,this.monthssum.sepsum,this.monthssum.octsum,this.monthssum.novsum,this.monthssum.decsum,this.monthssum.augsum)) * 1.5  )
+        this.updatechart();
+      });
     },
     updatechart() {
       const newData = this.series[0].data.map(() => {
@@ -277,25 +266,22 @@ export default {
       ];
     },
   },
-  mounted() {
-    Vue.axios.get("http://127.0.0.1:8000/year").then((resp) => {
-      this.year = resp.data;
-      console.log(resp.data);
-    });
-  },
 };
 </script>
 <style scoped>
+#graph .width {
+  width: 35%;
+}
 #graph .pad {
   margin-top: 10vh;
 }
 #graph .btn {
-  background-color: rgb(49, 36, 53);
+  background-color: rgb(84, 43, 197);
   border-radius: 4rem;
   background-clip: border-box;
 }
 #graph .tabletop {
-  background-color: #385743;
+  background-color: #3988d1;
   border-top-right-radius: 2rem;
   border-top-left-radius: 2rem;
   position: relative;
@@ -344,4 +330,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.877);
   color: black;
 }
+/* *{
+  border: 1px solid;
+} */
 </style>

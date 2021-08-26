@@ -3,16 +3,22 @@
     <div class="row">
       <div class="col-md-3 register-left">
         <div class="card-container">
-          <div class="card">
-            <div class="front">Number of Students</div>
-            <div class="back">User</div>
+          <div class="card m-3">
+            <div class="front">
+              <i class="fa fa-users icon"></i><br />
+              <p class="fontsize">Number of Students</p>
+            </div>
+            <div class="back">{{ countinfo.studentcount }}</div>
           </div>
         </div>
         <br />
         <div class="card-container">
           <div class="card">
-            <div class="front">Number of Teachers</div>
-            <div class="back">User</div>
+            <div class="front">
+              <i class="fa fa-users icon"></i><br />
+              <p class="fontsize">Number of Teachers</p>
+            </div>
+            <div class="back">{{ countinfo.teachercount }}</div>
           </div>
         </div>
         <br />
@@ -375,6 +381,7 @@ export default {
       studentshow: true,
       teachershow: false,
       cposition: null,
+      countinfo: null,
       sexoptions: [
         { text: "Male", value: "True" },
         { text: "Female", value: "False" },
@@ -409,6 +416,14 @@ export default {
       },
     };
   },
+  mounted() {
+    Vue.axios.get("http://127.0.0.1:8000/count").then((resp) => {
+      this.countinfo = resp.data;
+
+      console.log(resp.data);
+    });
+  },
+
   methods: {
     onFileChanged(e) {
       let image = e.target.files[0];
@@ -498,6 +513,12 @@ export default {
 </script>
 
 <style lang="scss">
+.fontsize {
+  font-size: 50%;
+}
+.icon {
+  padding-top: 40px;
+}
 .register {
   background: -webkit-linear-gradient(left, #3931af, #00c6ff);
   padding: 3%;
@@ -617,8 +638,9 @@ export default {
 }
 #regist .card {
   position: relative;
-  width: 250px;
+  width: 197px;
   height: 150px;
+  background: #0c54b3;
   transition: all 0.6s ease;
   transform-style: preserve-3d;
 }
@@ -626,10 +648,10 @@ export default {
 .front,
 .back {
   position: absolute;
-  background: #021e42;
+  background: #0c54b3;
   top: 0;
   left: 0;
-  width: 250px;
+  width: 200px;
   height: 150px;
   border-radius: 5px;
   color: rgb(255, 255, 255);
@@ -639,7 +661,7 @@ export default {
 }
 
 .front {
-  display: flex;
+  display: table-column-group;
   align-items: center;
   justify-content: center;
   font-size: 30px;

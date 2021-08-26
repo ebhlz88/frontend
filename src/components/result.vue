@@ -14,9 +14,7 @@
       </div>
       <div class="submitdiv col-md-8 row">
         <select class="form-control" v-model="updatestandard">
-          <option class="hidden" selected disabled>
-            Please select Standard
-          </option>
+          <option selected disabled>Please select Standard</option>
           <option v-for="items in standards" :key="items.id">
             {{ items.standardname }}
           </option>

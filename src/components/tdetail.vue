@@ -13,8 +13,7 @@
               </div>
               <div class="card-body">
                 <p class="mb-0">
-                  <strong class="pr-1">Teacher ID:</strong
-                  >{{ list.id }}
+                  <strong class="pr-1">Teacher ID:</strong>{{ list.id }}
                 </p>
               </div>
             </div>
@@ -120,7 +119,7 @@ export default {
       list: undefined,
       hrefpayment: "/#/payments/",
       tsearchitem: null,
-      photo:null,
+      photo: null,
     };
   },
   props: {
@@ -129,15 +128,16 @@ export default {
       default: NaN,
     },
   },
-  methods: {
-  },
+  methods: {},
   mounted() {
-    Vue.axios.get("http://127.0.0.1:8000/teacherbyroll/"+this.roll).then((resp) => {
-      this.list = resp.data;
-      this.photo = "http://127.0.0.1:8000" +resp.data.teacher_pic
+    Vue.axios
+      .get("http://127.0.0.1:8000/teacherbyroll/" + this.roll)
+      .then((resp) => {
+        this.list = resp.data;
+        this.photo = "http://127.0.0.1:8000" + resp.data.teacher_pic;
 
-      console.log(resp.data);
-    });
+        console.log(resp.data);
+      });
   },
 };
 </script>

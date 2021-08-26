@@ -33,7 +33,7 @@
         />
         <div class="card-body">Staff Management</div>
       </div>
-      <div class="cardd animate" style="width: 14rem">
+      <div class="cardd animate" style="width: 14rem" v-on:click="generaterpt">
         <img
           class="card-img-top"
           src="../assets/reports.png"
@@ -50,6 +50,9 @@ export default {
   methods: {
     stdtmngmt() {
       this.$router.push("/list");
+    },
+    generaterpt() {
+      this.$router.push("/graph");
     },
     staffmgmt() {
       this.$router.push("/ttable");
