@@ -10,8 +10,8 @@
         v-model="selectedyear"
       >
         <option disabled>Please select an Year</option>
-        <option v-for="items in year" :key="items.year" :value="items.year">
-          {{ items.year }}
+        <option v-for="items in yearlist" :key="items.id" :value="items.text">
+          {{ items.text }}
         </option>
       </select>
       <button class="btn btn-primary" v-on:click="search">search</button>
@@ -54,6 +54,18 @@ export default {
       monthssum: undefined,
       selectedyear: 0,
       teacherpayment: null,
+      yearlist: [
+        { text: "2021", value: 2021 },
+        { text: "2022", value: 2022 },
+        { text: "2023", value: 2023 },
+        { text: "2024", value: 2024 },
+        { text: "2025", value: 2025 },
+        { text: "2026", value: 2026 },
+        { text: "2027", value: 2027 },
+        { text: "2028", value: 2028 },
+        { text: "2029", value: 2029 },
+        { text: "2030", value: 2030 },
+      ],
       series: [
         {
           name: "collected",
@@ -140,17 +152,21 @@ export default {
 
   methods: {
     search() {
-      Vue.axios.get("http://127.0.0.1:8000/calc/2021").then((resp) => {
-        this.monthssum = resp.data;
+      Vue.axios
+        .get("http://127.0.0.1:8000/calc/" + this.selectedyear)
+        .then((resp) => {
+          this.monthssum = resp.data;
 
-        console.log(resp.data);
-      });
-      Vue.axios.get("http://127.0.0.1:8000/tcalc/2021").then((resp) => {
-        console.log(resp.data);
-        this.teacherpayment = resp.data;
-        //this.maxvalueee = ((Math.max(this.jansum,this.monthssum.febsum,this.monthssum.marsum,this.monthssum.aprsum,this.monthssum.maysum,this.monthssum.junsum,this.monthssum.julsum,this.monthssum.sepsum,this.monthssum.octsum,this.monthssum.novsum,this.monthssum.decsum,this.monthssum.augsum)) * 1.5  )
-        this.updatechart();
-      });
+          console.log(resp.data);
+        });
+      Vue.axios
+        .get("http://127.0.0.1:8000/tcalc/" + this.selectedyear)
+        .then((resp) => {
+          console.log(resp.data);
+          this.teacherpayment = resp.data;
+          //this.maxvalueee = ((Math.max(this.jansum,this.monthssum.febsum,this.monthssum.marsum,this.monthssum.aprsum,this.monthssum.maysum,this.monthssum.junsum,this.monthssum.julsum,this.monthssum.sepsum,this.monthssum.octsum,this.monthssum.novsum,this.monthssum.decsum,this.monthssum.augsum)) * 1.5  )
+          this.updatechart();
+        });
     },
     updatechart() {
       const newData = this.series[0].data.map(() => {
@@ -292,7 +308,7 @@ export default {
   margin: auto;
 }
 #graph .tablebottom {
-  background-color: rgb(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   border-bottom-right-radius: 2rem;
   border-bottom-left-radius: 2rem;
   position: relative;

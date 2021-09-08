@@ -6,7 +6,7 @@
           <div class="card m-3">
             <div class="front">
               <i class="fa fa-users icon"></i><br />
-              <p class="fontsize">Number of Students</p>
+              <p class="fontsize"><b>Number of Students</b></p>
             </div>
             <div class="back">{{ countinfo.studentcount }}</div>
           </div>
@@ -16,7 +16,7 @@
           <div class="card">
             <div class="front">
               <i class="fa fa-users icon"></i><br />
-              <p class="fontsize">Number of Teachers</p>
+              <p class="fontsize"><b>Number of Teachers</b></p>
             </div>
             <div class="back">{{ countinfo.teachercount }}</div>
           </div>
@@ -523,6 +523,9 @@ export default {
   background: -webkit-linear-gradient(left, #3931af, #00c6ff);
   padding: 3%;
 }
+.nl {
+  width: 100px;
+}
 .register-left {
   text-align: center;
   color: #fff;
@@ -648,7 +651,7 @@ export default {
 .front,
 .back {
   position: absolute;
-  background: #0c54b3;
+  background: #59a1ff;
   top: 0;
   left: 0;
   width: 200px;

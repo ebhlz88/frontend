@@ -3,7 +3,7 @@
     <div>
       <div>
         <div class="row">
-          <div class="col-md-4 margin">
+          <div class="col-md-4 marginn">
             <div class="login">
               <h3 class="text-center">Login</h3>
               <form @submit.prevent="loginn">
@@ -107,16 +107,18 @@ export default {
   margin: 0px;
 }
 .homeimage {
-  height: 320px;
+  height: 90%;
   margin-top: 20px;
+  width: 85%;
+  padding-bottom: 5%;
 }
 .login {
   height: auto;
-  width: 400px;
+  width: 89%;
   padding: 60px;
-  margin: auto;
-  margin-left: 90px;
-  background-image: url("../assets/loginback.png");
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #82b1ff;
   border-radius: 10px;
 }
 .input-group-addon {
@@ -134,6 +136,10 @@ input:focus {
 .margin {
   margin: 30px 0px;
 }
+/* .marginn{
+margin-top: 0%;
+margin-left: 2px;
+} */
 .form {
   z-index: 2;
 }

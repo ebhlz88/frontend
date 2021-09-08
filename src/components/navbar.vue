@@ -34,7 +34,7 @@
                 <b>Logout</b>
               </div>
             </li>
-            <li>
+            <!-- <li>
               <form class="d-flex">
                 <div class="searchdiv">
                   <div class="input-group">
@@ -50,7 +50,7 @@
                   </div>
                 </div>
               </form>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -92,6 +92,9 @@ export default {
   background-image: linear-gradient(to right, #3931af, #00c6ff);
   padding: 0px !important;
   width: 100%;
+}
+#nav .nav-item {
+  margin-right: 40px;
 }
 .mlauto {
   margin-left: auto;

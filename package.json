@@ -18,6 +18,7 @@
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.6.2",
     "vue-axios": "^3.2.4",
+    "vue-js-modal": "^2.0.1",
     "vue-router": "^3.5.2",
     "vue2-datepicker": "^3.9.1",
     "vuejs-datepicker": "^1.6.2",

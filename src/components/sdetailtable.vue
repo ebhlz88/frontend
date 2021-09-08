@@ -7,7 +7,8 @@
             <div class="card shadow-sm">
               <div class="card-header bg-transparent text-center">
                 <img class="profile_img" :src="photo" alt="student dp" />
-                <h3>{{ list.s_name }}</h3>
+                <h3 v-if="list">{{ list.s_name }}</h3>
+                <p v-else>loading</p>
                 S/O
                 <h3>{{ list.s_fname }}</h3>
               </div>
@@ -119,20 +120,18 @@ export default {
     },
   },
   methods: {
-    searchstudent() {
+    getsdata() {
       Vue.axios
-        .get("http://127.0.0.1:8000/studentsearch/?search=" + this.searchitem)
+        .get("http://127.0.0.1:8000/student/" + this.roll)
         .then((resp) => {
           this.list = resp.data;
-          this.photo = resp.data.student_pic;
+          console.log(this.list);
+          this.photo = "http://127.0.0.1:8000" + resp.data.student_pic;
         });
     },
   },
   mounted() {
-    Vue.axios.get("http://127.0.0.1:8000/student/" + this.roll).then((resp) => {
-      this.list = resp.data;
-      this.photo = "http://127.0.0.1:8000" + resp.data.student_pic;
-    });
+    this.getsdata();
   },
 };
 </script>

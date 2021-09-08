@@ -51,7 +51,6 @@ const routes = [
   { path: "/list", component: table },
   { path: "/fees", component: fees },
   { path: "/fees/:roll", component: fees, props: true },
-  { path: "/result", component: result },
   { path: "/result/:roll", component: result, props: true },
   { path: "/ttable", component: teachertable },
   { path: "/payments", component: payment },
