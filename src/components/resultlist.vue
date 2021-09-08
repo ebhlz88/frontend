@@ -16,7 +16,9 @@
                   <strong class="pr-1">Student Roll No:</strong
                   >{{ list.enrollstudent.student.rollnbr }}
                 </p>
-                <p class="mb-0"><strong class="pr-1">Class:</strong>{{fstandard}}</p>
+                <p class="mb-0">
+                  <strong class="pr-1">Class:</strong>{{ fstandard }}
+                </p>
               </div>
             </div>
           </div>
@@ -33,9 +35,9 @@
               <div class="card-body pt-0">
                 <table class="table table-bordered">
                   <tr v-for="item in resultlist" :key="item">
-                    <th width="30%">{{item.subjectname.subjectname}}</th>
+                    <th width="30%">{{ item.subjectname.subjectname }}</th>
                     <td width="2%">:</td>
-                    <td>{{item.subjectmarks}}</td>
+                    <td>{{ item.subjectmarks }}</td>
                   </tr>
                 </table>
               </div>
@@ -66,19 +68,17 @@ export default {
       list: null,
       photo: null,
       resultlist: null,
-      fstandard : null,
+      fstandard: null,
     };
   },
   methods: {
     getresults(event) {
       this.fstandard = event;
       Vue.axios
-        .get(
-          "http://127.0.0.1:8000/result/" + this.rollnbr + "/" + event
-        )
+        .get("http://127.0.0.1:8000/result/" + this.rollnbr + "/" + event)
         .then((resp) => {
           this.list = resp.data[0];
-          console.log(this.list)
+          console.log(this.list);
           this.resultlist = resp.data;
           this.photo =
             "http://127.0.0.1:8000" +

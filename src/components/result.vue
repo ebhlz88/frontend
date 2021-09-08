@@ -3,7 +3,11 @@
     <div id="rowdiv" class="row" v-if="!showModal">
       <h4 class="col-md-2">Filter Results {{ filterstandard }}</h4>
       <div class="col-md-2">
-        <select class="form-group mleft" v-model="filterstandard"  @change="find($event)">
+        <select
+          class="form-group mleft"
+          v-model="filterstandard"
+          @change="find($event)"
+        >
           <option selected disabled>Please select Standard</option>
           <option v-for="items in standards" :key="items.id">
             {{ items.standardname }}
@@ -121,7 +125,7 @@ export default {
     });
   },
   methods: {
-    find(event){
+    find(event) {
       this.$children[0].getresults(event.target.value);
     },
     updateresult() {
@@ -316,5 +320,6 @@ export default {
 #rowdiv {
   margin-top: 25px !important;
   justify-content: unset !important;
+  margin-right: 0px;
 }
 </style>

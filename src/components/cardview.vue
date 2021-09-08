@@ -87,9 +87,10 @@ export default {
   color: white;
   border-radius: 0.7rem;
 }
-.row {
+#cardview .row {
   display: flex;
   justify-content: center;
+  margin-right: 0px;
 }
 .footer {
   background-color: yellow;
