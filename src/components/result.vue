@@ -1,91 +1,74 @@
 <template>
   <div id="result">
-    <div class="searchdiv m-4 row">
-      <div class="input-group col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          aria-describedby="start-date"
-          placeholder="Search Here"
-        />
-        <span class="input-group-addon" id="start-date"
-          ><img src="../assets/searchicon.png" alt="serar"
-        /></span>
-      </div>
-      <div class="submitdiv col-md-8 row">
-        <select class="form-control" v-model="updatestandard">
+    <div id="rowdiv" class="row" v-if="!showModal">
+      <h4 class="col-md-2">Filter Results {{ filterstandard }}</h4>
+      <div class="col-md-2">
+        <select class="form-group mleft" v-model="filterstandard"  @change="find($event)">
           <option selected disabled>Please select Standard</option>
           <option v-for="items in standards" :key="items.id">
             {{ items.standardname }}
           </option>
         </select>
-        <select class="form-control" v-model="updatesubject">
-          <option class="hidden" selected disabled>
-            Please select subject
-          </option>
-          <option v-for="items in subjects" :key="items.id">
-            {{ items.subjectname }}
-          </option>
-        </select>
-        <input
-          type="text"
-          class="form-control"
-          v-model="marks.subjectmarks"
-          aria-describedby="start-date"
-          placeholder="Subject Marks"
-        />
-        <input
-          type="Submit"
-          class="btn btn-primary"
-          v-on:click="updateresult"
-          aria-describedby="start-date"
-          value="Submit Fees"
-        />
       </div>
+      <button class="button col-md-2 mx-5" v-on:click="showModal = true">
+        Add Fees
+      </button>
     </div>
-    <div class="row">
-      <div v-if="showtable">
-        <div class="table">
-          <div class="table-header">
-            <div class="header__item">
-              <p id="name" class="filter__link">Roll No.</p>
-            </div>
-            <div class="header__item">
-              <p id="wins" class="filter__link filter__link--number">Name</p>
-            </div>
-            <div class="header__item">
-              <p id="wins" class="filter__link filter__link--number">
-                Standard
-              </p>
-            </div>
-            <div class="header__item">
-              <p id="wins" class="filter__link filter__link--number">Subject</p>
-            </div>
-            <div class="header__item">
-              <p id="wins" class="filter__link filter__link--number">Subject</p>
-            </div>
-            <div class="header__item">
-              <p id="wins" class="filter__link filter__link--number">Marks</p>
-            </div>
+    <div id="popup">
+      <transition name="fade" appear>
+        <div
+          class="modal-overlay"
+          v-if="showModal"
+          v-on:click="showModal = false"
+        ></div>
+      </transition>
+      <!-- <transition name="slide" appear> -->
+      <div class="modalll" v-if="showModal">
+        <div class="modal-body p-4 addfees">
+          <h2>Add Fees</h2>
+          <div class="form-group d-flex my-3">
+            <select class="form-control" v-model="updatestandard">
+              <option selected disabled>Please select Standard</option>
+              <option v-for="items in standards" :key="items.id">
+                {{ items.standardname }}
+              </option>
+            </select>
           </div>
-        </div>
-        <div class="table-content">
-          <div v-for="result in list" class="table-row" :key="result.id">
-            <div class="table-data">
-              {{ result.enrollstudent.student.rollnbr }}
-            </div>
-            <div class="table-data">
-              {{ result.enrollstudent.student.s_name }}
-            </div>
-            <div class="table-data">
-              {{ result.enrollstudent.standard.standardname }}
-            </div>
-            <div class="table-data">{{ result.subjectname.subjectname }}</div>
-            <div class="table-data">{{ result.subjectmarks }}</div>
+          <div class="form-group d-flex my-3">
+            <select class="form-control" v-model="updatesubject">
+              <option class="hidden" selected disabled>
+                Please select subject
+              </option>
+              <option v-for="items in subjects" :key="items.id">
+                {{ items.subjectname }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group d-flex my-3">
+            <input
+              type="text"
+              class="form-control"
+              v-model="marks.subjectmarks"
+              aria-describedby="start-date"
+              placeholder="Subject Marks"
+            />
+          </div>
+          <div class="form-group">
+            <button
+              type="submit"
+              class="btn btn-primary submit"
+              v-on:click="updateresult"
+            >
+              Add
+            </button>
           </div>
         </div>
       </div>
+      <!-- </transition> -->
     </div>
+    <!-- <div class="searchdiv m-4 row">
+    </div> -->
+    <resultlist :fstandard="filterstandard" :rollnbr="roll" />
   </div>
 </template>
 
@@ -95,10 +78,14 @@ import VueAxios from "vue-axios";
 import axios from "axios";
 
 import { mapGetters } from "vuex";
+import resultlist from "./resultlist.vue";
 
 Vue.use(VueAxios, axios);
 export default {
   name: "fees",
+  components: {
+    resultlist,
+  },
   data() {
     return {
       list: undefined,
@@ -107,6 +94,10 @@ export default {
       standards: null,
       subjects: null,
       showtable: true,
+      photo: null,
+      filterstandard: null,
+      resultlist: null,
+      showModal: false,
       marks: {
         subjectmarks: null,
       },
@@ -122,27 +113,16 @@ export default {
     },
   },
   mounted() {
-    this.getresults();
     Vue.axios.get("http://127.0.0.1:8000/standardlist").then((resp) => {
       this.standards = resp.data;
-
-      console.log(resp.data);
     });
     Vue.axios.get("http://127.0.0.1:8000/subjectlist").then((resp) => {
       this.subjects = resp.data;
-
-      console.log(resp.data);
     });
   },
   methods: {
-    getresults() {
-      Vue.axios
-        .get("http://127.0.0.1:8000/result/" + this.roll)
-        .then((resp) => {
-          this.list = resp.data;
-
-          console.log(resp.data);
-        });
+    find(event){
+      this.$children[0].getresults(event.target.value);
     },
     updateresult() {
       axios
@@ -215,4 +195,126 @@ export default {
 // *{
 //   border: 1px solid;
 // }
+
+#result {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#result body {
+  font-family: "montserrat", sans-serif;
+}
+
+#popup {
+  position: absolute;
+  height: 300px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#result .button {
+  appearance: none;
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  height: 40px;
+  display: inline-block;
+  background-image: linear-gradient(to right, #2e3ecc, #2b3596);
+  border-radius: 8px;
+
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.4);
+  transition: 0.4s ease-out;
+
+  &:hover {
+    box-shadow: 6px 6px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 524px;
+  z-index: 98;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.modalll {
+  position: absolute;
+  top: 20%;
+  left: 36%;
+  height: auto;
+  width: 400px;
+  border-radius: 16px;
+  z-index: 99;
+  background-color: #fff;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 800px;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+
+  width: 100%;
+  background-color: #fff;
+  border-radius: 16px;
+
+  padding: 25px;
+
+  p {
+    color: #666;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.5s;
+}
+
+.slide-enter,
+.slide-leave-to {
+  transform: translateY(-50%) translateX(100vw);
+}
+#rowdiv .form-group {
+  height: 30px;
+}
+.submit {
+  margin-left: 0px;
+  width: 130px;
+  height: 40px;
+}
+#rowdiv .row {
+  height: 40px;
+}
+#popup .form-group {
+  margin: 0px 20px;
+}
+#rowdiv {
+  margin-top: 25px !important;
+  justify-content: unset !important;
+}
 </style>
