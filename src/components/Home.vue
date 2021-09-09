@@ -77,7 +77,6 @@ export default {
       axios
         .post("http://127.0.0.1:8000/login", this.logindata)
         .then((response) => {
-          console.log(response.data.token);
           this.token = response.data.token;
           var token = {
             headers: {
@@ -105,12 +104,16 @@ export default {
   background-color: rgb(83, 83, 158); */
   background-image: linear-gradient(to right, #3931af, #00c6ff);
   margin: 0px;
+  padding-top: 40px;
 }
 .homeimage {
   height: 90%;
   margin-top: 20px;
   width: 85%;
   padding-bottom: 5%;
+}
+#homepage .row {
+  margin-right: 0px;
 }
 .login {
   height: auto;

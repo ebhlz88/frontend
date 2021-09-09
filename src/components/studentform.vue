@@ -255,6 +255,8 @@ import Vue from "vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
 
+
+
 Vue.use(VueAxios, axios);
 
 export default {
@@ -281,31 +283,22 @@ export default {
     submitData() {
       axios
         .post("http://127.0.0.1:8000", this.posts)
-        .then((response) => {
-          console.log(response);
-
+        .then(() => {
           // this.smessage="Succesfully added"
           this.$bvToast.toast("Succesfully added", {
             title: "Succesful",
             variant: "success",
             solid: true,
             toaster: "b-toaster-top-center",
+            autoHideDelay: 100000,
           });
         })
-        .catch((error) =>
-          console.log(
-            error.response.request._response,
-            this.$bvToast.toast(
-              "Make sure all fields are filled or pass Null value",
-              {
-                title: " Failed to Add",
-                variant: "danger",
-                solid: true,
-                toaster: "b-toaster-top-center",
-              }
-            )
-          )
-        );
+        .catch(() =>
+            this.$bvToast.toast(`Toast with action link`, {
+          href: '#foo',
+          title: 'Example'
+        })
+          );
     },
   },
 };

@@ -80,16 +80,12 @@ export default {
         .get("http://127.0.0.1:8000/studentsearch/?search=" + this.searchitem)
         .then((resp) => {
           this.list = resp.data;
-
-          console.log(resp.data);
         });
     },
   },
   mounted() {
     Vue.axios.get("http://127.0.0.1:8000/").then((resp) => {
       this.list = resp.data;
-
-      console.log(resp.data);
     });
   },
 };

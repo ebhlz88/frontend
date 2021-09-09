@@ -419,8 +419,6 @@ export default {
   mounted() {
     Vue.axios.get("http://127.0.0.1:8000/count").then((resp) => {
       this.countinfo = resp.data;
-
-      console.log(resp.data);
     });
   },
 
@@ -432,7 +430,6 @@ export default {
       reader.readAsDataURL(image);
       reader.onload = (e) => {
         this.posts.student_pic = e.target.result;
-        console.log(e);
       };
     },
     submitData() {
@@ -449,9 +446,7 @@ export default {
       data.append("bloodgroup", this.posts.bloodgroup);
       axios
         .post("http://127.0.0.1:8000", data, this.token)
-        .then((response) => {
-          console.log(response);
-
+        .then(() => {
           // this.smessage="Succesfully added"
           this.$bvToast.toast("Succesfully added", {
             title: "Succesful",
@@ -482,9 +477,7 @@ export default {
           this.teacherposts,
           this.token
         )
-        .then((response) => {
-          console.log(response);
-
+        .then(() => {
           // this.smessage="Succesfully added"
           this.$bvToast.toast("Succesfully added", {
             title: "Succesful",

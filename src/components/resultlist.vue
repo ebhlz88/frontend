@@ -78,7 +78,6 @@ export default {
         .get("http://127.0.0.1:8000/result/" + this.rollnbr + "/" + event)
         .then((resp) => {
           this.list = resp.data[0];
-          console.log(this.list);
           this.resultlist = resp.data;
           this.photo =
             "http://127.0.0.1:8000" +

@@ -64,9 +64,6 @@ import { mapGetters } from "vuex";
 export default {
   name: "navbar",
   methods: {
-    clicked() {
-      console.log("clicked");
-    },
     logout() {
       this.$store.dispatch("isloggedin", false);
 

@@ -125,7 +125,6 @@ export default {
         .get("http://127.0.0.1:8000/student/" + this.roll)
         .then((resp) => {
           this.list = resp.data;
-          console.log(this.list);
           this.photo = "http://127.0.0.1:8000" + resp.data.student_pic;
         });
     },

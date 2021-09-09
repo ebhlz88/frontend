@@ -135,8 +135,6 @@ export default {
       .then((resp) => {
         this.list = resp.data;
         this.photo = "http://127.0.0.1:8000" + resp.data.teacher_pic;
-
-        console.log(resp.data);
       });
   },
 };

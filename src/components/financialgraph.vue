@@ -156,13 +156,10 @@ export default {
         .get("http://127.0.0.1:8000/calc/" + this.selectedyear)
         .then((resp) => {
           this.monthssum = resp.data;
-
-          console.log(resp.data);
         });
       Vue.axios
         .get("http://127.0.0.1:8000/tcalc/" + this.selectedyear)
         .then((resp) => {
-          console.log(resp.data);
           this.teacherpayment = resp.data;
           //this.maxvalueee = ((Math.max(this.jansum,this.monthssum.febsum,this.monthssum.marsum,this.monthssum.aprsum,this.monthssum.maysum,this.monthssum.junsum,this.monthssum.julsum,this.monthssum.sepsum,this.monthssum.octsum,this.monthssum.novsum,this.monthssum.decsum,this.monthssum.augsum)) * 1.5  )
           this.updatechart();
@@ -244,7 +241,6 @@ export default {
       const taugustdata = this.series[0].data.map(() => {
         return this.teacherpayment.augsum;
       });
-      console.log(newData);
       this.series = [
         {
           data: [

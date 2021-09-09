@@ -119,8 +119,6 @@ export default {
     this.getfees();
     Vue.axios.get("http://127.0.0.1:8000/standardlist").then((resp) => {
       this.standards = resp.data;
-
-      console.log(resp.data);
     });
   },
   methods: {
@@ -129,8 +127,6 @@ export default {
         .get("http://127.0.0.1:8000/feesByroll/" + this.roll)
         .then((resp) => {
           this.list = resp.data;
-
-          console.log(resp.data);
         });
     },
     updatefees() {
@@ -143,8 +139,7 @@ export default {
           this.amount,
           this.token
         )
-        .then((response) => {
-          console.warn(response);
+        .then(() => {
           // this.smessage="Succesfully added"
           this.getfees();
           this.$bvToast.toast("Fees Submitted", {

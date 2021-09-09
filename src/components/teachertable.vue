@@ -79,16 +79,12 @@ export default {
         .get("http://127.0.0.1:8000/teachersearch/?search=" + this.tsearchitem)
         .then((resp) => {
           this.list = resp.data;
-
-          console.log(resp.data);
         });
     },
   },
   mounted() {
     Vue.axios.get("http://127.0.0.1:8000/allteachers").then((resp) => {
       this.list = resp.data;
-
-      console.log(resp.data);
     });
   },
 };

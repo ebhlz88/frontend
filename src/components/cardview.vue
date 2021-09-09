@@ -130,7 +130,7 @@ export default {
   }
 }
 #cardview {
-  margin-top: 1px;
+  margin-top: 40px;
 }
 .cardd {
   height: 54vh;

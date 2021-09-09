@@ -107,8 +107,6 @@ export default {
         .get("http://127.0.0.1:8000/teacherpayment/" + this.roll)
         .then((resp) => {
           this.list = resp.data;
-
-          console.log(resp.data);
         });
     },
     updatefees() {
