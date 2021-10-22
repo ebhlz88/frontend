@@ -1,7 +1,7 @@
 <template>
   <div id="tdetail">
     <div class="student-profile py-4">
-      <div class="container">
+      <div v-if="list" class="container">
         <div class="row">
           <div class="col-lg-4">
             <div class="card shadow-sm">
@@ -89,16 +89,6 @@
               </div>
             </div>
             <div style="height: 26px"></div>
-            <!-- <div class="card shadow-sm">
-              <div class="card-header bg-transparent border-0">
-                <h3 class="mb-0">
-                  <i class="far fa-clone pr-1"></i>Other Information
-                </h3>
-              </div>
-              <div class="card-body pt-0">
-                <p>sfsdfsd</p>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
@@ -113,7 +103,7 @@ import axios from "axios";
 
 Vue.use(VueAxios, axios);
 export default {
-  name: "table",
+  name: "ttable",
   data() {
     return {
       list: undefined,

@@ -3,7 +3,8 @@
     <div>
       <div>
         <div class="row">
-          <div class="col-md-4 marginn">
+          <div class="col-md-5 d-flex align-items-center flex-column">
+            <div class="logindiv">
             <div class="login">
               <h3 class="text-center">Login</h3>
               <form @submit.prevent="loginn">
@@ -38,8 +39,9 @@
                 <button class="btn btn-primary" type="submit">Login</button>
               </form>
             </div>
+            </div>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-7">
             <img
               src="../assets/students.png"
               class="homeimage"
@@ -109,11 +111,11 @@ export default {
 .homeimage {
   height: 90%;
   margin-top: 20px;
-  width: 85%;
-  padding-bottom: 5%;
+  width: 100%;
 }
 #homepage .row {
   margin-right: 0px;
+  margin-bottom: 30px;
 }
 .login {
   height: auto;
@@ -152,6 +154,12 @@ margin-left: 2px;
 }
 .text-center {
   margin-bottom: 20px;
+}
+.logindiv{
+  width: 80%;
+}
+.row .align-items-end{
+  padding: 0px;
 }
 /* *{
   border: 1px solid;

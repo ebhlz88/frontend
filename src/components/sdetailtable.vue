@@ -2,7 +2,7 @@
   <div id="sdetail">
     <div class="student-profile py-4">
       <div class="container">
-        <div class="row">
+        <div v-if="list" class="row">
           <div class="col-lg-4">
             <div class="card shadow-sm">
               <div class="card-header bg-transparent text-center">

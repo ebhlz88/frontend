@@ -16,7 +16,7 @@
       </select>
       <button class="btn btn-primary" v-on:click="search">search</button>
     </div>
-    <div id="chart" class="chartdiv">
+    <div v-if="monthssum || teacherpayment" id="chart" class="chartdiv">
       <apexchart
         type="line"
         height="350"
