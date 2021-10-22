@@ -255,8 +255,6 @@ import Vue from "vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
 
-
-
 Vue.use(VueAxios, axios);
 
 export default {
@@ -294,11 +292,11 @@ export default {
           });
         })
         .catch(() =>
-            this.$bvToast.toast(`Toast with action link`, {
-          href: '#foo',
-          title: 'Example'
-        })
-          );
+          this.$bvToast.toast(`Toast with action link`, {
+            href: "#foo",
+            title: "Example",
+          })
+        );
     },
   },
 };

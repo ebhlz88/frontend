@@ -5,40 +5,40 @@
         <div class="row">
           <div class="col-md-5 d-flex align-items-center flex-column">
             <div class="logindiv">
-            <div class="login">
-              <h3 class="text-center">Login</h3>
-              <form @submit.prevent="loginn">
-                <div class="input-group">
-                  <span class="input-group-addon"
-                    ><font-awesome-icon
-                      :icon="['fas', 'user']"
-                      id="basic-addon1"
-                  /></span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="username"
-                    v-model="logindata.username"
-                    placeholder="Username"
-                  />
-                </div>
-                <div class="input-group margin">
-                  <span class="input-group-addon"
-                    ><font-awesome-icon
-                      :icon="['fas', 'lock']"
-                      id="basic-addon1"
-                  /></span>
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    v-model="logindata.password"
-                    placeholder="Password"
-                  />
-                </div>
-                <button class="btn btn-primary" type="submit">Login</button>
-              </form>
-            </div>
+              <div class="login">
+                <h3 class="text-center">Login</h3>
+                <form @submit.prevent="loginn">
+                  <div class="input-group">
+                    <span class="input-group-addon"
+                      ><font-awesome-icon
+                        :icon="['fas', 'user']"
+                        id="basic-addon1"
+                    /></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="username"
+                      v-model="logindata.username"
+                      placeholder="Username"
+                    />
+                  </div>
+                  <div class="input-group margin">
+                    <span class="input-group-addon"
+                      ><font-awesome-icon
+                        :icon="['fas', 'lock']"
+                        id="basic-addon1"
+                    /></span>
+                    <input
+                      type="password"
+                      class="form-control"
+                      name="password"
+                      v-model="logindata.password"
+                      placeholder="Password"
+                    />
+                  </div>
+                  <button class="btn btn-primary" type="submit">Login</button>
+                </form>
+              </div>
             </div>
           </div>
           <div class="col-md-7">
@@ -155,10 +155,10 @@ margin-left: 2px;
 .text-center {
   margin-bottom: 20px;
 }
-.logindiv{
+.logindiv {
   width: 80%;
 }
-.row .align-items-end{
+.row .align-items-end {
   padding: 0px;
 }
 /* *{

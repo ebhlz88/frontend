@@ -6,7 +6,7 @@
         split-variant="outline-primary"
         variant="primary"
         text="Select the year"
-        class="width m-2 form-control"
+        class="width m-3 form-control"
         v-model="selectedsubject"
       >
         <option disabled>Please select an Year</option>
@@ -24,7 +24,6 @@
         :series="series"
       ></apexchart>
     </div>
-    {{subjectmarks}}
 
     <!-- <div class="tabletop">
   <h2 class="textalign">Student Info</h2>
@@ -55,10 +54,11 @@ export default {
       subjects: undefined,
       selectedsubject: null,
       subjectmarks: null,
+      chartdata: null,
       series: [
         {
           name: "payed",
-          data: [0, 0, 0, 0, 56, 0, 0, 0, 0, 0, 0, 0],
+          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
       ],
       chartOptions: {
@@ -85,7 +85,7 @@ export default {
           curve: "straight",
         },
         title: {
-          text: "Money Collected & Payed for School",
+          text: "Subject marks through classes",
           align: "left",
         },
         grid: {
@@ -99,27 +99,14 @@ export default {
           size: 1,
         },
         xaxis: {
-          categories: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "aug",
-            "sep",
-            "oct",
-            "nov",
-            "dec",
-          ],
+          categories: [],
           title: {
-            text: "Month",
+            text: "Class",
           },
         },
         yaxis: {
           title: {
-            text: "Amount",
+            text: "Marks",
           },
           min: this.min,
           max: this.max,
@@ -134,12 +121,10 @@ export default {
       },
     };
   },
-  mounted(){
-    Vue.axios
-        .get("http://127.0.0.1:8000/subjectlist")
-        .then((resp) => {
-          this.subjects = resp.data;
-        });
+  mounted() {
+    Vue.axios.get("http://127.0.0.1:8000/subjectlist").then((resp) => {
+      this.subjects = resp.data;
+    });
   },
 
   methods: {
@@ -153,71 +138,30 @@ export default {
       Vue.axios
         .get("http://127.0.0.1:8000/nofsubjects/10/" + this.selectedsubject)
         .then((resp) => {
-            this.nofsubjects=resp.data;
+          this.nofsubjects = resp.data;
         });
     },
     updatechart() {
-      var sdata= new Array(this.nofsubjects.nosubjects)
-      for(let i=0 ;i < this.nofsubjects.nosubjects; i++){
-        sdata[i] = this.series[0].data.map(() => {
-        return this.subjectmarks.subjectmarks;
-      });
+      const newdata = [];
+      let count = Object.keys(this.subjectmarks).length;
+      for (let i = 0; i < count; i++) {
+        this.chartOptions.xaxis.categories.push(
+          this.subjectmarks[i].enrollstudent.standard.standardname
+        );
+        this.chartdata = this.series[0].data.map(() => {
+          return this.subjectmarks[i].subjectmarks;
+        });
+        newdata.push(this.chartdata);
       }
-        console.log(this.subjectmarks.subjectmarks)
-      
-      // const newData = this.series[0].data.map(() => {
-      //   return this.monthssum.jansum;
-      //   //Math.floor(Math.random() * (max - min + 1)) + min
-      // });
-      // const seconddata = this.series[0].data.map(() => {
-      //   return this.monthssum.febsum;
-      // });
-      // const marchdata = this.series[0].data.map(() => {
-      //   return this.monthssum.marsum;
-      // });
-      // const aprildata = this.series[0].data.map(() => {
-      //   return this.monthssum.aprsum;
-      // });
-      // const maydata = this.series[0].data.map(() => {
-      //   return this.monthssum.maysum;
-      // });
-      // const junedata = this.series[0].data.map(() => {
-      //   return this.monthssum.junsum;
-      // });
-      // const julydata = this.series[0].data.map(() => {
-      //   return this.monthssum.julsum;
-      // });
-      // const septemberdata = this.series[0].data.map(() => {
-      //   return this.monthssum.sepsum;
-      // });
-      // const octoberdata = this.series[0].data.map(() => {
-      //   return this.monthssum.octsum;
-      // });
-      // const novemberdata = this.series[0].data.map(() => {
-      //   return this.monthssum.novsum;
-      // });
-      // const decemberdata = this.series[0].data.map(() => {
-      //   return this.monthssum.decsum;
-      // });
-      // const augustdata = this.series[0].data.map(() => {
-      //   return this.monthssum.augsum;
-      // });
+      var sdata = new Array(this.nofsubjects.nosubjects);
+      for (let i = 0; i < this.nofsubjects.nosubjects; i++) {
+        sdata[i] = this.series[0].data.map(() => {
+          return this.subjectmarks.subjectmarks;
+        });
+      }
       this.series = [
         {
-          data: [
-            String(sdata[0]),
-      //       seconddata,
-      //       marchdata,
-      //       aprildata,
-      //       maydata,
-      //       junedata,
-      //       julydata,
-      //       augustdata,
-      //       septemberdata,
-      //       octoberdata,
-      //       novemberdata,
-      //       decemberdata,
-          ],
+          data: [String(newdata[0]), newdata[1]],
         },
       ];
     },
