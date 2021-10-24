@@ -56,7 +56,7 @@ const routes = [
   { path: "/ttable", component: teachertable },
   { path: "/payments", component: payment },
   { path: "/main", component: cardview },
-  { path: "/rgraph", component: resultgraph },
+  { path: "/rgraph/:roll", component: resultgraph, props: true },
   { path: "/graph", component: graph },
   { path: "/payments/:roll", component: payment, props: true },
   { path: "/sdetail/:roll", component: sdetailtable, props: true },

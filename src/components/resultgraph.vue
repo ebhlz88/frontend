@@ -8,6 +8,7 @@
         text="Select the year"
         class="width m-3 form-control"
         v-model="selectedsubject"
+        @change="onChange()"
       >
         <option disabled>Please select an Year</option>
         <option v-for="items in subjects" :key="items.id">
@@ -18,21 +19,13 @@
     </div>
     <div id="chart" class="chartdiv">
       <apexchart
+      id="chart"
         type="line"
         height="350"
         :options="chartOptions"
         :series="series"
       ></apexchart>
     </div>
-
-    <!-- <div class="tabletop">
-  <h2 class="textalign">Student Info</h2>
-  </div>
-<div class="tablebottom divmargin container" >
-<img src="./photo.jpg" class="d-inline-block align-top imgsize" alt="schoagement">
-<h5 class="bphototext">Emad baloch</h5>
-<p class="infodiv">this i s text</p>
-  </div> -->
   </div>
 </template>
 <script>
@@ -53,12 +46,14 @@ export default {
       nofsubjects: null,
       subjects: undefined,
       selectedsubject: null,
+      categorieslist:[],
       subjectmarks: null,
+      serieslist:[],
       chartdata: null,
       series: [
         {
-          name: "payed",
-          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          name: "Marks",
+          data: [],
         },
       ],
       chartOptions: {
@@ -99,7 +94,8 @@ export default {
           size: 1,
         },
         xaxis: {
-          categories: [],
+          categories: []
+          ,
           title: {
             text: "Class",
           },
@@ -126,42 +122,55 @@ export default {
       this.subjects = resp.data;
     });
   },
-
+  props: {
+    roll: {
+      type: String,
+      default: NaN,
+    },
+  },
   methods: {
-    search() {
+    onChange() {
       Vue.axios
-        .get("http://127.0.0.1:8000/calcsubject/10/" + this.selectedsubject)
-        .then((resp) => {
-          this.subjectmarks = resp.data;
-          this.updatechart();
-        });
-      Vue.axios
-        .get("http://127.0.0.1:8000/nofsubjects/10/" + this.selectedsubject)
+        .get("http://127.0.0.1:8000/nofsubjects/"+this.roll+"/" + this.selectedsubject)
         .then((resp) => {
           this.nofsubjects = resp.data;
         });
     },
-    updatechart() {
-      const newdata = [];
-      let count = Object.keys(this.subjectmarks).length;
-      for (let i = 0; i < count; i++) {
-        this.chartOptions.xaxis.categories.push(
-          this.subjectmarks[i].enrollstudent.standard.standardname
-        );
-        this.chartdata = this.series[0].data.map(() => {
-          return this.subjectmarks[i].subjectmarks;
+    search() {
+      this.serieslist = [];
+      this.categorieslist = [];
+      Vue.axios
+        .get("http://127.0.0.1:8000/calcsubject/"+this.roll+"/"  + this.selectedsubject)
+        .then((resp) => {
+          this.subjectmarks = resp.data;
+          this.updateTheme();
+          this.updatechart();
         });
-        newdata.push(this.chartdata);
-      }
+    },
+    updateTheme() {
+      let count = Object.keys(this.subjectmarks).length;
+          for (let i = 0; i < count; i++) {
+            this.categorieslist.push(
+              this.subjectmarks[i].enrollstudent.standard.standardname
+            );
+          }
+  this.chartOptions = {
+   xaxis: {
+     categories: this.categorieslist
+   }
+  }
+ },
+    updatechart() {
       var sdata = new Array(this.nofsubjects.nosubjects);
       for (let i = 0; i < this.nofsubjects.nosubjects; i++) {
         sdata[i] = this.series[0].data.map(() => {
-          return this.subjectmarks.subjectmarks;
+          return this.subjectmarks[i].subjectmarks;
         });
+        this.serieslist.push(String(sdata[i]))
       }
       this.series = [
         {
-          data: [String(newdata[0]), newdata[1]],
+          data: this.serieslist,
         },
       ];
     },

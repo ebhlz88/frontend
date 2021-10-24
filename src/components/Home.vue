@@ -156,7 +156,7 @@ margin-left: 2px;
   margin-bottom: 20px;
 }
 .logindiv {
-  width: 80%;
+  width: 90%;
 }
 .row .align-items-end {
   padding: 0px;

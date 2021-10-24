@@ -6,7 +6,7 @@
         split-variant="outline-primary"
         variant="primary"
         text="Select the year"
-        class="width m-2 form-control"
+        class="width m-3 form-control"
         v-model="selectedyear"
       >
         <option disabled>Please select an Year</option>
@@ -24,15 +24,6 @@
         :series="series"
       ></apexchart>
     </div>
-
-    <!-- <div class="tabletop">
-  <h2 class="textalign">Student Info</h2>
-  </div>
-<div class="tablebottom divmargin container" >
-<img src="./photo.jpg" class="d-inline-block align-top imgsize" alt="schoagement">
-<h5 class="bphototext">Emad baloch</h5>
-<p class="infodiv">this i s text</p>
-  </div> -->
   </div>
 </template>
 <script>

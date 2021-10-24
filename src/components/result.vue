@@ -1,10 +1,20 @@
 <template>
   <div id="result">
     <div id="rowdiv" class="row" v-if="!showModal">
-      <h4 class="col-md-2">Filter Results {{ filterstandard }}</h4>
+      <div class="col-md-7 btndiv">
+      <button class="btn btn-primary" v-on:click="showModal = true">
+        Add Fees
+      </button>
+      <router-link class="btn btn-primary" :to="'/rgraph/'+roll">
+        Result Graph
+      </router-link>
+      </div>
+      <div class="col-md-4 row">
+        <label for="standardselect" class="col-md-5 my-2"><b>Select Standard</b></label>
       <div class="col-md-2">
         <select
           class="form-group mleft"
+          id="standardselect"
           v-model="filterstandard"
           @change="find($event)"
         >
@@ -14,9 +24,7 @@
           </option>
         </select>
       </div>
-      <button class="button col-md-2 mx-5" v-on:click="showModal = true">
-        Add Fees
-      </button>
+      </div>
     </div>
     <div id="popup">
       <transition name="fade" appear>
@@ -321,5 +329,8 @@ export default {
   margin-top: 25px !important;
   justify-content: unset !important;
   margin-right: 0px;
+}
+#rowdiv .btndiv{
+  padding-right: 30%;
 }
 </style>
