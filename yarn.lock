@@ -8895,6 +8895,11 @@
   "resolved" "https://registry.nlark.com/uuid/download/uuid-3.4.0.tgz"
   "version" "3.4.0"
 
+"v-toaster@^1.0.3":
+  "integrity" "sha512-B+yhvuUDiYykh1g4jgAKTRmnrJa4vrc+O1+/A57HSl4rA3R7OX0+8GGz2kr3eZ9YKkpaRlew9zWSjtksVa0+Bg=="
+  "resolved" "https://registry.npmjs.org/v-toaster/-/v-toaster-1.0.3.tgz"
+  "version" "1.0.3"
+
 "v8-compile-cache@^2.0.3":
   "integrity" "sha1-LeGWGMZtwkfc+2+ZM4A12CRaLO4="
   "resolved" "https://registry.npm.taobao.org/v8-compile-cache/download/v8-compile-cache-2.3.0.tgz"

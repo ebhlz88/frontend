@@ -6,6 +6,7 @@
         split-variant="outline-primary"
         variant="primary"
         text="Select the year"
+        @change="onChange()"
         class="width m-3 form-control"
         v-model="selectedyear"
       >
@@ -14,9 +15,11 @@
           {{ items.text }}
         </option>
       </select>
-      <button class="btn btn-primary" v-on:click="search">search</button>
+      <button class="btn btn-primary" 
+        id="searchbtn"
+        disabled v-on:click="search">search</button>
     </div>
-    <div v-if="monthssum || teacherpayment" id="chart" class="chartdiv">
+    <div id="chart" class="chartdiv">
       <apexchart
         type="line"
         height="350"
@@ -142,7 +145,7 @@ export default {
   },
 
   methods: {
-    search() {
+    onChange(){
       Vue.axios
         .get("http://127.0.0.1:8000/calc/" + this.selectedyear)
         .then((resp) => {
@@ -152,14 +155,12 @@ export default {
         .get("http://127.0.0.1:8000/tcalc/" + this.selectedyear)
         .then((resp) => {
           this.teacherpayment = resp.data;
-          //this.maxvalueee = ((Math.max(this.jansum,this.monthssum.febsum,this.monthssum.marsum,this.monthssum.aprsum,this.monthssum.maysum,this.monthssum.junsum,this.monthssum.julsum,this.monthssum.sepsum,this.monthssum.octsum,this.monthssum.novsum,this.monthssum.decsum,this.monthssum.augsum)) * 1.5  )
-          this.updatechart();
         });
+        document.getElementById("searchbtn").disabled = false;
     },
-    updatechart() {
+    search() {
       const newData = this.series[0].data.map(() => {
         return this.monthssum.jansum;
-        //Math.floor(Math.random() * (max - min + 1)) + min
       });
       const seconddata = this.series[0].data.map(() => {
         return this.monthssum.febsum;

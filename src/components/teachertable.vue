@@ -18,23 +18,23 @@
       <div class="table">
         <div class="table-header">
           <div class="header__item">
-            <p id="name" class="filter__link">Roll No.</p>
+            <p class="filter__link">Roll No.</p>
           </div>
           <div class="header__item">
-            <p id="wins" class="filter__link filter__link--number">name</p>
+            <p class="filter__link filter__link--number">name</p>
           </div>
           <div class="header__item">
-            <p id="draws" class="filter__link filter__link--number">
+            <p class="filter__link filter__link--number">
               Mobile Number
             </p>
           </div>
           <div class="header__item">
-            <p id="losses" class="filter__link filter__link--number">
+            <p class="filter__link filter__link--number">
               Speciality
             </p>
           </div>
           <div class="header__item">
-            <p id="losses" class="filter__link filter__link--number">
+            <p class="filter__link filter__link--number">
               Fee Detail
             </p>
           </div>
@@ -64,7 +64,7 @@ import axios from "axios";
 
 Vue.use(VueAxios, axios);
 export default {
-  name: "table",
+  name: "tchrtable",
   data() {
     return {
       list: undefined,
@@ -111,17 +111,6 @@ h5,
 h6 {
   margin: 0;
 }
-
-// .container {
-//   max-width: 1000px;
-//   margin-right: auto;
-//   margin-left: auto;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   min-height: 100vh;
-// }
-
 .table {
   width: 100%;
   border: 1px solid $color-form-highlight;

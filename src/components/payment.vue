@@ -116,29 +116,15 @@ export default {
           this.amount,
           this.token
         )
-        .then((response) => {
-          console.warn(response);
+        .then(() => {
+          this.$toaster.success('Successfully Added.')
           // this.smessage="Succesfully added"
           this.getpayments();
-          this.$bvToast.toast("Fees Submitted", {
-            title: "Succesful",
-            variant: "success",
-            solid: true,
-            toaster: "b-toaster-top-center",
-          });
         })
         .catch((error) =>
           console.log(
             error.response.request._response,
-            this.$bvToast.toast(
-              "Students does not exist and Make sure all fields are filled correctly",
-              {
-                title: " Failed to Add",
-                variant: "danger",
-                solid: true,
-                toaster: "b-toaster-top-center",
-              }
-            )
+            this.$toaster.error('Invalid inputs.')
           )
         );
     },

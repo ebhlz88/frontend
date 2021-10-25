@@ -19,7 +19,7 @@
     </div>
     <div id="chart" class="chartdiv">
       <apexchart
-      id="chart"
+        id="chart"
         type="line"
         height="350"
         :options="chartOptions"
@@ -37,7 +37,7 @@ Vue.use(VueApexCharts);
 Vue.component("apexchart", VueApexCharts);
 Vue.use(VueAxios, axios);
 export default {
-  name: "studentslist",
+  name: "resultgraph",
   components: {
     apexchart: VueApexCharts,
   },
@@ -46,9 +46,9 @@ export default {
       nofsubjects: null,
       subjects: undefined,
       selectedsubject: null,
-      categorieslist:[],
+      categorieslist: [],
       subjectmarks: null,
-      serieslist:[],
+      serieslist: [],
       chartdata: null,
       series: [
         {
@@ -94,8 +94,7 @@ export default {
           size: 1,
         },
         xaxis: {
-          categories: []
-          ,
+          categories: [],
           title: {
             text: "Class",
           },
@@ -131,7 +130,12 @@ export default {
   methods: {
     onChange() {
       Vue.axios
-        .get("http://127.0.0.1:8000/nofsubjects/"+this.roll+"/" + this.selectedsubject)
+        .get(
+          "http://127.0.0.1:8000/nofsubjects/" +
+            this.roll +
+            "/" +
+            this.selectedsubject
+        )
         .then((resp) => {
           this.nofsubjects = resp.data;
         });
@@ -140,34 +144,42 @@ export default {
       this.serieslist = [];
       this.categorieslist = [];
       Vue.axios
-        .get("http://127.0.0.1:8000/calcsubject/"+this.roll+"/"  + this.selectedsubject)
+        .get(
+          "http://127.0.0.1:8000/calcsubject/" +
+            this.roll +
+            "/" +
+            this.selectedsubject
+        )
         .then((resp) => {
           this.subjectmarks = resp.data;
-          this.updateTheme();
-          this.updatechart();
+          let count = Object.keys(this.subjectmarks).length;
+      for (let i = 0; i < count; i++) {
+        this.categorieslist.push(
+          this.subjectmarks[i].enrollstudent.standard.standardname
+        );
+      }
+          this.updateTheme()
+          this.updatechart()
         });
     },
     updateTheme() {
-      let count = Object.keys(this.subjectmarks).length;
-          for (let i = 0; i < count; i++) {
-            this.categorieslist.push(
-              this.subjectmarks[i].enrollstudent.standard.standardname
-            );
-          }
-  this.chartOptions = {
-   xaxis: {
-     categories: this.categorieslist
-   }
-  }
- },
+      
+      this.chartOptions = {
+        xaxis: {
+          categories: this.categorieslist,
+        },
+      };
+    },
     updatechart() {
-      var sdata = new Array(this.nofsubjects.nosubjects);
+      let sdata= [];
       for (let i = 0; i < this.nofsubjects.nosubjects; i++) {
+        console.log(this.subjectmarks[i].subjectmarks)
         sdata[i] = this.series[0].data.map(() => {
           return this.subjectmarks[i].subjectmarks;
-        });
-        this.serieslist.push(String(sdata[i]))
+        })
+        this.serieslist.push(String(sdata[i]));
       }
+      
       this.series = [
         {
           data: this.serieslist,

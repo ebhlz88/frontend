@@ -8,7 +8,7 @@
               <i class="fa fa-users icon"></i><br />
               <p class="fontsize"><b>Number of Students</b></p>
             </div>
-            <div class="back">{{ countinfo.studentcount }}</div>
+            <div v-if="countinfo" class="back">{{ countinfo.studentcount }}</div>
           </div>
         </div>
         <br />
@@ -18,7 +18,7 @@
               <i class="fa fa-users icon"></i><br />
               <p class="fontsize"><b>Number of Teachers</b></p>
             </div>
-            <div class="back">{{ countinfo.teachercount }}</div>
+            <div v-if="countinfo" class="back">{{ countinfo.teachercount }}</div>
           </div>
         </div>
         <br />
@@ -77,6 +77,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Full Name *"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -85,6 +86,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Father's Name *"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -126,6 +128,7 @@
                     name="txtEmpPhone"
                     class="form-control"
                     placeholder="Father's Phone *"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -137,6 +140,7 @@
                     name="blood"
                     class="form-control"
                     placeholder="Blood Group *"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -175,19 +179,13 @@
                       v-model="posts.c_position"
                       class="form-check-input"
                       id="exampleCheck1"
+                      required
                     />
                     <label class="form-check-label" for="exampleCheck1"
                       >Currently enrolled</label
                     >
                   </div>
                 </div>
-                <!-- <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter Your Answer *"
-                    value=""
-                  /> -->
-
                 <input
                   type="submit"
                   v-on:click="submitData"
@@ -213,6 +211,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Full Name *"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -221,6 +220,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Father's Name *"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -256,6 +256,7 @@
                     v-model="teacherposts.address"
                     class="form-control"
                     placeholder="Address *"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -267,6 +268,7 @@
                     name="txtEmpPhone"
                     class="form-control"
                     placeholder="Mobile *"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -278,6 +280,7 @@
                     name="txtEmpPhone"
                     class="form-control"
                     placeholder="Salary *"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -333,13 +336,6 @@
                     >
                   </div>
                 </div>
-                <!-- <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter Your Answer *"
-                    value=""
-                  /> -->
-
                 <input
                   type="submit"
                   v-on:click="submitteacherData"
@@ -418,7 +414,7 @@ export default {
   },
   mounted() {
     Vue.axios.get("http://127.0.0.1:8000/count").then((resp) => {
-      this.countinfo = resp.data;
+      this.countinfo = resp.data
     });
   },
 
@@ -447,26 +443,12 @@ export default {
       axios
         .post("http://127.0.0.1:8000", data, this.token)
         .then(() => {
-          // this.smessage="Succesfully added"
-          this.$bvToast.toast("Succesfully added", {
-            title: "Succesful",
-            variant: "success",
-            solid: true,
-            toaster: "b-toaster-top-center",
-          });
+          this.$toaster.success('Successfully Added Student.')
         })
         .catch((error) =>
           console.log(
             error.response.request._response,
-            this.$bvToast.toast(
-              "Make sure all fields are filled or pass Null value",
-              {
-                title: " Failed to Add",
-                variant: "danger",
-                solid: true,
-                toaster: "b-toaster-top-center",
-              }
-            )
+            this.$toaster.error('Invalid Inputs.')
           )
         );
     },
@@ -478,26 +460,12 @@ export default {
           this.token
         )
         .then(() => {
-          // this.smessage="Succesfully added"
-          this.$bvToast.toast("Succesfully added", {
-            title: "Succesful",
-            variant: "success",
-            solid: true,
-            toaster: "b-toaster-top-center",
-          });
+          this.$toaster.success('Successfully Added Teacher.')
         })
         .catch((error) =>
           console.log(
             error.response.request._response,
-            this.$bvToast.toast(
-              "Make sure all fields are filled or pass Null value",
-              {
-                title: " Failed to Add",
-                variant: "danger",
-                solid: true,
-                toaster: "b-toaster-top-center",
-              }
-            )
+            this.$toaster.error('Invalid Inputs.')
           )
         );
     },

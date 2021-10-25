@@ -133,7 +133,7 @@ export default {
   margin-top: 40px;
 }
 .cardd {
-  height: 54vh;
+  height: 330px;
   background-color: transparent;
   margin: 8vh;
   margin-bottom: 0px;

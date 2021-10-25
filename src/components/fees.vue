@@ -140,27 +140,14 @@ export default {
           this.token
         )
         .then(() => {
+          this.$toaster.success('Your toaster success message.')
           // this.smessage="Succesfully added"
           this.getfees();
-          this.$bvToast.toast("Fees Submitted", {
-            title: "Succesful",
-            variant: "success",
-            solid: true,
-            toaster: "b-toaster-top-center",
-          });
         })
         .catch((error) =>
           console.log(
             error.response.request._response,
-            this.$bvToast.toast(
-              "Students does not exist and Make sure all fields are filled correctly",
-              {
-                title: " Failed to Add",
-                variant: "danger",
-                solid: true,
-                toaster: "b-toaster-top-center",
-              }
-            )
+            this.$toaster.error('Invalid Inputs.')
           )
         );
     },

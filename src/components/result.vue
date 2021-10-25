@@ -2,28 +2,30 @@
   <div id="result">
     <div id="rowdiv" class="row" v-if="!showModal">
       <div class="col-md-7 btndiv">
-      <button class="btn btn-primary" v-on:click="showModal = true">
-        Add Fees
-      </button>
-      <router-link class="btn btn-primary" :to="'/rgraph/'+roll">
-        Result Graph
-      </router-link>
+        <button class="btn btn-primary" v-on:click="showModal = true">
+          Add Result
+        </button>
+        <router-link class="btn btn-primary" :to="'/rgraph/' + roll">
+          Result Graph
+        </router-link>
       </div>
       <div class="col-md-4 row">
-        <label for="standardselect" class="col-md-5 my-2"><b>Select Standard</b></label>
-      <div class="col-md-2">
-        <select
-          class="form-group mleft"
-          id="standardselect"
-          v-model="filterstandard"
-          @change="find($event)"
+        <label for="standardselect" class="col-md-5 my-2"
+          ><b>Select Standard</b></label
         >
-          <option selected disabled>Please select Standard</option>
-          <option v-for="items in standards" :key="items.id">
-            {{ items.standardname }}
-          </option>
-        </select>
-      </div>
+        <div class="col-md-2">
+          <select
+            class="form-group mleft"
+            id="standardselect"
+            v-model="filterstandard"
+            @change="find($event)"
+          >
+            <option selected disabled>Please select Standard</option>
+            <option v-for="items in standards" :key="items.id">
+              {{ items.standardname }}
+            </option>
+          </select>
+        </div>
       </div>
     </div>
     <div id="popup">
@@ -37,7 +39,7 @@
       <!-- <transition name="slide" appear> -->
       <div class="modalll" v-if="showModal">
         <div class="modal-body p-4 addfees">
-          <h2>Add Fees</h2>
+          <h2>Add Result</h2>
           <div class="form-group d-flex my-3">
             <select class="form-control" v-model="updatestandard">
               <option selected disabled>Please select Standard</option>
@@ -94,7 +96,7 @@ import resultlist from "./resultlist.vue";
 
 Vue.use(VueAxios, axios);
 export default {
-  name: "fees",
+  name: "result",
   components: {
     resultlist,
   },
@@ -134,7 +136,7 @@ export default {
   },
   methods: {
     find(event) {
-      this.$children[0].getresults(event.target.value);
+      this.$children[1].getresults(event.target.value);
     },
     updateresult() {
       axios
@@ -148,29 +150,14 @@ export default {
           this.marks,
           this.token
         )
-        .then((response) => {
-          console.warn(response);
+        .then(() => {
           // this.smessage="Succesfully added"
-          this.getresults();
-          this.$bvToast.toast("Fees Submitted", {
-            title: "Succesful",
-            variant: "success",
-            solid: true,
-            toaster: "b-toaster-top-center",
-          });
+          this.$toaster.success('Succesfully added.')
         })
         .catch((error) =>
           console.log(
             error.response.request._response,
-            this.$bvToast.toast(
-              "Students does not exist and Make sure all fields are filled correctly",
-              {
-                title: " Failed to Add",
-                variant: "danger",
-                solid: true,
-                toaster: "b-toaster-top-center",
-              }
-            )
+            this.$toaster.error('Invalid inputs.')
           )
         );
     },
@@ -330,7 +317,7 @@ export default {
   justify-content: unset !important;
   margin-right: 0px;
 }
-#rowdiv .btndiv{
+#rowdiv .btndiv {
   padding-right: 30%;
 }
 </style>

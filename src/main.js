@@ -39,7 +39,11 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-
+import Toaster from 'v-toaster'
+ 
+import 'v-toaster/dist/v-toaster.css'
+ 
+Vue.use(Toaster, {timeout: 5000})
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
