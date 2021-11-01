@@ -140,14 +140,14 @@ export default {
           this.token
         )
         .then(() => {
-          this.$toaster.success('Your toaster success message.')
+          this.$toaster.success("Your toaster success message.");
           // this.smessage="Succesfully added"
           this.getfees();
         })
         .catch((error) =>
           console.log(
             error.response.request._response,
-            this.$toaster.error('Invalid Inputs.')
+            this.$toaster.error("Invalid Inputs.")
           )
         );
     },

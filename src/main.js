@@ -23,6 +23,7 @@ import tdetail from "./components/tdetail.vue";
 import cardview from "./components/cardview.vue";
 import graph from "./components/financialgraph.vue";
 import resultgraph from "./components/resultgraph.vue";
+import books from "./components/books.vue";
 
 import VueComp from "@vue/composition-api";
 
@@ -39,11 +40,11 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-import Toaster from 'v-toaster'
- 
-import 'v-toaster/dist/v-toaster.css'
- 
-Vue.use(Toaster, {timeout: 5000})
+import Toaster from "v-toaster";
+
+import "v-toaster/dist/v-toaster.css";
+
+Vue.use(Toaster, { timeout: 5000 });
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
@@ -65,6 +66,7 @@ const routes = [
   { path: "/payments/:roll", component: payment, props: true },
   { path: "/sdetail/:roll", component: sdetailtable, props: true },
   { path: "/tdetail/:roll", component: tdetail, props: true },
+  { path: "/books", component: books },
 ];
 
 const router = new VueRouter({

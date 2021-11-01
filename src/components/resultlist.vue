@@ -6,7 +6,14 @@
           <div class="col-lg-4">
             <div class="card shadow-sm">
               <div class="card-header bg-transparent text-center">
-                <img class="profile_img" :src="'http://127.0.0.1:8000' + list.enrollstudent.student.student_pic" alt="student dp" />
+                <img
+                  class="profile_img"
+                  :src="
+                    'http://127.0.0.1:8000' +
+                    list.enrollstudent.student.student_pic
+                  "
+                  alt="student dp"
+                />
                 <h3>{{ list.enrollstudent.student.s_name }}</h3>
                 S/O
                 <h3>{{ list.enrollstudent.student.s_fname }}</h3>
@@ -34,7 +41,10 @@
               </div>
               <div class="card-body pt-0">
                 <table class="table table-bordered">
-                  <tr v-for="item in resultlist" :key="item.subjectname.subjectname">
+                  <tr
+                    v-for="item in resultlist"
+                    :key="item.subjectname.subjectname"
+                  >
                     <th width="30%">{{ item.subjectname.subjectname }}</th>
                     <td width="2%">:</td>
                     <td>{{ item.subjectmarks }}</td>
@@ -46,13 +56,13 @@
         </div>
       </div>
       <div v-else-if="!fstandard">
-      <h1 >Please Select standard</h1>
-        <img class="elseimg" src="../assets/select.png" alt="Select standard">
+        <h1>Please Select standard</h1>
+        <img class="elseimg" src="../assets/select.png" alt="Select standard" />
       </div>
       <div v-else>
-      <h1 >No result found</h1>
-        <img class="elseimg" src="../assets/nodata.webp" alt="404">
-       </div>
+        <h1>No result found</h1>
+        <img class="elseimg" src="../assets/nodata.webp" alt="404" />
+      </div>
     </div>
   </div>
 </template>
@@ -71,7 +81,7 @@ export default {
   methods: {
     getresults(event) {
       this.fstandard = event;
-      console.log(event)
+      console.log(event);
       Vue.axios
         .get("http://127.0.0.1:8000/result/" + this.rollnbr + "/" + event)
         .then((resp) => {
@@ -124,7 +134,7 @@ export default {
   padding: 5px 10px;
   color: #000;
 }
-.elseimg{
+.elseimg {
   width: 35%;
   height: 35%;
 }

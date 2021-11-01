@@ -8,7 +8,9 @@
               <i class="fa fa-users icon"></i><br />
               <p class="fontsize"><b>Number of Students</b></p>
             </div>
-            <div v-if="countinfo" class="back">{{ countinfo.studentcount }}</div>
+            <div v-if="countinfo" class="back">
+              {{ countinfo.studentcount }}
+            </div>
           </div>
         </div>
         <br />
@@ -18,7 +20,9 @@
               <i class="fa fa-users icon"></i><br />
               <p class="fontsize"><b>Number of Teachers</b></p>
             </div>
-            <div v-if="countinfo" class="back">{{ countinfo.teachercount }}</div>
+            <div v-if="countinfo" class="back">
+              {{ countinfo.teachercount }}
+            </div>
           </div>
         </div>
         <br />
@@ -414,7 +418,7 @@ export default {
   },
   mounted() {
     Vue.axios.get("http://127.0.0.1:8000/count").then((resp) => {
-      this.countinfo = resp.data
+      this.countinfo = resp.data;
     });
   },
 
@@ -443,12 +447,12 @@ export default {
       axios
         .post("http://127.0.0.1:8000", data, this.token)
         .then(() => {
-          this.$toaster.success('Successfully Added Student.')
+          this.$toaster.success("Successfully Added Student.");
         })
         .catch((error) =>
           console.log(
             error.response.request._response,
-            this.$toaster.error('Invalid Inputs.')
+            this.$toaster.error("Invalid Inputs.")
           )
         );
     },
@@ -460,12 +464,12 @@ export default {
           this.token
         )
         .then(() => {
-          this.$toaster.success('Successfully Added Teacher.')
+          this.$toaster.success("Successfully Added Teacher.");
         })
         .catch((error) =>
           console.log(
             error.response.request._response,
-            this.$toaster.error('Invalid Inputs.')
+            this.$toaster.error("Invalid Inputs.")
           )
         );
     },

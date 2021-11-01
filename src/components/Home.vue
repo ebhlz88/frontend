@@ -79,7 +79,7 @@ export default {
       axios
         .post("http://127.0.0.1:8000/login", this.logindata)
         .then((response) => {
-          this.$toaster.success('You logged in successfully.')
+          this.$toaster.success("You logged in successfully.");
           this.token = response.data.token;
           var token = {
             headers: {
@@ -95,7 +95,7 @@ export default {
           () => this.$store.dispatch("token", NaN),
           (this.isloggedin = false),
           this.$store.dispatch("isloggedin", this.isloggedin),
-          this.$toaster.error('Invalid UserName or Password.')
+          this.$toaster.error("Invalid UserName or Password.")
         );
     },
   },

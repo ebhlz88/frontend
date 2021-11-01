@@ -24,14 +24,10 @@
             <p class="filter__link filter__link--number">name</p>
           </div>
           <div class="header__item">
-            <p class="filter__link filter__link--number">
-              FATHER NAME
-            </p>
+            <p class="filter__link filter__link--number">FATHER NAME</p>
           </div>
           <div class="header__item">
-            <p class="filter__link filter__link--number">
-              Fee Detail
-            </p>
+            <p class="filter__link filter__link--number">Fee Detail</p>
           </div>
           <div class="header__item">
             <p class="filter__link filter__link--number">Result</p>

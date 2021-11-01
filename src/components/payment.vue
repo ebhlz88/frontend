@@ -117,14 +117,14 @@ export default {
           this.token
         )
         .then(() => {
-          this.$toaster.success('Successfully Added.')
+          this.$toaster.success("Successfully Added.");
           // this.smessage="Succesfully added"
           this.getpayments();
         })
         .catch((error) =>
           console.log(
             error.response.request._response,
-            this.$toaster.error('Invalid inputs.')
+            this.$toaster.error("Invalid inputs.")
           )
         );
     },

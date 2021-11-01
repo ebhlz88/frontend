@@ -15,9 +15,14 @@
           {{ items.text }}
         </option>
       </select>
-      <button class="btn btn-primary" 
+      <button
+        class="btn btn-primary"
         id="searchbtn"
-        disabled v-on:click="search">search</button>
+        disabled
+        v-on:click="search"
+      >
+        search
+      </button>
     </div>
     <div id="chart" class="chartdiv">
       <apexchart
@@ -145,7 +150,7 @@ export default {
   },
 
   methods: {
-    onChange(){
+    onChange() {
       Vue.axios
         .get("http://127.0.0.1:8000/calc/" + this.selectedyear)
         .then((resp) => {
@@ -156,7 +161,7 @@ export default {
         .then((resp) => {
           this.teacherpayment = resp.data;
         });
-        document.getElementById("searchbtn").disabled = false;
+      document.getElementById("searchbtn").disabled = false;
     },
     search() {
       const newData = this.series[0].data.map(() => {

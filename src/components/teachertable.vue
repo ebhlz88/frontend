@@ -24,19 +24,13 @@
             <p class="filter__link filter__link--number">name</p>
           </div>
           <div class="header__item">
-            <p class="filter__link filter__link--number">
-              Mobile Number
-            </p>
+            <p class="filter__link filter__link--number">Mobile Number</p>
           </div>
           <div class="header__item">
-            <p class="filter__link filter__link--number">
-              Speciality
-            </p>
+            <p class="filter__link filter__link--number">Speciality</p>
           </div>
           <div class="header__item">
-            <p class="filter__link filter__link--number">
-              Fee Detail
-            </p>
+            <p class="filter__link filter__link--number">Fee Detail</p>
           </div>
         </div>
         <div class="table-content">

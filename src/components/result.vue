@@ -152,12 +152,12 @@ export default {
         )
         .then(() => {
           // this.smessage="Succesfully added"
-          this.$toaster.success('Succesfully added.')
+          this.$toaster.success("Succesfully added.");
         })
         .catch((error) =>
           console.log(
             error.response.request._response,
-            this.$toaster.error('Invalid inputs.')
+            this.$toaster.error("Invalid inputs.")
           )
         );
     },

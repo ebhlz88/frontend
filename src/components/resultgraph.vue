@@ -153,17 +153,16 @@ export default {
         .then((resp) => {
           this.subjectmarks = resp.data;
           let count = Object.keys(this.subjectmarks).length;
-      for (let i = 0; i < count; i++) {
-        this.categorieslist.push(
-          this.subjectmarks[i].enrollstudent.standard.standardname
-        );
-      }
-          this.updateTheme()
-          this.updatechart()
+          for (let i = 0; i < count; i++) {
+            this.categorieslist.push(
+              this.subjectmarks[i].enrollstudent.standard.standardname
+            );
+          }
+          this.updateTheme();
+          this.updatechart();
         });
     },
     updateTheme() {
-      
       this.chartOptions = {
         xaxis: {
           categories: this.categorieslist,
@@ -171,15 +170,15 @@ export default {
       };
     },
     updatechart() {
-      let sdata= [];
+      let sdata = [];
       for (let i = 0; i < this.nofsubjects.nosubjects; i++) {
-        console.log(this.subjectmarks[i].subjectmarks)
+        console.log(this.subjectmarks[i].subjectmarks);
         sdata[i] = this.series[0].data.map(() => {
           return this.subjectmarks[i].subjectmarks;
-        })
+        });
         this.serieslist.push(String(sdata[i]));
       }
-      
+
       this.series = [
         {
           data: this.serieslist,
