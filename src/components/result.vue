@@ -2,7 +2,11 @@
   <div id="result">
     <div id="rowdiv" class="row" v-if="!showModal">
       <div class="col-md-7 btndiv">
-        <button class="btn btn-primary" v-on:click="showModal = true">
+        <button
+          v-if="isloggedin"
+          class="btn btn-primary"
+          v-on:click="showModal = true"
+        >
           Add Result
         </button>
         <router-link class="btn btn-primary" :to="'/rgraph/' + roll">
@@ -13,9 +17,9 @@
         <label for="standardselect" class="col-md-5 my-2"
           ><b>Select Standard</b></label
         >
-        <div class="col-md-2">
+        <div class="col-md-7">
           <select
-            class="form-group mleft"
+            class="form-control mleft"
             id="standardselect"
             v-model="filterstandard"
             @change="find($event)"
@@ -28,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div id="popup">
+    <div id="popup" v-if="isloggedin">
       <transition name="fade" appear>
         <div
           class="modal-overlay"
@@ -119,6 +123,7 @@ export default {
   },
   computed: {
     ...mapGetters(["token"]),
+    ...mapGetters(["isloggedin"]),
   },
   props: {
     roll: {

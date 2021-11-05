@@ -5895,6 +5895,18 @@
   dependencies:
     "minimist" "^1.2.5"
 
+"moment-timezone@^0.5.33":
+  "integrity" "sha512-PTc2vcT8K9J5/9rDEPe5czSIKgLoGsH8UNpA4qZTVw0Vd/Uz19geE9abbIOQKaAQFcnQ3v5YEXrbSc5BpshH+w=="
+  "resolved" "https://registry.npmjs.org/moment-timezone/-/moment-timezone-0.5.33.tgz"
+  "version" "0.5.33"
+  dependencies:
+    "moment" ">= 2.9.0"
+
+"moment@^2.19.2", "moment@>= 2.9.0":
+  "integrity" "sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ=="
+  "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
+  "version" "2.29.1"
+
 "move-concurrently@^1.0.1":
   "integrity" "sha1-viwAX9oy4LKa8fBdfEszIUxwH5I="
   "resolved" "https://registry.npm.taobao.org/move-concurrently/download/move-concurrently-1.0.1.tgz"
@@ -8996,6 +9008,13 @@
     "vue-hot-reload-api" "^2.3.0"
     "vue-style-loader" "^4.1.0"
 
+"vue-moment@^4.1.0":
+  "integrity" "sha512-Gzisqpg82ItlrUyiD9d0Kfru+JorW2o4mQOH06lEDZNgxci0tv/fua1Hl0bo4DozDV2JK1r52Atn/8QVCu8qQw=="
+  "resolved" "https://registry.npmjs.org/vue-moment/-/vue-moment-4.1.0.tgz"
+  "version" "4.1.0"
+  dependencies:
+    "moment" "^2.19.2"
+
 "vue-router@^3.5.2":
   "integrity" "sha512-807gn82hTnjCYGrnF3eNmIw/dk7/GE4B5h69BlyCK9KHASwSloD1Sjcn06zg9fVG4fYH2DrsNBZkpLtb25WtaQ=="
   "resolved" "https://registry.npmjs.org/vue-router/-/vue-router-3.5.2.tgz"
@@ -9022,7 +9041,7 @@
   "resolved" "https://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^ 3.0.0 || ^ 2.0.0", "vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.5.0", "vue@^2.5.18", "vue@^2.5.22", "vue@^2.6.10", "vue@^2.6.11", "vue@>= 2.5 < 3", "vue@~2":
+"vue@^ 3.0.0 || ^ 2.0.0", "vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.5.0", "vue@^2.5.18", "vue@^2.5.22", "vue@^2.6.10", "vue@^2.6.11", "vue@>= 2.5 < 3", "vue@>=1.x.x", "vue@~2":
   "integrity" "sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz"
   "version" "2.6.14"
@@ -9038,6 +9057,11 @@
   "integrity" "sha512-PkC4vxzFBo7i6FSCUAJfnaWOx6VkKbOqxijSGHHlWxh8FIUKEZVtFychkonVWtK3iwWfhmYtqHcwsmgxefLpLQ=="
   "resolved" "https://registry.npmjs.org/vuejs-datepicker/-/vuejs-datepicker-1.6.2.tgz"
   "version" "1.6.2"
+
+"vuelidate@^0.7.6":
+  "integrity" "sha512-suzIuet1jGcyZ4oUSW8J27R2tNrJ9cIfklAh63EbAkFjE380iv97BAiIeolRYoB9bF9usBXCu4BxftWN1Dkn3g=="
+  "resolved" "https://registry.npmjs.org/vuelidate/-/vuelidate-0.7.6.tgz"
+  "version" "0.7.6"
 
 "vuex-persistedstate@*":
   "integrity" "sha512-T4IRD27qoUWh+8qr6T6zVp15xO7x/nPgnU13OD0C2uUwA7U9PhGozrj6lvVmMYDyRgc36J0msMXn3GvwHjkIhA=="

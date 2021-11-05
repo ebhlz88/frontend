@@ -9,7 +9,12 @@
         />
         <div class="card-body">School Information</div>
       </div>
-      <div class="cardd animate" style="width: 14rem" v-on:click="register">
+      <div
+        v-if="isloggedin"
+        class="cardd animate"
+        style="width: 14rem"
+        v-on:click="register"
+      >
         <img
           class="card-img-top"
           src="../assets/RegStudent.png"
@@ -25,7 +30,12 @@
         />
         <div class="card-body">Student Management</div>
       </div>
-      <div class="cardd animate" style="width: 14rem" v-on:click="staffmgmt">
+      <div
+        v-if="isloggedin"
+        class="cardd animate"
+        style="width: 14rem"
+        v-on:click="staffmgmt"
+      >
         <img
           class="card-img-top"
           src="../assets/StaffMgmt.png"
@@ -33,7 +43,12 @@
         />
         <div class="card-body">Staff Management</div>
       </div>
-      <div class="cardd animate" style="width: 14rem" v-on:click="generaterpt">
+      <div
+        v-if="isloggedin"
+        class="cardd animate"
+        style="width: 14rem"
+        v-on:click="generaterpt"
+      >
         <img
           class="card-img-top"
           src="../assets/reports.png"
@@ -41,12 +56,24 @@
         />
         <div class="card-body">Financial Report</div>
       </div>
+      <div class="cardd animate" style="width: 14rem" v-on:click="digitlib">
+        <img
+          class="card-img-top"
+          src="../assets/LibraryMgmt.png"
+          alt="Card image cap"
+        />
+        <div class="card-body">Digital Library</div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters(["isloggedin"]),
+  },
   methods: {
     stdtmngmt() {
       this.$router.push("/list");
@@ -59,6 +86,9 @@ export default {
     },
     register() {
       this.$router.push("/sform");
+    },
+    digitlib() {
+      this.$router.push("/books");
     },
     schoolinfo() {},
   },

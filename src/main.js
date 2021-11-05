@@ -24,6 +24,7 @@ import cardview from "./components/cardview.vue";
 import graph from "./components/financialgraph.vue";
 import resultgraph from "./components/resultgraph.vue";
 import books from "./components/books.vue";
+import schoolinfo from "./components/schoolinfo.vue";
 
 import VueComp from "@vue/composition-api";
 
@@ -31,6 +32,9 @@ Vue.use(VueComp);
 
 library.add(fas);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
+
+import Vuelidate from "vuelidate";
+Vue.use(Vuelidate);
 
 Vue.use(VueRouter);
 Vue.component("navbar", require("./components/navbar.vue").default);
@@ -67,6 +71,7 @@ const routes = [
   { path: "/sdetail/:roll", component: sdetailtable, props: true },
   { path: "/tdetail/:roll", component: tdetail, props: true },
   { path: "/books", component: books },
+  { path: "/sinfo", component: schoolinfo },
 ];
 
 const router = new VueRouter({

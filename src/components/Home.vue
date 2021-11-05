@@ -92,10 +92,10 @@ export default {
           this.$router.push("/main");
         })
         .catch(
-          () => this.$store.dispatch("token", NaN),
-          (this.isloggedin = false),
-          this.$store.dispatch("isloggedin", this.isloggedin),
-          this.$toaster.error("Invalid UserName or Password.")
+          () => this.$toaster.error("Invalid UserName or Password."),
+          this.$store.dispatch("token", NaN),
+          // this.isloggedin = false,
+          this.$store.dispatch("isloggedin", false)
         );
     },
   },
@@ -104,8 +104,6 @@ export default {
 
 <style>
 #homepage {
-  /* background-color: #4e71ee;
-  background-color: rgb(83, 83, 158); */
   background-image: linear-gradient(to right, #3931af, #00c6ff);
   margin: 0px;
   padding-top: 40px;

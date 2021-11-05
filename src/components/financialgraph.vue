@@ -1,5 +1,5 @@
 <template>
-  <div id="graph">
+  <div id="graph" v-if="isloggedin">
     <div class="input-group col-md-6 width m-3">
       <h5 class="p-3"><b>Select a year</b></h5>
       <select

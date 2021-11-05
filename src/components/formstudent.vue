@@ -1,5 +1,6 @@
 <template>
-  <div id="regist" class="register" v-if="isloggedin">
+  <div id="regist" class="register">
+    <!-- v-if="isloggedin" -->
     <div class="row">
       <div class="col-md-3 register-left">
         <div class="card-container">
@@ -80,35 +81,83 @@
                     v-model="posts.s_name"
                     type="text"
                     class="form-control"
+                    :class="{ 'is-invalid': $v.posts.s_name.$error }"
                     placeholder="Full Name *"
                     required
                   />
+                  <div
+                    v-if="!$v.posts.s_name.required"
+                    class="invalid-feedback"
+                  >
+                    Name is required
+                  </div>
+                  <div
+                    v-if="!$v.posts.s_name.minLength"
+                    class="invalid-feedback"
+                  >
+                    Name must be altleast 4 Characters
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
                     v-model="posts.s_fname"
                     type="text"
                     class="form-control"
+                    :class="{ 'is-invalid': $v.posts.s_fname.$error }"
                     placeholder="Father's Name *"
-                    required
                   />
+                  <div
+                    v-if="!$v.posts.s_fname.required"
+                    class="invalid-feedback"
+                  >
+                    Father's Name is required
+                  </div>
+                  <div
+                    v-if="!$v.posts.s_fname.minLength"
+                    class="invalid-feedback"
+                  >
+                    Father's Name must be altleast 4 Characters
+                  </div>
                 </div>
                 <div class="form-group">
                   <date-picker
                     placeholder="Date of Birth"
                     class="widthdp from-control"
+                    :class="{ 'is-invalid': $v.posts.dob.$error }"
                     v-model="posts.dob"
-                    valueType="format"
+                    valueType="MM/DD/YYYY"
                   ></date-picker>
+                  <div v-if="!$v.posts.dob.required" class="invalid-feedback">
+                    Date of Birth is required
+                  </div>
+                  <div v-if="check_dob(this.posts.dob)" class="invalid">
+                    Invalid Date of Birth
+                  </div>
+                  <div
+                    class="invalid"
+                    v-if="date_diff_indays(this.posts.dob) < 1460"
+                  >
+                    Must be atleast four years old
+                  </div>
                 </div>
 
                 <div class="form-group">
                   <date-picker
                     placeholder="Date of joining"
                     class="widthdp from-control"
+                    :class="{ 'is-invalid': $v.posts.date_join.$error }"
                     v-model="posts.date_join"
-                    valueType="format"
+                    valueType="MM/DD/YYYY"
                   ></date-picker>
+                  <div
+                    v-if="!$v.posts.date_join.required"
+                    class="invalid-feedback"
+                  >
+                    Date of Joining is required
+                  </div>
+                  <div class="invalid" v-if="check_dob(this.posts.date_join)">
+                    Select current or previous date
+                  </div>
                 </div>
                 <div class="form-group">
                   <input type="file" @change="onFileChanged" />
@@ -119,28 +168,46 @@
                   <input
                     type="text"
                     v-model="posts.address"
+                    :class="{ 'is-invalid': $v.posts.address.$error }"
                     class="form-control"
                     placeholder="Address *"
                   />
+                  <div
+                    v-if="!$v.posts.address.required"
+                    class="invalid-feedback"
+                  >
+                    Address is required
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
-                    type="text"
+                    type="tel"
                     v-model="posts.fm_number"
-                    minlength="10"
-                    maxlength="10"
                     name="txtEmpPhone"
                     class="form-control"
+                    :class="{ 'is-invalid': $v.posts.fm_number.$error }"
                     placeholder="Father's Phone *"
-                    required
                   />
+                  <div
+                    v-if="!$v.posts.fm_number.required"
+                    class="invalid-feedback"
+                  >
+                    Father's Mobile No. is required
+                  </div>
+                  <div
+                    v-if="
+                      !$v.posts.fm_number.minlength ||
+                      !$v.posts.fm_number.maxLength
+                    "
+                    class="invalid-feedback"
+                  >
+                    Mobile No. must be between 11 to 15 numbers
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
                     type="text"
                     v-model="posts.bloodgroup"
-                    minlength="10"
-                    maxlength="10"
                     name="blood"
                     class="form-control"
                     placeholder="Blood Group *"
@@ -151,6 +218,7 @@
                   <div class="form-check current">
                     <input
                       class="form-check-input"
+                      :class="{ 'is-invalid': $v.posts.sex.$error }"
                       v-model="posts.sex"
                       value="male"
                       type="radio"
@@ -163,6 +231,7 @@
                   </div>
                   <div class="form-check current">
                     <input
+                      :class="{ 'is-invalid': $v.posts.sex.$error }"
                       class="form-check-input"
                       v-model="posts.sex"
                       value="female"
@@ -214,35 +283,91 @@
                     v-model="teacherposts.t_name"
                     type="text"
                     class="form-control"
+                    :class="{ 'is-invalid': $v.teacherposts.t_name.$error }"
                     placeholder="Full Name *"
                     required
                   />
+                  <div
+                    v-if="!$v.teacherposts.t_name.required"
+                    class="invalid-feedback"
+                  >
+                    Name is required
+                  </div>
+                  <div
+                    v-if="!$v.teacherposts.t_name.minLength"
+                    class="invalid-feedback"
+                  >
+                    Name must be atleast 4 characters
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
                     v-model="teacherposts.t_fname"
                     type="text"
                     class="form-control"
+                    :class="{ 'is-invalid': $v.teacherposts.t_fname.$error }"
                     placeholder="Father's Name *"
-                    required
                   />
+                  <div
+                    v-if="!$v.teacherposts.t_fname.required"
+                    class="invalid-feedback"
+                  >
+                    Father's Name is required
+                  </div>
+                  <div
+                    v-if="!$v.teacherposts.t_fname.minLength"
+                    class="invalid-feedback"
+                  >
+                    Father's Name must be atleast 4 characters
+                  </div>
                 </div>
                 <div class="form-group">
                   <date-picker
                     placeholder="Date of Birth"
                     class="widthdp from-control"
+                    :class="{ 'is-invalid': $v.teacherposts.dob.$error }"
                     v-model="teacherposts.dob"
                     valueType="format"
                   ></date-picker>
+                  <div
+                    v-if="!$v.teacherposts.dob.required"
+                    class="invalid-feedback"
+                  >
+                    Date of Birth is required
+                  </div>
+                  <div
+                    class="invalid"
+                    v-if="date_diff_indays(this.teacherposts.dob) < 5840"
+                  >
+                    Must be atleast 16 years old
+                  </div>
+                  <div class="invalid" v-if="check_dob(this.teacherposts.dob)">
+                    Select current or previous date
+                  </div>
                 </div>
 
                 <div class="form-group">
                   <date-picker
                     placeholder="Date of Hiring"
                     class="widthdp from-control"
+                    :class="{
+                      'is-invalid': $v.teacherposts.date_hiring.$error,
+                    }"
                     v-model="teacherposts.date_hiring"
                     valueType="format"
                   ></date-picker>
+                  <div
+                    v-if="!$v.teacherposts.date_hiring.required"
+                    class="invalid-feedback"
+                  >
+                    Date of Hiring is required
+                  </div>
+                  <div
+                    class="invalid"
+                    v-if="check_dob(this.teacherposts.date_hiring)"
+                  >
+                    Select current or previous date
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
@@ -252,56 +377,93 @@
                     placeholder="Speciality *"
                   />
                 </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    v-model="teacherposts.bloodgroup"
+                    class="form-control"
+                    placeholder="Blood Group *"
+                  />
+                </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <input
                     type="text"
                     v-model="teacherposts.address"
+                    :class="{ 'is-invalid': $v.teacherposts.address.$error }"
                     class="form-control"
                     placeholder="Address *"
                     required
                   />
+                  <div
+                    v-if="!$v.teacherposts.address.required"
+                    class="invalid-feedback"
+                  >
+                    Address is required
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
                     type="text"
                     v-model="teacherposts.m_number"
-                    minlength="10"
-                    maxlength="10"
                     name="txtEmpPhone"
                     class="form-control"
+                    :class="{ 'is-invalid': $v.teacherposts.m_number.$error }"
                     placeholder="Mobile *"
-                    required
                   />
+                  <div
+                    v-if="!$v.teacherposts.m_number.required"
+                    class="invalid-feedback"
+                  >
+                    Mobile Number is required
+                  </div>
+                  <div
+                    v-if="
+                      !$v.teacherposts.m_number.minlength ||
+                      !$v.teacherposts.m_number.maxLength
+                    "
+                    class="invalid-feedback"
+                  >
+                    Mobile Number must be between 11 to 15 numbers
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
                     type="text"
                     v-model="teacherposts.salary"
-                    minlength="10"
-                    maxlength="10"
                     name="txtEmpPhone"
                     class="form-control"
                     placeholder="Salary *"
-                    required
                   />
                 </div>
                 <div class="form-group">
                   <input
                     type="text"
                     v-model="teacherposts.t_email"
-                    minlength="10"
-                    maxlength="10"
                     name="txtEmpPhone"
                     class="form-control"
+                    :class="{ 'is-invalid': $v.teacherposts.t_email.$error }"
                     placeholder="Email *"
                   />
+                  <div
+                    v-if="!$v.teacherposts.t_email.required"
+                    class="invalid-feedback"
+                  >
+                    Email is required
+                  </div>
+                  <div
+                    v-if="!$v.teacherposts.t_email.email"
+                    class="invalid-feedback"
+                  >
+                    Invalid Email address
+                  </div>
                 </div>
                 <div class="form-group">
                   <div class="form-check current">
                     <input
                       class="form-check-input"
+                      :class="{ 'is-invalid': $v.teacherposts.sex.$error }"
                       v-model="teacherposts.sex"
                       value="male"
                       type="radio"
@@ -315,6 +477,7 @@
                   <div class="form-check current">
                     <input
                       class="form-check-input"
+                      :class="{ 'is-invalid': $v.teacherposts.sex.$error }"
                       v-model="teacherposts.sex"
                       value="female"
                       type="radio"
@@ -352,6 +515,7 @@
         </div>
       </div>
     </div>
+    {{ posts.date_join }}
   </div>
 </template>
 
@@ -363,6 +527,18 @@ import axios from "axios";
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 
+import {
+  required,
+  minLength,
+  email,
+  maxLength,
+} from "vuelidate/lib/validators";
+import VueMoment from "vue-moment";
+import moment from "moment-timezone";
+
+Vue.use(VueMoment, {
+  moment,
+});
 import { mapGetters } from "vuex";
 
 Vue.use(VueAxios, axios);
@@ -377,6 +553,11 @@ export default {
   },
   data() {
     return {
+      momentFormat: {
+        parse: (value) => {
+          return value ? moment(value, "LL").toDate() : null;
+        },
+      },
       imagefile: null,
       studentshow: true,
       teachershow: false,
@@ -403,6 +584,7 @@ export default {
         m_number: null,
         dob: null,
         date_hiring: null,
+        bloodgroup: null,
         t_email: null,
         address: null,
         salary: null,
@@ -416,6 +598,35 @@ export default {
       },
     };
   },
+  validations: {
+    posts: {
+      s_name: { required, minLength: minLength(4) },
+      s_fname: { required, minLength: minLength(4) },
+      dob: { required },
+      date_join: { required },
+      address: { required },
+      fm_number: {
+        required,
+        minLength: minLength(11),
+        maxLength: maxLength(15),
+      },
+      sex: { required },
+    },
+    teacherposts: {
+      t_name: { required, minLength: minLength(4) },
+      t_fname: { required, minLength: minLength(4) },
+      m_number: {
+        required,
+        minLength: minLength(11),
+        maxLength: maxLength(15),
+      },
+      dob: { required },
+      date_hiring: { required },
+      t_email: { required, email },
+      address: { required },
+      sex: { required },
+    },
+  },
   mounted() {
     Vue.axios.get("http://127.0.0.1:8000/count").then((resp) => {
       this.countinfo = resp.data;
@@ -424,54 +635,107 @@ export default {
 
   methods: {
     onFileChanged(e) {
-      let image = e.target.files[0];
       this.imagefile = e.target.files[0];
-      let reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.onload = (e) => {
-        this.posts.student_pic = e.target.result;
-      };
+      // let reader = new FileReader();
+      // reader.readAsDataURL(image);
+      // reader.onload = (e) => {
+      //   this.posts.student_pic = e.target.result;
+      // };
     },
     submitData() {
-      let data = new FormData();
-      data.append("s_name", this.posts.s_name);
-      data.append("s_fname", this.posts.s_fname);
-      data.append("dob", this.posts.dob);
-      data.append("date_join", this.posts.date_join);
-      data.append("sex", this.posts.sex);
-      data.append("fm_number", this.posts.fm_number);
-      data.append("c_position", this.posts.c_position);
-      data.append("address", this.posts.address);
-      data.append("student_pic", this.imagefile);
-      data.append("bloodgroup", this.posts.bloodgroup);
-      axios
-        .post("http://127.0.0.1:8000", data, this.token)
-        .then(() => {
-          this.$toaster.success("Successfully Added Student.");
-        })
-        .catch((error) =>
-          console.log(
-            error.response.request._response,
-            this.$toaster.error("Invalid Inputs.")
-          )
-        );
+      this.$v.posts.$touch();
+      if (this.$v.posts.$error) {
+        return false;
+      }
+      if (this.check_dob(this.posts.dob)) {
+        return false;
+      } else if (this.check_dob(this.posts.date_join)) {
+        return false;
+      } else if (this.date_diff_indays(this.posts.dob) < 1460) {
+        return false;
+      } else {
+        var dt1 = new Date(this.posts.dob);
+        var date_birth =
+          dt1.getFullYear() + "-" + dt1.getMonth() + "-" + dt1.getDate();
+        var dt2 = new Date(this.posts.date_join);
+        var join_date =
+          dt2.getFullYear() + "-" + dt2.getMonth() + "-" + dt2.getDate();
+        let data = new FormData();
+        data.append("s_name", this.posts.s_name);
+        data.append("s_fname", this.posts.s_fname);
+        data.append("dob", date_birth);
+        data.append("date_join", join_date);
+        data.append("sex", this.posts.sex);
+        data.append("fm_number", this.posts.fm_number);
+        data.append("c_position", this.posts.c_position);
+        data.append("address", this.posts.address);
+        data.append("student_pic", this.imagefile);
+        data.append("bloodgroup", this.posts.bloodgroup);
+        axios
+          .post("http://127.0.0.1:8000", data, this.token)
+          .then(() => {
+            this.$toaster.success("Successfully Added Student.");
+          })
+          .catch((error) =>
+            console.log(
+              error.response.request._response,
+              this.$toaster.error("Invalid Inputs.")
+            )
+          );
+      }
+    },
+    date_diff_indays(date1) {
+      var dt1 = new Date(date1);
+      var dt2 = new Date();
+      return Math.floor(
+        (Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) -
+          Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) /
+          (1000 * 60 * 60 * 24)
+      );
+    },
+    check_dob(date1) {
+      var dt1 = new Date(date1);
+      var dt2 = new Date();
+      return Math.floor(
+        Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) <
+          Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())
+      );
     },
     submitteacherData() {
-      axios
-        .post(
-          "http://127.0.0.1:8000/allteachers",
-          this.teacherposts,
-          this.token
-        )
-        .then(() => {
-          this.$toaster.success("Successfully Added Teacher.");
-        })
-        .catch((error) =>
-          console.log(
-            error.response.request._response,
-            this.$toaster.error("Invalid Inputs.")
+      this.$v.teacherposts.$touch();
+      if (this.$v.teacherposts.$error) {
+        return false;
+      } else if (this.check_dob(this.teacherposts.date_hiring)) {
+        return false;
+      } else if (this.date_diff_indays(this.teacherposts.dob) < 5840) {
+        return false;
+      } else {
+        var dt1 = new Date(this.teacherposts.dob);
+        var date_birth =
+          dt1.getFullYear() + "-" + dt1.getMonth() + "-" + dt1.getDate();
+        var dt2 = new Date(this.teacherposts.date_hiring);
+        var hiring_date =
+          dt2.getFullYear() + "-" + dt2.getMonth() + "-" + dt2.getDate();
+        this.teacherposts.dob = date_birth;
+        this.teacherposts.date_hiring = hiring_date;
+        console.log(this.teacherposts.dob);
+        console.log(this.teacherposts.date_hiring);
+        axios
+          .post(
+            "http://127.0.0.1:8000/allteachers",
+            this.teacherposts,
+            this.token
           )
-        );
+          .then(() => {
+            this.$toaster.success("Successfully Added Teacher.");
+          })
+          .catch((error) =>
+            console.log(
+              error.response.request._response,
+              this.$toaster.error("Invalid Inputs.")
+            )
+          );
+      }
     },
   },
 };
@@ -648,5 +912,9 @@ export default {
 
 .back {
   transform: rotateY(180deg);
+}
+.invalid {
+  color: #dc3545;
+  font-size: 14px;
 }
 </style>

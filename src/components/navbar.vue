@@ -26,6 +26,16 @@
                 ><b>Home</b></router-link
               >
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link active" to="/list"
+                ><b>Student</b></router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link active" to="/books"
+                ><b>Library</b></router-link
+              >
+            </li>
             <li v-if="!isloggedin" class="nav-item">
               <router-link class="nav-link" to="/"><b>Login</b></router-link>
             </li>
@@ -34,23 +44,6 @@
                 <b>Logout</b>
               </div>
             </li>
-            <!-- <li>
-              <form class="d-flex">
-                <div class="searchdiv">
-                  <div class="input-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      aria-describedby="start-date"
-                      placeholder="Search Here"
-                    />
-                    <span class="input-group-addon" id="start-date"
-                      ><img src="../assets/searchicon.png" alt="serar"
-                    /></span>
-                  </div>
-                </div>
-              </form>
-            </li> -->
           </ul>
         </div>
       </div>

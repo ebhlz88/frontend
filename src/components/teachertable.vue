@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isloggedin">
     <form>
       <div class="formrow">
         <input
@@ -55,6 +55,7 @@
 import Vue from "vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
+import { mapGetters } from "vuex";
 
 Vue.use(VueAxios, axios);
 export default {
@@ -75,6 +76,9 @@ export default {
           this.list = resp.data;
         });
     },
+  },
+  computed: {
+    ...mapGetters(["isloggedin"]),
   },
   mounted() {
     Vue.axios.get("http://127.0.0.1:8000/allteachers").then((resp) => {
