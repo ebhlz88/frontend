@@ -1,51 +1,19 @@
 <template>
-  <div v-if="isloggedin">
-    <form>
-      <div class="formrow">
-        <input
-          type="text"
-          v-model="tsearchitem"
-          class="form-control"
-          placeholder="Search Here"
-        />
-        <button class="btn btn-primary" v-on:click="searchteacher">
-          Search
-        </button>
-      </div>
-    </form>
-
-    <div>
-      <div class="table">
-        <div class="table-header">
-          <div class="header__item">
-            <p class="filter__link">Roll No.</p>
+  <div  v-if="isloggedin" class="cont">
+<h2 class="tlist">List of all Teachers</h2>
+  <div id="tcard" class="d-flex justify-content-around row">
+      <div class="card my-2 mx-2" v-for="items in list" :key="items.id">
+        <a :href="hrefdetail + items.id">
+          <img
+            class="card-img-top"
+            :src="'http://127.0.0.1:8000' + items.teacher_pic"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <p class="card-text">{{ items.t_name }}</p>
+            <a :href="hrefpayment + items.id">Payments</a>
           </div>
-          <div class="header__item">
-            <p class="filter__link filter__link--number">name</p>
-          </div>
-          <div class="header__item">
-            <p class="filter__link filter__link--number">Mobile Number</p>
-          </div>
-          <div class="header__item">
-            <p class="filter__link filter__link--number">Speciality</p>
-          </div>
-          <div class="header__item">
-            <p class="filter__link filter__link--number">Fee Detail</p>
-          </div>
-        </div>
-        <div class="table-content">
-          <div v-for="item in list" v-bind:key="item.id" class="table-row">
-            <div class="table-data">{{ item.id }}</div>
-            <a :href="hrefdetail + item.id" class="table-data">{{
-              item.t_name
-            }}</a>
-            <div class="table-data">{{ item.m_number }}</div>
-            <div class="table-data">{{ item.speciality }}</div>
-            <div class="table-data">
-              <a :href="hrefpayment + item.id">Payment</a>
-            </div>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
@@ -89,75 +57,28 @@ export default {
 </script>
 
 <style lang="scss">
-$base-spacing-unit: 24px;
-$half-spacing-unit: $base-spacing-unit / 2;
-
-$color-alpha: #1772ff;
-$color-form-highlight: #eeeeee;
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+.cont{
+  padding: 0px 45px;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-}
-.table {
-  width: 100%;
-  border: 1px solid $color-form-highlight;
-}
-
-.table-header {
-  display: flex;
-  width: 100%;
-  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-  padding: ($half-spacing-unit * 1.5) 0;
-}
-
-.table-row {
-  display: flex;
-  width: 100%;
-  padding: ($half-spacing-unit * 1.5) 0;
-
-  &:nth-of-type(odd) {
-    background: $color-form-highlight;
-  }
-}
-
-.table-data,
-.header__item {
-  flex: 1 1 20%;
-  text-align: center;
-  height: 38px;
-}
-
-.header__item {
-  text-transform: uppercase;
-}
-
-.filter__link {
-  color: white;
+#tcard a {
   text-decoration: none;
-  font-weight: bold;
-  position: relative;
-  display: inline-block;
-  padding-left: $base-spacing-unit;
-  padding-right: $base-spacing-unit;
 }
-.formrow {
-  display: flex;
-  margin: 20px;
-  width: 330px;
+#tcard a:hover {
+  cursor: pointer;
 }
-.btn {
-  margin: auto;
-  margin-left: 8px;
+#tcard .card-img-top {
+  height: 220px;
+  width: 250px;
+}
+#tcard .card {
+  width: 253px !important;
+  padding: 0px !important;
+  background-color: #bcc0f2ab;
+}
+#tcard .row {
+  margin-right: 0px;
+}
+.tlist{
+  margin-top: 30px;
 }
 </style>

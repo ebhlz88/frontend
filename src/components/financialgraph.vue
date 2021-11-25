@@ -1,13 +1,14 @@
 <template>
   <div id="graph" v-if="isloggedin">
     <div class="input-group col-md-6 width m-3">
-      <h5 class="p-3"><b>Select a year</b></h5>
+      <div class="selectdiv">
+      <h5><b>Select a year</b></h5>
       <select
         split-variant="outline-primary"
         variant="primary"
         text="Select the year"
         @change="onChange()"
-        class="width m-3 form-control"
+        class="form-control"
         v-model="selectedyear"
       >
         <option disabled>Please select an Year</option>
@@ -15,6 +16,7 @@
           {{ items.text }}
         </option>
       </select>
+      </div>
       <button
         class="btn btn-primary"
         id="searchbtn"
@@ -38,6 +40,7 @@
 import Vue from "vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
+import { mapGetters } from "vuex";
 import VueApexCharts from "vue-apexcharts";
 Vue.use(VueApexCharts);
 Vue.component("apexchart", VueApexCharts);
@@ -46,6 +49,10 @@ export default {
   name: "studentslist",
   components: {
     apexchart: VueApexCharts,
+  },
+   computed: {
+    ...mapGetters(["token"]),
+    ...mapGetters(["isloggedin"]),
   },
   data() {
     return {
@@ -99,7 +106,7 @@ export default {
           curve: "straight",
         },
         title: {
-          text: "Money Collected & Payed for School",
+          text: "Money Collected & Payed",
           align: "left",
         },
         grid: {
@@ -278,8 +285,16 @@ export default {
 };
 </script>
 <style scoped>
-#graph .width {
-  width: 35%;
+.selectdiv{
+  display: flex;
+  
+}
+.selectdiv h5{
+  width: 197px;
+  padding: 4px 0px;
+}
+.selectdiv select{
+  margin: 0px 10px;
 }
 #graph .pad {
   margin-top: 10vh;
@@ -338,6 +353,18 @@ export default {
   padding: 2rem;
   background-color: rgba(255, 255, 255, 0.877);
   color: black;
+}
+@media screen and (max-width: 450px) {
+  #graph .chartdiv {
+  padding: 0px;
+}
+.selectdiv select{
+  width: 190px;
+}
+.selectdiv h5{
+  width: 128px;
+}
+
 }
 /* *{
   border: 1px solid;

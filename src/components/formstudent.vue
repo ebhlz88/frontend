@@ -460,6 +460,9 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <input type="file" @change="onFileChanged" />
+                </div>
+                <div class="form-group">
                   <div class="form-check current">
                     <input
                       class="form-check-input"
@@ -636,11 +639,6 @@ export default {
   methods: {
     onFileChanged(e) {
       this.imagefile = e.target.files[0];
-      // let reader = new FileReader();
-      // reader.readAsDataURL(image);
-      // reader.onload = (e) => {
-      //   this.posts.student_pic = e.target.result;
-      // };
     },
     submitData() {
       this.$v.posts.$touch();
@@ -718,12 +716,25 @@ export default {
           dt2.getFullYear() + "-" + dt2.getMonth() + "-" + dt2.getDate();
         this.teacherposts.dob = date_birth;
         this.teacherposts.date_hiring = hiring_date;
-        console.log(this.teacherposts.dob);
-        console.log(this.teacherposts.date_hiring);
+        console.log(date_birth)
+        let data = new FormData();
+        data.append("t_name", this.teacherposts.t_name);
+        data.append("t_fname", this.teacherposts.t_fname);
+        data.append("dob", date_birth);
+        data.append("date_hiring", hiring_date);
+        data.append("sex", this.teacherposts.sex);
+        data.append("m_number", this.teacherposts.m_number);
+        data.append("c_position", this.teacherposts.c_position);
+        data.append("address", this.teacherposts.address);
+        data.append("teacher_pic", this.imagefile);
+        data.append("bloodgroup", this.teacherposts.bloodgroup);
+        data.append("t_email", this.teacherposts.t_email);
+        data.append("speciality", this.teacherposts.speciality);
+        data.append("salary", this.teacherposts.salary);
         axios
           .post(
             "http://127.0.0.1:8000/allteachers",
-            this.teacherposts,
+            data,
             this.token
           )
           .then(() => {
@@ -824,7 +835,7 @@ export default {
   float: right;
 }
 .register .nav-tabs .nav-link {
-  padding: 2%;
+  padding: 1%;
   height: 34px;
   font-weight: 600;
   color: #fff;
@@ -854,7 +865,22 @@ export default {
   margin: 6px;
 }
 .widthdp {
-  width: 355px !important;
+  width: 355px;
+}
+@media screen and (max-width: 450px) {
+  .widthdp {
+  width: 230px;
+}
+.form-group{
+  width: 230px;
+}
+.register .nav-tabs {
+    width: 35%;
+}
+.btnRegister {
+    padding: 6%;
+    width: 110px;
+}
 }
 .current {
   padding-right: 200px;

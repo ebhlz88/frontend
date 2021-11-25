@@ -31,6 +31,7 @@
 <script>
 import Vue from "vue";
 import VueAxios from "vue-axios";
+import { mapGetters } from "vuex";
 import axios from "axios";
 import VueApexCharts from "vue-apexcharts";
 Vue.use(VueApexCharts);
@@ -40,6 +41,10 @@ export default {
   name: "resultgraph",
   components: {
     apexchart: VueApexCharts,
+  },
+   computed: {
+    ...mapGetters(["token"]),
+    ...mapGetters(["isloggedin"]),
   },
   data() {
     return {

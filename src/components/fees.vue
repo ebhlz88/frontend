@@ -12,7 +12,7 @@
           ><img src="../assets/searchicon.png" alt="serar"
         /></span>
       </div>
-      <div class="submitdiv col-md-8 row">
+      <div v-if="isloggedin" class="submitdiv col-md-8 row">
         <select class="form-control" v-model="updatestandard">
           <option class="hidden" selected disabled>
             Please select Standard
@@ -108,6 +108,7 @@ export default {
   },
   computed: {
     ...mapGetters(["token"]),
+    ...mapGetters(["isloggedin"]),
   },
   props: {
     roll: {

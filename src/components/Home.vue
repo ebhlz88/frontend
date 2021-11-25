@@ -161,6 +161,24 @@ margin-left: 2px;
 .row .align-items-end {
   padding: 0px;
 }
+@media screen and (max-width: 450px) {
+  .login{
+    padding: 60px 24px;
+  }
+  .logindiv{
+    width: 366px;
+  }
+  .align-items-center{
+    padding: 0px;
+  }
+  #homepage .row {
+  margin: 0px;
+  margin-bottom: 30px;
+}
+.login .form-control{
+  width: 300px;
+}
+}
 /* *{
   border: 1px solid;
 } */
