@@ -2,20 +2,20 @@
   <div id="graph" v-if="isloggedin">
     <div class="input-group col-md-6 width m-3">
       <div class="selectdiv">
-      <h5><b>Select a year</b></h5>
-      <select
-        split-variant="outline-primary"
-        variant="primary"
-        text="Select the year"
-        @change="onChange()"
-        class="form-control"
-        v-model="selectedyear"
-      >
-        <option disabled>Please select an Year</option>
-        <option v-for="items in yearlist" :key="items.id" :value="items.text">
-          {{ items.text }}
-        </option>
-      </select>
+        <h5><b>Select a year</b></h5>
+        <select
+          split-variant="outline-primary"
+          variant="primary"
+          text="Select the year"
+          @change="onChange()"
+          class="form-control"
+          v-model="selectedyear"
+        >
+          <option disabled>Please select an Year</option>
+          <option v-for="items in yearlist" :key="items.id" :value="items.text">
+            {{ items.text }}
+          </option>
+        </select>
       </div>
       <button
         class="btn btn-primary"
@@ -50,7 +50,7 @@ export default {
   components: {
     apexchart: VueApexCharts,
   },
-   computed: {
+  computed: {
     ...mapGetters(["token"]),
     ...mapGetters(["isloggedin"]),
   },
@@ -285,15 +285,14 @@ export default {
 };
 </script>
 <style scoped>
-.selectdiv{
+.selectdiv {
   display: flex;
-  
 }
-.selectdiv h5{
+.selectdiv h5 {
   width: 197px;
   padding: 4px 0px;
 }
-.selectdiv select{
+.selectdiv select {
   margin: 0px 10px;
 }
 #graph .pad {
@@ -356,15 +355,14 @@ export default {
 }
 @media screen and (max-width: 450px) {
   #graph .chartdiv {
-  padding: 0px;
-}
-.selectdiv select{
-  width: 190px;
-}
-.selectdiv h5{
-  width: 128px;
-}
-
+    padding: 0px;
+  }
+  .selectdiv select {
+    width: 190px;
+  }
+  .selectdiv h5 {
+    width: 128px;
+  }
 }
 /* *{
   border: 1px solid;

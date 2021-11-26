@@ -90,10 +90,10 @@ export default {
   margin-left: auto;
 }
 @media screen and (min-width: 200px) {
- .navbar-brand img {
-  height: 10vh;
-  padding: 5px;
-}
+  .navbar-brand img {
+    height: 10vh;
+    padding: 5px;
+  }
 }
 .navbar-brand img {
   height: 90px;

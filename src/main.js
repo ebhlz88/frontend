@@ -25,6 +25,7 @@ import graph from "./components/financialgraph.vue";
 import resultgraph from "./components/resultgraph.vue";
 import books from "./components/books.vue";
 import schoolinfo from "./components/schoolinfo.vue";
+import sectionresult from "./components/sectionResult.vue";
 
 import VueComp from "@vue/composition-api";
 
@@ -72,6 +73,7 @@ const routes = [
   { path: "/tdetail/:roll", component: tdetail, props: true },
   { path: "/books", component: books },
   { path: "/sinfo", component: schoolinfo },
+  { path: "/secresult", component: sectionresult },
 ];
 
 const router = new VueRouter({

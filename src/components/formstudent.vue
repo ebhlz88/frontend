@@ -716,7 +716,7 @@ export default {
           dt2.getFullYear() + "-" + dt2.getMonth() + "-" + dt2.getDate();
         this.teacherposts.dob = date_birth;
         this.teacherposts.date_hiring = hiring_date;
-        console.log(date_birth)
+        console.log(date_birth);
         let data = new FormData();
         data.append("t_name", this.teacherposts.t_name);
         data.append("t_fname", this.teacherposts.t_fname);
@@ -732,11 +732,7 @@ export default {
         data.append("speciality", this.teacherposts.speciality);
         data.append("salary", this.teacherposts.salary);
         axios
-          .post(
-            "http://127.0.0.1:8000/allteachers",
-            data,
-            this.token
-          )
+          .post("http://127.0.0.1:8000/allteachers", data, this.token)
           .then(() => {
             this.$toaster.success("Successfully Added Teacher.");
           })
@@ -869,18 +865,18 @@ export default {
 }
 @media screen and (max-width: 450px) {
   .widthdp {
-  width: 230px;
-}
-.form-group{
-  width: 230px;
-}
-.register .nav-tabs {
+    width: 230px;
+  }
+  .form-group {
+    width: 230px;
+  }
+  .register .nav-tabs {
     width: 35%;
-}
-.btnRegister {
+  }
+  .btnRegister {
     padding: 6%;
     width: 110px;
-}
+  }
 }
 .current {
   padding-right: 200px;

@@ -81,7 +81,6 @@ export default {
   methods: {
     getresults(event) {
       this.fstandard = event;
-      console.log(event);
       Vue.axios
         .get("http://127.0.0.1:8000/result/" + this.rollnbr + "/" + event)
         .then((resp) => {

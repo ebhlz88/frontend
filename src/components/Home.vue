@@ -162,22 +162,22 @@ margin-left: 2px;
   padding: 0px;
 }
 @media screen and (max-width: 450px) {
-  .login{
+  .login {
     padding: 60px 24px;
   }
-  .logindiv{
+  .logindiv {
     width: 366px;
   }
-  .align-items-center{
+  .align-items-center {
     padding: 0px;
   }
   #homepage .row {
-  margin: 0px;
-  margin-bottom: 30px;
-}
-.login .form-control{
-  width: 300px;
-}
+    margin: 0px;
+    margin-bottom: 30px;
+  }
+  .login .form-control {
+    width: 300px;
+  }
 }
 /* *{
   border: 1px solid;

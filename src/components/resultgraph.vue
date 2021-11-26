@@ -42,7 +42,7 @@ export default {
   components: {
     apexchart: VueApexCharts,
   },
-   computed: {
+  computed: {
     ...mapGetters(["token"]),
     ...mapGetters(["isloggedin"]),
   },

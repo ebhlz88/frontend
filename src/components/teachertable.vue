@@ -1,7 +1,7 @@
 <template>
-  <div  v-if="isloggedin" class="cont">
-<h2 class="tlist">List of all Teachers</h2>
-  <div id="tcard" class="d-flex justify-content-around row">
+  <div v-if="isloggedin" class="cont">
+    <h2 class="tlist">List of all Teachers</h2>
+    <div id="tcard" class="d-flex justify-content-around row">
       <div class="card my-2 mx-2" v-for="items in list" :key="items.id">
         <a :href="hrefdetail + items.id">
           <img
@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss">
-.cont{
+.cont {
   padding: 0px 45px;
 }
 #tcard a {
@@ -78,7 +78,7 @@ export default {
 #tcard .row {
   margin-right: 0px;
 }
-.tlist{
+.tlist {
   margin-top: 30px;
 }
 </style>
