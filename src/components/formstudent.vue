@@ -77,6 +77,10 @@
             <div class="row register-form">
               <div class="col-md-6">
                 <div class="form-group">
+                  <div id="profileupload" class="form-group">
+                    <p class="profilep">Profile Picture</p>
+                    <input type="file" @change="onFileChanged" />
+                  </div>
                   <input
                     v-model="posts.s_name"
                     type="text"
@@ -160,7 +164,20 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="file" @change="onFileChanged" />
+                  <select
+                    class="form-control"
+                    id="standardselect"
+                    v-model="posts.currentStandard"
+                  >
+                    <option selected disabled>Please select Standard</option>
+                    <option
+                      v-for="items in standards"
+                      :key="items.id"
+                      :value="items.id"
+                    >
+                      {{ items.standardname }}
+                    </option>
+                  </select>
                 </div>
               </div>
               <div class="col-md-6">
@@ -564,6 +581,8 @@ export default {
       imagefile: null,
       studentshow: true,
       teachershow: false,
+      standards: null,
+      selectedstandard: null,
       cposition: null,
       countinfo: null,
       sexoptions: [
@@ -580,6 +599,7 @@ export default {
         fm_number: null,
         sex: null,
         bloodgroup: null,
+        currentStandard: null,
       },
       teacherposts: {
         t_name: null,
@@ -634,6 +654,9 @@ export default {
     Vue.axios.get("http://127.0.0.1:8000/count").then((resp) => {
       this.countinfo = resp.data;
     });
+    Vue.axios.get("http://127.0.0.1:8000/standardlist").then((resp) => {
+      this.standards = resp.data;
+    });
   },
 
   methods: {
@@ -669,6 +692,7 @@ export default {
         data.append("address", this.posts.address);
         data.append("student_pic", this.imagefile);
         data.append("bloodgroup", this.posts.bloodgroup);
+        data.append("currentStandard", this.posts.currentStandard);
         axios
           .post("http://127.0.0.1:8000", data, this.token)
           .then(() => {
@@ -938,5 +962,13 @@ export default {
 .invalid {
   color: #dc3545;
   font-size: 14px;
+}
+#profileupload {
+  display: flex;
+  align-items: center;
+}
+.profilep {
+  width: 166px;
+  margin-bottom: 0px !important;
 }
 </style>

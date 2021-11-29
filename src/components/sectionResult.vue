@@ -22,76 +22,201 @@
       </select>
       <button class="btn btn-primary" v-on:click="search">Search</button>
     </div>
-    <div id="ww" class="resultform">
-      <div v-if="resultlist" class="rowdiv">
-        <p>Roll No.</p>
-        <p>Name</p>
-        <p>Marks</p>
+    <div class="maindiv">
+      <div id="ww" class="resultform">
+        <div v-if="resultlist" class="rowdiv">
+          <p>Roll No.</p>
+          <p>Name</p>
+          <p>Marks</p>
+        </div>
+        <div class="rowdiv" v-for="items in reslength" :key="items.id">
+          <p class="form-control">
+            {{ resultlist[items - 1].enrollstudent.student.rollnbr }}
+          </p>
+          <input
+            class="form-control"
+            :value="resultlist[items - 1].enrollstudent.student.s_name"
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Marks"
+            v-model="markarray[items - 1]"
+          />
+        </div>
+        <hr v-if="resultlist" />
+        <h6>
+          <b><u>Add New Students Results</u></b>
+        </h6>
+        <div v-if="counter != 0" class="rowdivv">
+          <p>Roll No.</p>
+          <p>Marks</p>
+        </div>
+        <div id="addrowdiv" class="rowdivadditional">
+          <input
+            type="text"
+            v-model="rollist[reslength]"
+            class="form-control"
+            placeholder="Enter Roll No"
+          />
+          <input
+            type="text"
+            v-model="markarray[reslength]"
+            class="form-control"
+            placeholder="Enter Marks"
+          />
+        </div>
+        <div id="addrowdiv2" class="rowdivadditional">
+          <input
+            type="text"
+            v-model="rollist[reslength + 1]"
+            class="form-control"
+            placeholder="Enter Roll No"
+          />
+          <input
+            type="text"
+            v-model="markarray[reslength + 1]"
+            class="form-control"
+            placeholder="Enter Marks"
+          />
+        </div>
+        <div id="addrowdiv3" class="rowdivadditional">
+          <input
+            type="text"
+            v-model="rollist[reslength + 2]"
+            class="form-control"
+            placeholder="Enter Roll No"
+          />
+          <input
+            type="text"
+            v-model="markarray[reslength + 2]"
+            class="form-control"
+            placeholder="Enter Marks"
+          />
+        </div>
+        <div id="addrowdiv4" class="rowdivadditional">
+          <input
+            type="text"
+            v-model="rollist[reslength + 3]"
+            class="form-control"
+            placeholder="Enter Roll No"
+          />
+          <input
+            type="text"
+            v-model="markarray[reslength + 3]"
+            class="form-control"
+            placeholder="Enter Marks"
+          />
+        </div>
+        <div id="addrowdiv5" class="rowdivadditional">
+          <input
+            type="text"
+            v-model="rollist[reslength + 4]"
+            class="form-control"
+            placeholder="Enter Roll No"
+          />
+          <input
+            type="text"
+            v-model="markarray[reslength + 4]"
+            class="form-control"
+            placeholder="Enter Marks"
+          />
+        </div>
+        <div id="addrowdiv6" class="rowdivadditional">
+          <input
+            type="text"
+            v-model="rollist[reslength + 5]"
+            class="form-control"
+            placeholder="Enter Roll No"
+          />
+          <input
+            type="text"
+            v-model="markarray[reslength + 5]"
+            class="form-control"
+            placeholder="Enter Marks"
+          />
+        </div>
+        <div id="addrowdiv7" class="rowdivadditional">
+          <input
+            type="text"
+            v-model="rollist[reslength + 6]"
+            class="form-control"
+            placeholder="Enter Roll No"
+          />
+          <input
+            type="text"
+            v-model="markarray[reslength + 6]"
+            class="form-control"
+            placeholder="Enter Marks"
+          />
+        </div>
+        <div id="addrowdiv8" class="rowdivadditional">
+          <input
+            type="text"
+            v-model="rollist[reslength + 7]"
+            class="form-control"
+            placeholder="Enter Roll No"
+          />
+          <input
+            type="text"
+            v-model="markarray[reslength + 7]"
+            class="form-control"
+            placeholder="Enter Marks"
+          />
+        </div>
+        <div id="addrowdiv9" class="rowdivadditional">
+          <input
+            type="text"
+            v-model="rollist[reslength + 8]"
+            class="form-control"
+            placeholder="Enter Roll No"
+          />
+          <input
+            type="text"
+            v-model="markarray[reslength + 8]"
+            class="form-control"
+            placeholder="Enter Marks"
+          />
+        </div>
+        <div id="addrowdiv10" class="rowdivadditional">
+          <input
+            type="text"
+            v-model="rollist[reslength + 9]"
+            class="form-control"
+            placeholder="Enter Roll No"
+          />
+          <input
+            type="text"
+            v-model="markarray[reslength + 9]"
+            class="form-control"
+            placeholder="Enter Marks"
+          />
+        </div>
+        <div>
+          <button id="addbtn" class="btn btn-primary" v-on:click="addform">
+            add
+          </button>
+        </div>
+
+        <button id="savebtn" disabled class="btn btn-primary" v-on:click="save">
+          Save
+        </button>
       </div>
-      <div class="rowdiv" v-for="items in reslength" :key="items.id">
-        <p class="form-control">{{resultlist[items - 1].enrollstudent.student.rollnbr}}</p>
-        <input
-          class="form-control"
-          :value="resultlist[items - 1].enrollstudent.student.s_name"
-        />
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter Marks"
-          v-model="markarray[items - 1]"
-        />
+      <div class="resultform">
+        <button @click="resultget">asdfsd</button>
+        <div class="rowdiv">
+          <p>Roll No.</p>
+          <p>Name</p>
+          <p>Total Marks</p>
+          <p>Promote</p>
+        </div>
+        <div v-for="items in rollListsum.length" :key="items" class="rowdiv">
+          <p>{{rollListsum[items-1]}}</p>
+          <p>{{nameArray[items-1]}}</p>
+          <p>{{sumMarkarray[items-1]}}</p>
+          <p>Promote</p>
+        </div>
       </div>
-      <hr>
-      <h6><b><u>Add New Students Results</u></b></h6>
-      <div v-if="counter != 0" class="rowdiv">
-        <p>Roll No.</p>
-        <p>Marks</p>
-      </div>
-      <div id="addrowdiv" class="rowdivadditional">
-        <input type="text" v-model="rollist[reslength]" class="form-control" placeholder="Enter Roll No" />
-        <input type="text" v-model="markarray[reslength]" class="form-control" placeholder="Enter Marks" />
-      </div>
-      <div id="addrowdiv2" class="rowdivadditional">
-        <input type="text" v-model="rollist[reslength+1]" class="form-control" placeholder="Enter Roll No" />
-        <input type="text" v-model="markarray[reslength+1]" class="form-control" placeholder="Enter Marks" />
-      </div>
-      <div id="addrowdiv3" class="rowdivadditional">
-        <input type="text" v-model="rollist[reslength+2]" class="form-control" placeholder="Enter Roll No" />
-        <input type="text" v-model="markarray[reslength+2]" class="form-control" placeholder="Enter Marks" />
-      </div>
-      <div id="addrowdiv4" class="rowdivadditional">
-        <input type="text" v-model="rollist[reslength+3]" class="form-control" placeholder="Enter Roll No" />
-        <input type="text" v-model="markarray[reslength+3]" class="form-control" placeholder="Enter Marks" />
-      </div>
-      <div  id="addrowdiv5" class="rowdivadditional">
-        <input type="text" v-model="rollist[reslength+4]" class="form-control" placeholder="Enter Roll No" />
-        <input type="text" v-model="markarray[reslength+4]" class="form-control" placeholder="Enter Marks" />
-      </div>
-      <div id="addrowdiv6" class="rowdivadditional">
-        <input type="text" v-model="rollist[reslength+5]" class="form-control" placeholder="Enter Roll No" />
-        <input type="text" v-model="markarray[reslength+5]" class="form-control" placeholder="Enter Marks" />
-      </div>
-      <div id="addrowdiv7" class="rowdivadditional">
-        <input type="text" v-model="rollist[reslength+6]" class="form-control" placeholder="Enter Roll No" />
-        <input type="text" v-model="markarray[reslength+6]" class="form-control" placeholder="Enter Marks" />
-      </div>
-      <div id="addrowdiv8" class="rowdivadditional">
-        <input type="text" v-model="rollist[reslength+7]" class="form-control" placeholder="Enter Roll No" />
-        <input type="text" v-model="markarray[reslength+7]" class="form-control" placeholder="Enter Marks" />
-      </div>
-      <div id="addrowdiv9" class="rowdivadditional">
-        <input type="text" v-model="rollist[reslength+8]" class="form-control" placeholder="Enter Roll No" />
-        <input type="text" v-model="markarray[reslength+8]" class="form-control" placeholder="Enter Marks" />
-      </div>
-      <div id="addrowdiv10" class="rowdivadditional">
-        <input type="text" v-model="rollist[reslength+9]" class="form-control" placeholder="Enter Roll No" />
-        <input type="text" v-model="markarray[reslength+9]" class="form-control" placeholder="Enter Marks" />
-      </div>
-      <div>
-        <button id="addbtn" class="btn btn-primary" v-on:click="addform">add</button>
-      </div>
-      
-      <button id="savebtn" disabled class="btn btn-primary" v-on:click="save">Save</button>
     </div>
   </div>
 </template>
@@ -106,18 +231,24 @@ export default {
       standards: null,
       selectedstandard: null,
       selectedsubject: null,
+      allresult: null,
       resultlist: null,
       subjects: null,
-      counter:0,
+      counter: 0,
       studentmarks: {
         subjectmarks: null,
       },
       markarray: [],
-      rollist: [],
       reslength: 0,
+      rollist: [],
+      rollListsum: [],
+      markSum: 0,
+      sumMarkarray: [],
+      subjectArray:[],
+      nameArray:[],
     };
   },
-   computed: {
+  computed: {
     ...mapGetters(["token"]),
     ...mapGetters(["isloggedin"]),
   },
@@ -130,6 +261,33 @@ export default {
     });
   },
   methods: {
+    resultget() {
+      Vue.axios.get("http://127.0.0.1:8000/resbystandard/21").then((resp) => {
+        this.allresult = resp.data;
+        for (let i = 0; i < this.allresult.length; i++) {
+          if (
+            !this.rollListsum.includes(
+              this.allresult[i].enrollstudent.student.rollnbr
+            )
+          ) {
+            this.rollListsum.push(this.allresult[i].enrollstudent.student.rollnbr)
+            this.nameArray.push(this.allresult[i].enrollstudent.student.s_name)
+            for (let j = 0; j < this.allresult.length; j++) {
+              if (
+                this.allresult[i].enrollstudent.student.rollnbr ==
+                this.allresult[j].enrollstudent.student.rollnbr && !this.subjectArray.includes(this.allresult[j].subjectname.subjectname)
+              ) {
+                this.subjectArray.push(this.allresult[j].subjectname.subjectname)
+                this.markSum += this.allresult[j].subjectmarks;
+              }
+            }
+            this.subjectArray=[]
+            this.sumMarkarray.push(this.markSum);
+            this.markSum=0
+          }
+        }
+      });
+    },
     search() {
       Vue.axios
         .get(
@@ -139,7 +297,7 @@ export default {
             this.selectedsubject
         )
         .then((resp) => {
-          document.getElementById('savebtn').disabled = false;
+          document.getElementById("savebtn").disabled = false;
           this.resultlist = resp.data;
           this.reslength = resp.data.length;
           for (let i = 0; i < resp.data.length; i++) {
@@ -148,10 +306,10 @@ export default {
         });
     },
     addform() {
-      this.counter++
-      switch(this.counter) {
+      this.counter++;
+      switch (this.counter) {
         case 1:
-            document.getElementById("addrowdiv").style.display = "flex";
+          document.getElementById("addrowdiv").style.display = "flex";
           break;
         case 2:
           document.getElementById("addrowdiv2").style.display = "flex";
@@ -183,14 +341,12 @@ export default {
         case 11:
           document.getElementById("addbtn").disabled = true;
           break;
-} 
-
-
+      }
     },
     save() {
       for (let i = 0; i < this.rollist.length; i++) {
-        this.studentmarks.subjectmarks = this.markarray[i]
-        console.log(this.studentmarks)
+        this.studentmarks.subjectmarks = this.markarray[i];
+        console.log(this.studentmarks);
         axios
           .post(
             "http://127.0.0.1:8000/resultpost/" +
@@ -222,6 +378,9 @@ export default {
 #sectionresult {
   margin: 40px 30px;
 }
+.maindiv {
+  display: flex;
+}
 .secSelect {
   display: flex;
 }
@@ -235,12 +394,12 @@ export default {
   margin: 0px 8px;
 }
 .resultform {
-  width: 70%;
+  width: 50%;
   display: block;
-  margin: 20px auto;
+  margin: 20px 20px;
   border: 1px solid rgb(165, 164, 164);
   border-radius: 5px;
-  padding-bottom: 55px;
+  padding: 15px 30px;
 }
 .rowdiv {
   display: flex;
@@ -257,10 +416,21 @@ export default {
   float: right;
   margin-right: 20px;
 }
-.rowdivadditional{
+.rowdivadditional {
   display: none;
+  width: 50%;
+  margin: auto auto;
 }
-.rowdivadditional input{
+.rowdivv {
+  display: flex;
+  width: 50%;
+  margin: auto auto;
+}
+.rowdivv p {
+  width: 100%;
+  margin: 5px 4px;
+}
+.rowdivadditional input {
   margin: 0px 4px;
   margin-bottom: 13px;
 }
