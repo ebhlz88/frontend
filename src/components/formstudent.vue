@@ -172,8 +172,8 @@
                     <option selected disabled>Please select Standard</option>
                     <option
                       v-for="items in standards"
-                      :key="items.id"
-                      :value="items.id"
+                      :key="items.classid"
+                      :value="items.classid"
                     >
                       {{ items.standardname }}
                     </option>

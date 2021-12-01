@@ -15,7 +15,7 @@
         class="form-control"
         v-model="selectedsubject"
       >
-        <option disabled>Please select an Year</option>
+        <option disabled>Please select Subject</option>
         <option v-for="items in subjects" :key="items.id">
           {{ items.subjectname }}
         </option>
@@ -28,6 +28,7 @@
           <p>Roll No.</p>
           <p>Name</p>
           <p>Marks</p>
+          <p>Status</p>
         </div>
         <div class="rowdiv" v-for="items in reslength" :key="items.id">
           <p class="form-control">
@@ -43,14 +44,26 @@
             placeholder="Enter Marks"
             v-model="markarray[items - 1]"
           />
+          <div class="faildiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="failstatusArray[items - 1]"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Fail
+            </label>
+          </div>
         </div>
         <hr v-if="resultlist" />
-        <h6>
+        <h6 v-if="resultlist">
           <b><u>Add New Students Results</u></b>
         </h6>
         <div v-if="counter != 0" class="rowdivv">
           <p>Roll No.</p>
           <p>Marks</p>
+          <p>Status</p>
         </div>
         <div id="addrowdiv" class="rowdivadditional">
           <input
@@ -65,6 +78,17 @@
             class="form-control"
             placeholder="Enter Marks"
           />
+          <div class="faildiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="failstatusArray[reslength]"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Fail
+            </label>
+          </div>
         </div>
         <div id="addrowdiv2" class="rowdivadditional">
           <input
@@ -192,29 +216,54 @@
             placeholder="Enter Marks"
           />
         </div>
-        <div>
+        <div v-if="resultlist">
           <button id="addbtn" class="btn btn-primary" v-on:click="addform">
             add
           </button>
         </div>
 
-        <button id="savebtn" disabled class="btn btn-primary" v-on:click="save">
+        <button
+          v-if="resultlist"
+          id="savebtn"
+          disabled
+          class="btn btn-primary"
+          v-on:click="save"
+        >
           Save
         </button>
+        <h3 v-if="!resultlist">Select Subject and Standard</h3>
       </div>
       <div class="resultform">
-        <button @click="resultget">asdfsd</button>
-        <div class="rowdiv">
+        <div class="totalResultdiv">
+          <p>Select Standard</p>
+          <select
+            class="form-control"
+            @change="passGetMethod"
+            v-model="passStandard"
+          >
+            <option class="hidden" selected disabled>
+              Please select Standard
+            </option>
+            <option v-for="items in standards" :key="items.id">
+              {{ items.standardname }}
+            </option>
+          </select>
+          <button @click="passmethod" class="btn btn-primary">
+            Promote Passed Students
+          </button>
+        </div>
+        <div v-if="rollListsum.length" class="rowdiv">
           <p>Roll No.</p>
           <p>Name</p>
           <p>Total Marks</p>
-          <p>Promote</p>
+          <p>Status</p>
         </div>
         <div v-for="items in rollListsum.length" :key="items" class="rowdiv">
-          <p>{{rollListsum[items-1]}}</p>
-          <p>{{nameArray[items-1]}}</p>
-          <p>{{sumMarkarray[items-1]}}</p>
-          <p>Promote</p>
+          <p>{{ rollListsum[items - 1] }}</p>
+          <p>{{ nameArray[items - 1] }}</p>
+          <p>{{ sumMarkarray[items - 1] }}</p>
+          <p v-if="overAllFailArray[items - 1]">Failed</p>
+          <p v-if="!overAllFailArray[items - 1]">Passed</p>
         </div>
       </div>
     </div>
@@ -237,6 +286,7 @@ export default {
       counter: 0,
       studentmarks: {
         subjectmarks: null,
+        fail: true,
       },
       markarray: [],
       reslength: 0,
@@ -244,8 +294,12 @@ export default {
       rollListsum: [],
       markSum: 0,
       sumMarkarray: [],
-      subjectArray:[],
-      nameArray:[],
+      failstatusArray: [],
+      subjectArray: [],
+      nameArray: [],
+      passStandard: null,
+      overAllFailArray: [],
+      overAllFail: null,
     };
   },
   computed: {
@@ -261,32 +315,67 @@ export default {
     });
   },
   methods: {
-    resultget() {
-      Vue.axios.get("http://127.0.0.1:8000/resbystandard/21").then((resp) => {
-        this.allresult = resp.data;
-        for (let i = 0; i < this.allresult.length; i++) {
-          if (
-            !this.rollListsum.includes(
-              this.allresult[i].enrollstudent.student.rollnbr
-            )
-          ) {
-            this.rollListsum.push(this.allresult[i].enrollstudent.student.rollnbr)
-            this.nameArray.push(this.allresult[i].enrollstudent.student.s_name)
-            for (let j = 0; j < this.allresult.length; j++) {
-              if (
-                this.allresult[i].enrollstudent.student.rollnbr ==
-                this.allresult[j].enrollstudent.student.rollnbr && !this.subjectArray.includes(this.allresult[j].subjectname.subjectname)
-              ) {
-                this.subjectArray.push(this.allresult[j].subjectname.subjectname)
-                this.markSum += this.allresult[j].subjectmarks;
+    passGetMethod() {
+      Vue.axios
+        .get("http://127.0.0.1:8000/resbystandard/" + this.passStandard)
+        .then((resp) => {
+          this.allresult = resp.data;
+          for (let i = 0; i < this.allresult.length; i++) {
+            if (
+              !this.rollListsum.includes(
+                this.allresult[i].enrollstudent.student.rollnbr
+              )
+            ) {
+              this.rollListsum.push(
+                this.allresult[i].enrollstudent.student.rollnbr
+              );
+              this.nameArray.push(
+                this.allresult[i].enrollstudent.student.s_name
+              );
+              for (let j = 0; j < this.allresult.length; j++) {
+                if (
+                  this.allresult[i].enrollstudent.student.rollnbr ==
+                    this.allresult[j].enrollstudent.student.rollnbr &&
+                  !this.subjectArray.includes(
+                    this.allresult[j].subjectname.subjectname
+                  )
+                ) {
+                  this.subjectArray.push(
+                    this.allresult[j].subjectname.subjectname
+                  );
+                  this.markSum += this.allresult[j].subjectmarks;
+                  if (this.allresult[j].fail) {
+                    this.overAllFail = true;
+                  } else {
+                    this.overAllFail = false;
+                  }
+                }
               }
+              this.overAllFailArray.push(this.overAllFail);
+              this.overAllFail = false;
+              this.subjectArray = [];
+              this.sumMarkarray.push(this.markSum);
+              this.markSum = 0;
             }
-            this.subjectArray=[]
-            this.sumMarkarray.push(this.markSum);
-            this.markSum=0
           }
+        });
+    },
+    passmethod() {
+      let success = false;
+      for (let i = 0; i < this.rollListsum.length; i++) {
+        if (!this.overAllFailArray[i]) {
+          Vue.axios
+            .get("http://127.0.0.1:8000/studentstandard/" + this.rollListsum[i])
+            .then(() => {
+              success = true;
+            });
         }
-      });
+      }
+      if (!success) {
+        this.$toaster.success("Succesfully Promoted.");
+      } else {
+        this.$toaster.error("Invalid inputs.");
+      }
     },
     search() {
       Vue.axios
@@ -297,12 +386,15 @@ export default {
             this.selectedsubject
         )
         .then((resp) => {
-          document.getElementById("savebtn").disabled = false;
           this.resultlist = resp.data;
           this.reslength = resp.data.length;
           for (let i = 0; i < resp.data.length; i++) {
             this.rollist[i] = resp.data[i].enrollstudent.student.rollnbr;
           }
+          setTimeout(function () {
+            document.getElementById("savebtn").disabled = false;
+            //your code to be executed after 1 second
+          }, 500);
         });
     },
     addform() {
@@ -344,9 +436,10 @@ export default {
       }
     },
     save() {
+      let success = false;
       for (let i = 0; i < this.rollist.length; i++) {
         this.studentmarks.subjectmarks = this.markarray[i];
-        console.log(this.studentmarks);
+        this.studentmarks.fail = this.failstatusArray[i];
         axios
           .post(
             "http://127.0.0.1:8000/resultpost/" +
@@ -359,15 +452,13 @@ export default {
             this.token
           )
           .then(() => {
-            // this.smessage="Succesfully added"
-            this.$toaster.success("Succesfully added.");
-          })
-          .catch((error) =>
-            console.log(
-              error.response.request._response,
-              this.$toaster.error("Invalid inputs.")
-            )
-          );
+            success = true;
+          });
+      }
+      if (!success) {
+        this.$toaster.success("Succesfully added.");
+      } else {
+        this.$toaster.error("Invalid inputs.");
       }
     },
   },
@@ -377,12 +468,14 @@ export default {
 <style>
 #sectionresult {
   margin: 40px 30px;
+  font-size: 1rem;
 }
 .maindiv {
   display: flex;
 }
 .secSelect {
   display: flex;
+  width: 50%;
 }
 .secSelect h5 {
   width: 208px;
@@ -400,6 +493,7 @@ export default {
   border: 1px solid rgb(165, 164, 164);
   border-radius: 5px;
   padding: 15px 30px;
+  min-height: 75vh;
 }
 .rowdiv {
   display: flex;
@@ -409,7 +503,7 @@ export default {
   margin-bottom: 13px;
 }
 .rowdiv p {
-  width: 100%;
+  width: 72%;
   margin: 5px 4px;
 }
 #savebtn {
@@ -418,12 +512,12 @@ export default {
 }
 .rowdivadditional {
   display: none;
-  width: 50%;
+  width: 65%;
   margin: auto auto;
 }
 .rowdivv {
   display: flex;
-  width: 50%;
+  width: 70%;
   margin: auto auto;
 }
 .rowdivv p {
@@ -433,5 +527,63 @@ export default {
 .rowdivadditional input {
   margin: 0px 4px;
   margin-bottom: 13px;
+}
+.faildiv {
+  width: 13rem;
+  padding: 5px;
+  margin: 5px;
+}
+#statusfail {
+  float: right;
+}
+.totalResultdiv {
+  display: flex;
+  align-items: center;
+}
+.totalResultdiv p {
+  margin: auto 7px;
+}
+.totalResultdiv .btn {
+  margin-left: auto;
+}
+.totalResultdiv select {
+  width: 30%;
+}
+
+@media screen and (max-width: 400px) {
+  #sectionresult {
+    margin: 40px 0px;
+  }
+  .secSelect {
+    display: block;
+    width: 89%;
+    margin: 0px auto;
+  }
+  .secSelect select {
+    margin: 10px auto;
+  }
+
+  .maindiv {
+    display: block;
+    margin: 25px 0px;
+    margin-right: 20px;
+    font-size: 0.9rem;
+  }
+  .maindiv .form-control {
+    font-size: 0.8rem;
+  }
+  .resultform {
+    width: 100%;
+    margin: 20px 10px;
+    padding: 15px 5px;
+    padding-bottom: 50px;
+  }
+  .totalResultdiv {
+    display: block;
+  }
+  .totalResultdiv select {
+    margin: 5px auto;
+    width: 60%;
+  }
 }
 </style>

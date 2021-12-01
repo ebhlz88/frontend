@@ -17,7 +17,10 @@
                   <strong class="pr-1">Student Roll No:</strong
                   >{{ list.rollnbr }}
                 </p>
-                <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
+                <p class="mb-0">
+                  <strong class="pr-1">Class:</strong
+                  >{{ list.currentStandard.standardname }}
+                </p>
                 <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
               </div>
             </div>
@@ -78,16 +81,6 @@
               </div>
             </div>
             <div style="height: 26px"></div>
-            <!-- <div class="card shadow-sm">
-              <div class="card-header bg-transparent border-0">
-                <h3 class="mb-0">
-                  <i class="far fa-clone pr-1"></i>Other Information
-                </h3>
-              </div>
-              <div class="card-body pt-0">
-                <p>sfsdfsd</p>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
