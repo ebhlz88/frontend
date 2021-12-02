@@ -49,6 +49,10 @@ import Toaster from "v-toaster";
 
 import "v-toaster/dist/v-toaster.css";
 
+import VueConfirmDialog from "vue-confirm-dialog";
+
+Vue.use(VueConfirmDialog);
+Vue.component("vue-confirm-dialog", VueConfirmDialog.default);
 Vue.use(Toaster, { timeout: 5000 });
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);

@@ -10,8 +10,8 @@
             alt="Card image cap"
           />
           <div class="card-body">
-            <p class="card-text">{{ items.t_name }}</p>
-            <a :href="hrefpayment + items.id">Payments</a>
+            <p class="card-text">{{ items.t_name }}(Visit Profile)</p>
+            <a :href="hrefpayment + items.id">Payments(Check Payments)</a>
           </div>
         </a>
       </div>

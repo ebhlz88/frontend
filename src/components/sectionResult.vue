@@ -1,5 +1,5 @@
 <template>
-  <div id="sectionresult">
+  <div v-if="isloggedin" id="sectionresult">
     <div class="secSelect">
       <h5>Select Standard</h5>
       <select class="form-control" v-model="selectedstandard">
@@ -103,6 +103,17 @@
             class="form-control"
             placeholder="Enter Marks"
           />
+          <div class="faildiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="failstatusArray[reslength + 1]"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Fail
+            </label>
+          </div>
         </div>
         <div id="addrowdiv3" class="rowdivadditional">
           <input
@@ -117,6 +128,17 @@
             class="form-control"
             placeholder="Enter Marks"
           />
+          <div class="faildiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="failstatusArray[2]"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Fail
+            </label>
+          </div>
         </div>
         <div id="addrowdiv4" class="rowdivadditional">
           <input
@@ -131,6 +153,17 @@
             class="form-control"
             placeholder="Enter Marks"
           />
+          <div class="faildiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="failstatusArray[reslength + 3]"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Fail
+            </label>
+          </div>
         </div>
         <div id="addrowdiv5" class="rowdivadditional">
           <input
@@ -145,6 +178,17 @@
             class="form-control"
             placeholder="Enter Marks"
           />
+          <div class="faildiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="failstatusArray[reslength + 4]"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Fail
+            </label>
+          </div>
         </div>
         <div id="addrowdiv6" class="rowdivadditional">
           <input
@@ -159,6 +203,17 @@
             class="form-control"
             placeholder="Enter Marks"
           />
+          <div class="faildiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="failstatusArray[reslength + 5]"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Fail
+            </label>
+          </div>
         </div>
         <div id="addrowdiv7" class="rowdivadditional">
           <input
@@ -173,6 +228,17 @@
             class="form-control"
             placeholder="Enter Marks"
           />
+          <div class="faildiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="failstatusArray[reslength + 6]"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Fail
+            </label>
+          </div>
         </div>
         <div id="addrowdiv8" class="rowdivadditional">
           <input
@@ -187,6 +253,17 @@
             class="form-control"
             placeholder="Enter Marks"
           />
+          <div class="faildiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="failstatusArray[reslength + 7]"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Fail
+            </label>
+          </div>
         </div>
         <div id="addrowdiv9" class="rowdivadditional">
           <input
@@ -201,6 +278,17 @@
             class="form-control"
             placeholder="Enter Marks"
           />
+          <div class="faildiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="failstatusArray[reslength + 8]"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Fail
+            </label>
+          </div>
         </div>
         <div id="addrowdiv10" class="rowdivadditional">
           <input
@@ -215,6 +303,17 @@
             class="form-control"
             placeholder="Enter Marks"
           />
+          <div class="faildiv">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="failstatusArray[reslength + 9]"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Fail
+            </label>
+          </div>
         </div>
         <div v-if="resultlist">
           <button id="addbtn" class="btn btn-primary" v-on:click="addform">
@@ -267,6 +366,7 @@
         </div>
       </div>
     </div>
+    <vue-confirm-dialog></vue-confirm-dialog>
   </div>
 </template>
 
@@ -316,6 +416,9 @@ export default {
   },
   methods: {
     passGetMethod() {
+      this.rollListsum = [];
+      this.nameArray = [];
+      this.sumMarkarray = [];
       Vue.axios
         .get("http://127.0.0.1:8000/resbystandard/" + this.passStandard)
         .then((resp) => {
@@ -361,21 +464,42 @@ export default {
         });
     },
     passmethod() {
-      let success = false;
-      for (let i = 0; i < this.rollListsum.length; i++) {
-        if (!this.overAllFailArray[i]) {
-          Vue.axios
-            .get("http://127.0.0.1:8000/studentstandard/" + this.rollListsum[i])
-            .then(() => {
-              success = true;
-            });
-        }
-      }
-      if (!success) {
-        this.$toaster.success("Succesfully Promoted.");
-      } else {
-        this.$toaster.error("Invalid inputs.");
-      }
+      this.$confirm({
+        message:
+          "Are you sure you want to Promote the students of " +
+          this.passStandard +
+          "?",
+        button: {
+          no: "No",
+          yes: "Yes",
+        },
+        /**
+         * Callback Function
+         * @param {Boolean} confirm
+         */
+        callback: (confirm) => {
+          if (confirm) {
+            let success = false;
+            for (let i = 0; i < this.rollListsum.length; i++) {
+              if (!this.overAllFailArray[i]) {
+                Vue.axios
+                  .get(
+                    "http://127.0.0.1:8000/studentstandard/" +
+                      this.rollListsum[i]
+                  )
+                  .then(() => {
+                    success = true;
+                  });
+              }
+            }
+            if (!success) {
+              this.$toaster.success("Succesfully Promoted.");
+            } else {
+              this.$toaster.error("Invalid inputs.");
+            }
+          }
+        },
+      });
     },
     search() {
       Vue.axios

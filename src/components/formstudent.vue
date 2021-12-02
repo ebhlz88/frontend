@@ -125,7 +125,7 @@
                 </div>
                 <div class="form-group">
                   <date-picker
-                    placeholder="Date of Birth"
+                    placeholder="Date of Birth (YYYY-MM-DD)"
                     class="widthdp from-control"
                     :class="{ 'is-invalid': $v.posts.dob.$error }"
                     v-model="posts.dob"
@@ -147,7 +147,7 @@
 
                 <div class="form-group">
                   <date-picker
-                    placeholder="Date of joining"
+                    placeholder="Date of joining (YYYY-MM-DD)"
                     class="widthdp from-control"
                     :class="{ 'is-invalid': $v.posts.date_join.$error }"
                     v-model="posts.date_join"
@@ -340,7 +340,7 @@
                 </div>
                 <div class="form-group">
                   <date-picker
-                    placeholder="Date of Birth"
+                    placeholder="Date of Birth (YYYY-MM-DD)"
                     class="widthdp from-control"
                     :class="{ 'is-invalid': $v.teacherposts.dob.$error }"
                     v-model="teacherposts.dob"
@@ -365,7 +365,7 @@
 
                 <div class="form-group">
                   <date-picker
-                    placeholder="Date of Hiring"
+                    placeholder="Date of Hiring (YYYY-MM-DD)"
                     class="widthdp from-control"
                     :class="{
                       'is-invalid': $v.teacherposts.date_hiring.$error,

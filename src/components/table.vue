@@ -32,6 +32,9 @@
           <div class="header__item">
             <p class="filter__link filter__link--number">Result</p>
           </div>
+          <div v-if="isloggedin" class="header__item">
+            <p class="filter__link filter__link--number">Delete</p>
+          </div>
         </div>
         <div class="table-content">
           <div v-for="item in list" v-bind:key="item.id" class="table-row">
@@ -46,6 +49,11 @@
             <div class="table-data">
               <a :href="hrefresult + '' + item.rollnbr">Result</a>
             </div>
+            <div v-if="isloggedin" class="table-data">
+              <button @click="delet(item.rollnbr)" class="btn btn-primary">
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -57,7 +65,7 @@
 import Vue from "vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
-
+import { mapGetters } from "vuex";
 Vue.use(VueAxios, axios);
 export default {
   name: "stable",
@@ -70,6 +78,10 @@ export default {
       searchitem: null,
     };
   },
+  computed: {
+    ...mapGetters(["token"]),
+    ...mapGetters(["isloggedin"]),
+  },
   methods: {
     searchstudent() {
       Vue.axios
@@ -78,11 +90,23 @@ export default {
           this.list = resp.data;
         });
     },
+    delet(a) {
+      Vue.axios
+        .delete("http://127.0.0.1:8000/student/" + a, this.token)
+        .then(() => {
+          this.$toaster.success("Deleted Successfully.");
+          this.getstudents();
+        })
+        .catch(() => this.$toaster.error("Unsuccessfull."));
+    },
+    getstudents() {
+      Vue.axios.get("http://127.0.0.1:8000/").then((resp) => {
+        this.list = resp.data;
+      });
+    },
   },
   mounted() {
-    Vue.axios.get("http://127.0.0.1:8000/").then((resp) => {
-      this.list = resp.data;
-    });
+    this.getstudents();
   },
 };
 </script>

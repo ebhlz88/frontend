@@ -64,6 +64,14 @@
         />
         <div class="card-body">Digital Library</div>
       </div>
+      <div class="cardd animate" style="width: 14rem" v-on:click="resmngt">
+        <img
+          class="card-img-top"
+          src="../assets/secresult.png"
+          alt="Card image cap"
+        />
+        <div class="card-body">Results Management</div>
+      </div>
     </div>
   </div>
 </template>
@@ -91,6 +99,9 @@ export default {
       this.$router.push("/books");
     },
     schoolinfo() {},
+    resmngt() {
+      this.$router.push("/secresult");
+    },
   },
 };
 </script>
