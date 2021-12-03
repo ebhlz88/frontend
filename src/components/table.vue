@@ -1,18 +1,14 @@
 <template>
   <div>
-    <form>
-      <div class="formrow">
-        <input
-          type="text"
-          v-model="searchitem"
-          class="form-control"
-          placeholder="Search Here"
-        />
-        <button v-on:click="searchstudent" class="btn btn-primary">
-          Search
-        </button>
-      </div>
-    </form>
+    <div class="formrow">
+      <input
+        type="text"
+        v-model="searchitem"
+        class="form-control"
+        placeholder="Search Here"
+      />
+      <button v-on:click="searchstudent" class="btn btn-primary">Search</button>
+    </div>
 
     <div>
       <div class="table">

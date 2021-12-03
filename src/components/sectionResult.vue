@@ -3,8 +3,12 @@
     <div class="secSelect">
       <h5>Select Standard</h5>
       <select class="form-control" v-model="selectedstandard">
-        <option class="hidden" selected disabled>Please select Standard</option>
-        <option v-for="items in standards" :key="items.id">
+        <option value="" disabled selected>Please select Standard</option>
+        <option
+          v-for="items in standards"
+          :value="items.classid"
+          :key="items.id"
+        >
           {{ items.standardname }}
         </option>
       </select>
@@ -343,7 +347,11 @@
             <option class="hidden" selected disabled>
               Please select Standard
             </option>
-            <option v-for="items in standards" :key="items.id">
+            <option
+              v-for="items in standards"
+              :key="items.id"
+              :value="items.classid"
+            >
               {{ items.standardname }}
             </option>
           </select>
@@ -400,6 +408,8 @@ export default {
       passStandard: null,
       overAllFailArray: [],
       overAllFail: null,
+      success: false,
+      countertoast: 1,
     };
   },
   computed: {
@@ -465,10 +475,7 @@ export default {
     },
     passmethod() {
       this.$confirm({
-        message:
-          "Are you sure you want to Promote the students of " +
-          this.passStandard +
-          "?",
+        message: "Are you sure you want to Promote the students",
         button: {
           no: "No",
           yes: "Yes",
@@ -502,6 +509,9 @@ export default {
       });
     },
     search() {
+      (this.resultlist = null), (this.reslength = null), (this.rollist = []);
+      this.markarray = [];
+      this.failstatusArray = [];
       Vue.axios
         .get(
           "http://127.0.0.1:8000/rbystandard/" +
@@ -560,7 +570,7 @@ export default {
       }
     },
     save() {
-      let success = false;
+      this.countertoast = 1;
       for (let i = 0; i < this.rollist.length; i++) {
         this.studentmarks.subjectmarks = this.markarray[i];
         this.studentmarks.fail = this.failstatusArray[i];
@@ -576,14 +586,23 @@ export default {
             this.token
           )
           .then(() => {
-            success = true;
+            if (this.countertoast == 1) {
+              this.$toaster.success("Succesfully added.");
+              this.countertoast = this.countertoast + 1;
+            }
+          })
+          .catch(() => {
+            if (this.countertoast == 1) {
+              this.$toaster.error("Invalid inputs.");
+              this.countertoast = this.countertoast + 1;
+            }
           });
       }
-      if (!success) {
-        this.$toaster.success("Succesfully added.");
-      } else {
-        this.$toaster.error("Invalid inputs.");
-      }
+
+      // setTimeout(function () {
+      //   console.log(this.success)
+
+      // }, 500);
     },
   },
 };

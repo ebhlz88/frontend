@@ -1,7 +1,7 @@
 <template>
   <div id="fees">
     <div class="searchdiv m-4 row">
-      <div class="input-group col-md-4">
+      <!-- <div class="input-group col-md-4">
         <input
           type="text"
           class="form-control"
@@ -11,7 +11,7 @@
         <span class="input-group-addon" id="start-date"
           ><img src="../assets/searchicon.png" alt="serar"
         /></span>
-      </div>
+      </div> -->
       <div v-if="isloggedin" class="submitdiv col-md-8 row">
         <select class="form-control" v-model="updatestandard">
           <option class="hidden" selected disabled>

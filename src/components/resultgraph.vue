@@ -1,7 +1,7 @@
 <template>
   <div id="graph">
     <div class="input-group col-md-6 width m-3">
-      <h5 class="p-3"><b>Select a year</b></h5>
+      <h5 class="p-3"><b>Select a Subject</b></h5>
       <select
         split-variant="outline-primary"
         variant="primary"
@@ -10,7 +10,7 @@
         v-model="selectedsubject"
         @change="onChange()"
       >
-        <option disabled>Please select an Year</option>
+        <option disabled>Please select Subject</option>
         <option v-for="items in subjects" :key="items.id">
           {{ items.subjectname }}
         </option>

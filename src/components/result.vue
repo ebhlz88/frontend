@@ -47,7 +47,11 @@
           <div class="form-group d-flex my-3">
             <select class="form-control" v-model="updatestandard">
               <option selected disabled>Please select Standard</option>
-              <option v-for="items in standards" :key="items.id">
+              <option
+                v-for="items in standards"
+                :key="items.id"
+                :value="items.classid"
+              >
                 {{ items.standardname }}
               </option>
             </select>
