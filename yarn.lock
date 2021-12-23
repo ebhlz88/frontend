@@ -2439,9 +2439,9 @@
     "lodash.uniq" "^4.5.0"
 
 "caniuse-lite@^1.0.0", "caniuse-lite@^1.0.30001109", "caniuse-lite@^1.0.30001219":
-  "integrity" "sha1-zT+uR+s9dpFpK0BlaNej5bI8dZg="
-  "resolved" "https://registry.nlark.com/caniuse-lite/download/caniuse-lite-1.0.30001241.tgz?cache=0&sync_timestamp=1624942604834&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcaniuse-lite%2Fdownload%2Fcaniuse-lite-1.0.30001241.tgz"
-  "version" "1.0.30001241"
+  "integrity" "sha512-jnT4Tq0Q4ma+6nncYQVe7d73kmDmE9C3OGTx3MvW7lBM/eY1S1DZTMBON7dqV481RhNiS5OxD7k9JQvmDOTirw=="
+  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001292.tgz"
+  "version" "1.0.30001292"
 
 "case-sensitive-paths-webpack-plugin@^2.3.0":
   "integrity" "sha1-22QGbGQi7tLgjMFLmGykN5bbxtQ="
@@ -7876,7 +7876,7 @@
   "resolved" "https://registry.npm.taobao.org/shell-quote/download/shell-quote-1.7.2.tgz"
   "version" "1.7.2"
 
-"shvl@^2.0.2":
+"shvl@^2.0.3":
   "integrity" "sha512-V7C6S9Hlol6SzOJPnQ7qzOVEWUQImt3BNmmzh40wObhla3XOYMe4gGiYzLrJd5TFa+cI2f9LKIRJTTKZSTbWgw=="
   "resolved" "https://registry.npmjs.org/shvl/-/shvl-2.0.3.tgz"
   "version" "2.0.3"
@@ -9069,12 +9069,12 @@
   "version" "0.7.6"
 
 "vuex-persistedstate@*":
-  "integrity" "sha512-T4IRD27qoUWh+8qr6T6zVp15xO7x/nPgnU13OD0C2uUwA7U9PhGozrj6lvVmMYDyRgc36J0msMXn3GvwHjkIhA=="
-  "resolved" "https://registry.npmjs.org/vuex-persistedstate/-/vuex-persistedstate-4.0.0-beta.3.tgz"
-  "version" "4.0.0-beta.3"
+  "integrity" "sha512-3SkEj4NqwM69ikJdFVw6gObeB0NHyspRYMYkR/EbhR0hbvAKyR5gksVhtAfY1UYuWUOCCA0QNGwv9pOwdj+XUQ=="
+  "resolved" "https://registry.npmjs.org/vuex-persistedstate/-/vuex-persistedstate-4.1.0.tgz"
+  "version" "4.1.0"
   dependencies:
     "deepmerge" "^4.2.2"
-    "shvl" "^2.0.2"
+    "shvl" "^2.0.3"
 
 "vuex@^3.0 || ^4.0.0-rc", "vuex@^3.6.2":
   "integrity" "sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw=="

@@ -157,6 +157,15 @@ export default {
         )
         .then((resp) => {
           this.subjectmarks = resp.data;
+          this.subjectmarks.sort(function(a, b){
+            let fa = a.enrollstudent.standard.classid, fb = b.enrollstudent.standard.classid;
+            if (fa < fb) {
+              return -1
+            }
+            if (fa > fb) {
+              return 1
+            }
+            return 0});
           let count = Object.keys(this.subjectmarks).length;
           for (let i = 0; i < count; i++) {
             this.categorieslist.push(
@@ -177,7 +186,7 @@ export default {
     updatechart() {
       let sdata = [];
       for (let i = 0; i < this.nofsubjects.nosubjects; i++) {
-        console.log(this.subjectmarks[i].subjectmarks);
+        //console.log(this.subjectmarks.sort(function(a.enrollstudent.standard.classid,,b))=>{return a-b});
         sdata[i] = this.series[0].data.map(() => {
           return this.subjectmarks[i].subjectmarks;
         });
