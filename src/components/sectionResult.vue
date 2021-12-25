@@ -693,7 +693,7 @@ export default {
   width: 30%;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   #sectionresult {
     margin: 40px 0px;
   }
@@ -720,6 +720,7 @@ export default {
     margin: 20px 10px;
     padding: 15px 5px;
     padding-bottom: 50px;
+    min-height: 2vh;
   }
   .totalResultdiv {
     display: block;

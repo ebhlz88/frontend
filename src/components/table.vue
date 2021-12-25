@@ -128,6 +128,11 @@ h5,
 h6 {
   margin: 0;
 }
+@media screen and (max-width: 412px) {
+  .table{
+    font-size: .8rem;
+  }
+}
 
 .table {
   width: 100%;

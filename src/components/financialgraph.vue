@@ -362,6 +362,10 @@ export default {
   }
   .selectdiv h5 {
     width: 128px;
+    font-size: 1rem;
+  }
+  #graph .width{
+    width: 200px;
   }
 }
 /* *{

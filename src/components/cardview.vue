@@ -1,7 +1,7 @@
 <template>
   <div id="cardview">
     <div class="row">
-      <div class="cardd animate" style="width: 14rem" v-on:click="schoolinfo">
+      <div class="cardd animate" v-on:click="schoolinfo">
         <img
           class="card-img-top"
           src="../assets/SchoolInfo.png"
@@ -169,16 +169,23 @@ export default {
   .cancelbtn {
     width: 100%;
   }
+  .cardd{
+    height: 150px;
+    width: 100px;
+    margin: 2vh;
+  }
 }
 #cardview {
   margin-top: 40px;
 }
 .cardd {
   height: 330px;
+  width: 14rem !important;
   background-color: transparent;
   margin: 8vh;
   margin-bottom: 0px;
   padding: 0px 0px;
+  font-size: 1rem;
 }
 .cardd:hover {
   cursor: pointer;

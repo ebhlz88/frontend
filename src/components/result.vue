@@ -19,7 +19,7 @@
         >
         <div class="col-md-7">
           <select
-            class="form-control mleft"
+            class="form-control mleft col-md-7"
             id="standardselect"
             v-model="filterstandard"
             @change="find($event)"
@@ -328,5 +328,18 @@ export default {
 }
 #rowdiv .btndiv {
   padding-right: 30%;
+}
+@media screen and (max-width: 412px) {
+ #resultlist{
+   margin-top: 4px;
+ }
+  #rowdiv .row{
+height: auto;
+ margin-left: 1px;
+ }
+ .modalll {
+  left: 0;
+}
+ 
 }
 </style>
